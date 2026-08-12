@@ -1,12 +1,29 @@
 const $ = (id) => document.getElementById(id);
 
+const illustrationAssets = [
+  { value:"auto", label:"依內容自動配圖" },
+  { value:"guide", label:"共學引導老師" },
+  { value:"clap-siblings", label:"手足拍手唱歌" },
+  { value:"family-parachute", label:"親子彩虹傘遊戲" },
+  { value:"talking-pen", label:"點讀筆與圖卡" },
+  { value:"tablet-story", label:"平板看英文故事" },
+  { value:"parent-reading", label:"親子共讀" },
+  { value:"video-call", label:"家庭視訊互動" },
+  { value:"dancing-child", label:"孩子唱跳" },
+  { value:"teddy-books", label:"熊熊與書本" },
+  { value:"picture-book", label:"繪本與自然" },
+  { value:"growing-plant", label:"成長小芽" },
+  { value:"decorations", label:"愛心星星裝飾" },
+  { value:"none", label:"不放插圖" }
+];
+
 const defaultSections = [
-  { icon:"📚", title:"越來越熟悉，節奏更自在", text:"使用進入第二個月，孩子對教材越來越熟悉，連帶整個帶領的節奏也更自在。以前還會擔心有沒有照著流程走，現在反而能放鬆跟著感覺帶，和孩子一起享受學習的過程。" },
-  { icon:"🎵", title:"聽熟之後，自然開始跟唱", text:"最近最大的收穫，是孩子已經把歌曲聽得非常熟。熟悉感建立後，開口不再像是一項任務，而是生活裡自然發生的回應。" },
-  { icon:"🌱", title:"相信自然吸收，給孩子時間", text:"孩子有時咬字還不清楚，但我開始提醒自己不用急著糾正。先讓孩子大量接觸、自然吸收，保留她願意開口的信心。" },
-  { icon:"☎️", title:"把英文放進生活互動", text:"電話美語、洗澡唱歌、走路時玩口令，都變成孩子很期待的活動。語言不只出現在教材裡，也可以存在每天自然發生的小事中。" },
-  { icon:"✨", title:"這個月的小亮點", text:"孩子開始主動拿卡片、跟著錄音，也會把熟悉的英文句子放進遊戲。這些小小的變化，讓我看到反覆輸入正在慢慢累積。" },
-  { icon:"❤️", title:"身為家長，最大的改變", text:"一路使用下來，最大的改變不只是孩子學了多少，而是身為家長的我越來越放鬆，也越來越相信孩子會照著自己的節奏成長。" }
+  { icon:"📚", asset:"picture-book", title:"越來越熟悉，節奏更自在", text:"使用進入第二個月，孩子對教材越來越熟悉，連帶整個帶領的節奏也更自在。以前還會擔心有沒有照著流程走，現在反而能放鬆跟著感覺帶，和孩子一起享受學習的過程。" },
+  { icon:"🎵", asset:"clap-siblings", title:"聽熟之後，自然開始跟唱", text:"最近最大的收穫，是孩子已經把歌曲聽得非常熟。熟悉感建立後，開口不再像是一項任務，而是生活裡自然發生的回應。" },
+  { icon:"🌱", asset:"growing-plant", title:"相信自然吸收，給孩子時間", text:"孩子有時咬字還不清楚，但我開始提醒自己不用急著糾正。先讓孩子大量接觸、自然吸收，保留她願意開口的信心。" },
+  { icon:"☎️", asset:"video-call", title:"把英文放進生活互動", text:"電話美語、洗澡唱歌、走路時玩口令，都變成孩子很期待的活動。語言不只出現在教材裡，也可以存在每天自然發生的小事中。" },
+  { icon:"✨", asset:"talking-pen", title:"這個月的小亮點", text:"孩子開始主動拿卡片、跟著錄音，也會把熟悉的英文句子放進遊戲。這些小小的變化，讓我看到反覆輸入正在慢慢累積。" },
+  { icon:"❤️", asset:"parent-reading", title:"身為家長，最大的改變", text:"一路使用下來，最大的改變不只是孩子學了多少，而是身為家長的我越來越放鬆，也越來越相信孩子會照著自己的節奏成長。" }
 ];
 
 let sections = structuredClone(defaultSections);
@@ -34,6 +51,23 @@ function illustrationFor(text=""){
   return "✨";
 }
 
+function assetFor(text=""){
+  if(/電話|視訊|Face Call|video|call/i.test(text)) return "video-call";
+  if(/點讀|圖卡|卡片|flash/i.test(text)) return "talking-pen";
+  if(/平板|影片|卡通|tablet/i.test(text)) return "tablet-story";
+  if(/繪本|共讀|故事|閱讀|read|book/i.test(text)) return "parent-reading";
+  if(/跳|舞|律動|dance/i.test(text)) return "dancing-child";
+  if(/唱|歌|拍手|music|song|聽/i.test(text)) return "clap-siblings";
+  if(/親子|家人|爸爸|媽媽|遊戲|game/i.test(text)) return "family-parachute";
+  if(/成長|進步|慢慢|時間|吸收/i.test(text)) return "growing-plant";
+  return "decorations";
+}
+
+function assetUrl(asset){
+  if(!asset || asset === "none") return "";
+  return `./assets/illustrations/${asset}.png`;
+}
+
 function renderEditors(){
   const host = $("sectionEditors");
   host.innerHTML = "";
@@ -43,13 +77,17 @@ function renderEditors(){
     const icon = node.querySelector(".icon-input");
     const title = node.querySelector(".title-input");
     const text = node.querySelector(".text-input");
+    const asset = node.querySelector(".asset-select");
     icon.value = s.icon;
     title.value = s.title;
     text.value = s.text;
+    illustrationAssets.forEach(item=>asset.add(new Option(item.label,item.value)));
+    asset.value = s.asset || "auto";
 
     icon.addEventListener("input",()=>{ sections[index].icon=icon.value; renderPoster(); });
     title.addEventListener("input",()=>{ sections[index].title=title.value; renderPoster(); });
     text.addEventListener("input",()=>{ sections[index].text=text.value; renderPoster(); });
+    asset.addEventListener("change",()=>{ sections[index].asset=asset.value; renderPoster(); saveDraft(); });
 
     node.querySelector(".move-up").addEventListener("click",()=>{
       if(index===0) return;
@@ -88,7 +126,8 @@ function renderPoster(){
     const card = document.createElement("article");
     card.className = "diary-card";
     if(sections.length % 2 === 1 && index === sections.length-1) card.classList.add("wide");
-    const imageUrl = mode === "ai" ? safeImageUrl(s.imageUrl) : "";
+    const selectedAsset = s.asset === "auto" || !s.asset ? assetFor(s.text) : s.asset;
+    const imageUrl = mode === "ai" ? safeImageUrl(s.imageUrl) : assetUrl(selectedAsset);
     const art = s.icon || illustrationFor(s.text);
     card.innerHTML = `
       <div class="card-head">
@@ -131,6 +170,7 @@ function localSmartOrganize(raw){
 
   return groups.slice(0,7).map((text,i)=>({
     icon: illustrationFor(text),
+    asset: assetFor(text),
     title:titleFor(text,i),
     text
   }));
@@ -164,6 +204,7 @@ async function organizeDiary(){
           title:s.title || "本月紀錄",
           text:s.text || s.content || "",
           imageUrl:s.imageUrl || ""
+          ,asset:s.asset || assetFor(s.text || s.content || "")
         }));
         if(data.closing) $("closing").value=data.closing;
         renderEditors(); renderPoster(); saveDraft();
@@ -220,7 +261,7 @@ $("heroFile").addEventListener("change",e=>imagePreview(e.target,"heroVisual"));
 $("smartOrganize").addEventListener("click",organizeDiary);
 $("clearRaw").addEventListener("click",()=>{$("rawDiary").value="";saveDraft();});
 $("addSection").addEventListener("click",()=>{
-  sections.push({icon:"⭐",title:"新增段落",text:"請輸入家長日記內容。"});
+  sections.push({icon:"⭐",asset:"auto",title:"新增段落",text:"請輸入家長日記內容。"});
   renderEditors();renderPoster();
 });
 $("saveDraft").addEventListener("click",()=>{saveDraft();alert("已儲存在這台裝置的瀏覽器。");});
