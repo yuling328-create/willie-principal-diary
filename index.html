@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>威利兄弟3.0｜園長日記</title>
+  <meta name="description" content="威利兄弟3.0 園長日記月刊產生器">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="control-panel">
+      <div class="control-head">
+        <p class="kicker">WILLIE BROTHERS 3.0</p>
+        <h1>園長日記產生器</h1>
+        <p>選月份、貼家長日記、整理內容、選配圖，版面會自動完成。</p>
+      </div>
+
+      <section class="control-section">
+        <h2>① 出刊資訊</h2>
+        <div class="grid two">
+          <label>年份
+            <input id="year" type="number" min="2025" max="2100" value="2026">
+          </label>
+          <label>月份
+            <select id="month">
+              <option>一月</option><option>二月</option><option>三月</option>
+              <option>四月</option><option>五月</option><option selected>六月</option>
+              <option>七月</option><option>八月</option><option>九月</option>
+              <option>十月</option><option>十一月</option><option>十二月</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid two">
+          <label>園長姓名
+            <input id="principal" value="佳＊園長">
+          </label>
+          <label>使用期間
+            <input id="period" value="6/6–7/5">
+          </label>
+        </div>
+      </section>
+
+      <section class="control-section">
+        <h2>② 孩子資料</h2>
+        <div class="grid two">
+          <label>孩子姓名
+            <input id="childName" value="Jessie">
+          </label>
+          <label>年齡／班別
+            <input id="childInfo" value="6Y 大班">
+          </label>
+        </div>
+        <label>家庭主圖（可選）
+          <input id="heroFile" type="file" accept="image/*">
+        </label>
+      </section>
+
+      <section class="control-section">
+        <h2>③ 貼上家長原始日記</h2>
+        <label>
+          <textarea id="rawDiary" rows="11" placeholder="直接貼上家長原始文字，不需要先整理。"></textarea>
+        </label>
+        <div class="button-row">
+          <button id="smartOrganize" class="primary">✨ AI／智慧整理</button>
+          <button id="clearRaw" class="ghost">清空</button>
+        </div>
+        <p class="mini-note">預設可在瀏覽器本機做「智慧整理」示範；若串接 AI 後端，按同一顆按鈕即可改用真正 AI。</p>
+      </section>
+
+      <section class="control-section">
+        <div class="section-row">
+          <h2>④ 編輯整理後段落</h2>
+          <button id="addSection" class="small">＋段落</button>
+        </div>
+        <div id="sectionEditors"></div>
+      </section>
+
+      <section class="control-section">
+        <h2>⑤ 插圖模式</h2>
+        <div class="choice-row">
+          <label class="radio"><input type="radio" name="illustrationMode" value="fixed" checked> 固定童趣素材</label>
+          <label class="radio"><input type="radio" name="illustrationMode" value="ai"> AI 插圖（需後端）</label>
+        </div>
+        <label>AI API Proxy（選填）
+          <input id="apiBase" placeholder="https://your-backend.example.com">
+        </label>
+        <p class="mini-note">AI 後端可在整理結果回傳 imageUrl；沒有後端時，請使用固定童趣素材。不要把 API Key 直接放在 GitHub Pages 前端。</p>
+      </section>
+
+      <section class="control-section">
+        <h2>⑥ 本月收尾</h2>
+        <label>本月一句話
+          <input id="closing" value="陪伴不是把進度做完，而是把英文留在生活裡。">
+        </label>
+      </section>
+
+      <div class="sticky-actions">
+        <button id="saveDraft" class="ghost">儲存草稿</button>
+        <button id="exportPng" class="primary">下載 PNG</button>
+        <button id="printPdf" class="secondary">列印／PDF</button>
+      </div>
+    </aside>
+
+    <main class="preview-stage">
+      <article id="poster" class="poster">
+        <div class="paper-doodles top-left">✦ ♡ ♪</div>
+        <div class="paper-doodles bottom-right">🌿 ✦ ♫</div>
+
+        <header>
+          <div class="brand-banner">
+            <span class="brand-main">威利兄弟3.0</span>
+            <span class="brand-play">一起玩</span>
+          </div>
+
+          <div class="hero-title-row">
+            <div class="title-copy">
+              <span id="issueLabel" class="issue-pill">2026年六月號｜精選分享</span>
+              <h1>園長日記</h1>
+              <p class="lead">把英文放進生活裡，記錄孩子與家長每個月真實的小小進步。</p>
+            </div>
+
+            <div class="child-card">
+              <div class="child-avatar">👧🏻</div>
+              <div>
+                <strong id="childNameView">Jessie</strong>
+                <span id="childInfoView">6Y 大班</span>
+                <small id="periodView">使用期間｜6/6–7/5</small>
+              </div>
+            </div>
+          </div>
+
+          <div id="heroVisual" class="hero-visual">
+            <div class="family-scene">
+              <div class="scene-people">👩‍👧‍👦</div>
+              <div class="scene-book">📘</div>
+              <div class="scene-notes">♪ ♫ ✦</div>
+              <p>一起聽・一起玩・一起把英文留在生活裡</p>
+            </div>
+          </div>
+
+          <div class="meta-bar">
+            <div>園長 <b id="principalView">佳＊園長</b></div>
+            <div>出刊 <b id="issueMetaView">2026年六月號</b></div>
+            <div>主題 <b>家庭英語共學</b></div>
+          </div>
+        </header>
+
+        <section id="diaryCards" class="diary-grid"></section>
+
+        <section class="closing-card">
+          <div class="closing-icon">♡</div>
+          <div>
+            <span>身為家長，這個月最想留下的一句話</span>
+            <strong id="closingView">陪伴不是把進度做完，而是把英文留在生活裡。</strong>
+          </div>
+        </section>
+
+        <footer>
+          <span>威利兄弟3.0｜一起玩</span>
+          <span id="principalFooter">— 佳＊園長</span>
+        </footer>
+      </article>
+    </main>
+  </div>
+
+  <template id="sectionEditorTemplate">
+    <div class="section-editor">
+      <div class="editor-line">
+        <input class="icon-input" maxlength="4" aria-label="段落圖示">
+        <input class="title-input" aria-label="段落標題">
+      </div>
+      <textarea class="text-input" rows="5" aria-label="段落內容"></textarea>
+      <div class="editor-toolbar">
+        <button class="move-up ghost small">↑</button>
+        <button class="move-down ghost small">↓</button>
+        <button class="delete-section danger small">刪除</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
