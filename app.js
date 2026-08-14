@@ -103,7 +103,11 @@ function renderHero(){
       : `<div class="hero-placeholder">請在左側選擇要上傳的照片</div>`;
   }else{
     const selected = heroChoices.find(item=>item.value === choice);
-    hero.innerHTML = `<img class="hero-asset" src="${assetUrl(choice)}" alt="${escapeHtml(selected?.label || "童趣主圖")}">`;
+    hero.innerHTML = `
+      <div class="hero-asset-frame">
+        <img src="${assetUrl(choice)}" alt="${escapeHtml(selected?.label || "童趣主圖")}">
+      </div>
+    `;
   }
 }
 
