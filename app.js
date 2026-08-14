@@ -2,7 +2,7 @@ const $ = (id) => document.getElementById(id);
 
 const illustrationAssets = [
   { value:"auto", label:"依內容自動配圖" },
-  { value:"guide", label:"共學引導老師" },
+  { value:"guide", label:"英語陪伴老師" },
   { value:"clap-siblings", label:"手足拍手唱歌" },
   { value:"family-parachute", label:"親子彩虹傘遊戲" },
   { value:"talking-pen", label:"點讀筆與圖卡" },
@@ -18,7 +18,7 @@ const illustrationAssets = [
 ];
 
 const heroChoices = [
-  { value:"default", label:"預設家庭共學情境" },
+  { value:"default", label:"預設家庭英語情境" },
   { value:"none", label:"不顯示主圖（自動收合）" },
   { value:"custom", label:"自行上傳照片" },
   ...illustrationAssets.filter(item=>!["auto","none"].includes(item.value))
@@ -43,6 +43,14 @@ const defaultSections = [
   { icon:"✨", asset:"talking-pen", title:"這個月的小亮點", text:"孩子開始主動拿卡片、跟著錄音，也會把熟悉的英文句子放進遊戲。這些小小的變化，讓我看到反覆輸入正在慢慢累積。" },
   { icon:"❤️", asset:"parent-reading", title:"身為家長，最大的改變", text:"一路使用下來，最大的改變不只是孩子學了多少，而是身為家長的我越來越放鬆，也越來越相信孩子會照著自己的節奏成長。" }
 ];
+
+const quickSections = {
+  highlight:{ icon:"⭐", asset:"decorations", title:"本月亮點", text:"請寫下這個月最想留下的亮點。" },
+  reflection:{ icon:"🌿", asset:"guide", title:"家長反思", text:"請寫下陪伴過程中的觀察與心情。" },
+  favorite:{ icon:"😊", asset:"teddy-books", title:"孩子最享受", text:"請記錄孩子最投入、最喜歡的活動。" },
+  challenge:{ icon:"💭", asset:"growing-plant", title:"較抗拒／還在適應", text:"請記錄孩子目前較抗拒，或仍需要時間適應的部分。" },
+  plan:{ icon:"📘", asset:"picture-book", title:"下個月計畫", text:"請寫下想繼續保留、減少或新增的內容。" }
+};
 
 let sections = structuredClone(defaultSections);
 
@@ -84,6 +92,26 @@ function assetFor(text=""){
 function assetUrl(asset){
   if(!asset || asset === "none") return "";
   return `./assets/illustrations/${asset}.png`;
+}
+
+function sentenceSegments(text=""){
+  return text
+    .replace(/\r/g,"")
+    .split(/\n+/)
+    .flatMap(line=>line.match(/[^。！？!?]+[。！？!?]?/g) || [])
+    .map(point=>point.trim())
+    .filter(Boolean);
+}
+
+function textPoints(text=""){
+  return sentenceSegments(text);
+}
+
+function cardTextHtml(text="",layout="cute"){
+  if(layout !== "cute") return `<p>${escapeHtml(text)}</p>`;
+  const points = textPoints(text);
+  if(points.length < 2) return `<p class="cute-copy">${escapeHtml(text)}</p>`;
+  return `<ul class="diary-points">${points.map(point=>`<li>${escapeHtml(point)}</li>`).join("")}</ul>`;
 }
 
 function renderHero(){
@@ -151,6 +179,10 @@ function renderEditors(){
 }
 
 function renderPoster(){
+  const layout = $("layoutMode").value || "cute";
+  const poster = $("poster");
+  poster.classList.toggle("layout-cute",layout === "cute");
+  poster.classList.toggle("layout-story",layout === "story");
   const issue = `${$("year").value}年${$("month").value}號`;
   $("issueLabel").textContent = `${issue}｜精選分享`;
   $("principalView").textContent = $("principal").value;
@@ -169,7 +201,8 @@ function renderPoster(){
   sections.forEach((s,index)=>{
     const card = document.createElement("article");
     card.className = "diary-card";
-    if(sections.length % 2 === 1 && index === sections.length-1) card.classList.add("wide");
+    if(layout === "story" && sections.length % 2 === 1 && index === sections.length-1) card.classList.add("wide");
+    if(layout === "cute" && /下個月|計畫/.test(s.title)) card.classList.add("planning-card");
     const selectedAsset = s.asset === "auto" || !s.asset ? assetFor(s.text) : s.asset;
     const imageUrl = mode === "ai" ? safeImageUrl(s.imageUrl) : assetUrl(selectedAsset);
     const art = s.icon || illustrationFor(s.text);
@@ -181,7 +214,7 @@ function renderPoster(){
         <span class="card-no">${index+1}</span>
         <h2>${escapeHtml(s.title)}</h2>
       </div>
-      <p>${escapeHtml(s.text)}</p>
+      ${cardTextHtml(s.text,layout)}
       ${illustrationHtml}
     `;
     grid.appendChild(card);
@@ -192,10 +225,7 @@ function localSmartOrganize(raw){
   const clean = raw.replace(/\r/g,"").trim();
   if(!clean) return structuredClone(defaultSections);
 
-  const sentences = clean
-    .split(/\n+|(?<=[。！？!?])\s*/)
-    .map(s=>s.trim())
-    .filter(Boolean);
+  const sentences = sentenceSegments(clean);
 
   const groups = [];
   const target = Math.min(6, Math.max(4, Math.ceil(sentences.length/2)));
@@ -275,7 +305,7 @@ function saveDraft(){
     period:$("period").value, theme:$("theme").value,
     childName:$("childName").value, childInfo:$("childInfo").value,
     rawDiary:$("rawDiary").value, closing:$("closing").value, apiBase:$("apiBase").value,
-    heroChoice:$("heroChoice").value,
+    heroChoice:$("heroChoice").value, layoutMode:$("layoutMode").value,
     sections
   };
   localStorage.setItem("williePrincipalDiaryDraft",JSON.stringify(data));
@@ -286,7 +316,10 @@ function loadDraft(){
   if(!raw) return;
   try{
     const d=JSON.parse(raw);
-    ["year","month","principal","period","theme","childName","childInfo","rawDiary","closing","apiBase","heroChoice"].forEach(k=>{
+    if(["家庭英語共學","陪你一起孵出英語母語寶寶共學"].includes(d.theme)){
+      d.theme="陪你一起孵出英語母語寶寶";
+    }
+    ["year","month","principal","period","theme","childName","childInfo","rawDiary","closing","apiBase","heroChoice","layoutMode"].forEach(k=>{
       if(d[k]!==undefined && $(k)) $(k).value=d[k];
     });
     if(Array.isArray(d.sections)) sections=d.sections;
@@ -306,7 +339,7 @@ function imagePreview(input){
   reader.readAsDataURL(file);
 }
 
-["year","month","principal","period","theme","childName","childInfo","closing","apiBase"].forEach(id=>{
+["year","month","principal","period","theme","childName","childInfo","closing","apiBase","layoutMode"].forEach(id=>{
   $(id).addEventListener("input",()=>{renderPoster(); saveDraft();});
 });
 document.querySelectorAll('input[name="illustrationMode"]').forEach(el=>el.addEventListener("change",renderPoster));
@@ -319,6 +352,14 @@ $("clearRaw").addEventListener("click",()=>{$("rawDiary").value="";saveDraft();}
 $("addSection").addEventListener("click",()=>{
   sections.push({icon:"⭐",asset:"auto",title:"新增段落",text:"請輸入家長日記內容。"});
   renderEditors();renderPoster();
+});
+$("addQuickSection").addEventListener("click",()=>{
+  const preset = quickSections[$("quickSection").value];
+  if(!preset) return;
+  sections.push({...preset});
+  renderEditors();
+  renderPoster();
+  saveDraft();
 });
 $("saveDraft").addEventListener("click",()=>{saveDraft();alert("已儲存在這台裝置的瀏覽器。");});
 $("printPdf").addEventListener("click",async()=>{

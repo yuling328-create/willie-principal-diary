@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>威利兄弟3.0｜園長日記</title>
   <meta name="description" content="威利兄弟3.0 園長日記月刊產生器">
-  <link rel="stylesheet" href="./styles.css?v=20260814-7">
+  <link rel="stylesheet" href="./styles.css?v=20260814-8">
 </head>
 <body>
   <div class="app-shell">
@@ -41,6 +41,12 @@
         </div>
         <label>本期主題
           <input id="theme" value="陪你一起孵出英語母語寶寶">
+        </label>
+        <label>輸出版型
+          <select id="layoutMode">
+            <option value="cute" selected>可愛月刊版（三欄）</option>
+            <option value="story">日記故事版（雙欄）</option>
+          </select>
         </label>
       </section>
 
@@ -79,6 +85,16 @@
         <div class="section-row">
           <h2>④ 編輯整理後段落</h2>
           <button id="addSection" class="small">＋段落</button>
+        </div>
+        <div class="quick-section-row">
+          <select id="quickSection" aria-label="選擇常用分類">
+            <option value="highlight">本月亮點</option>
+            <option value="reflection">家長反思</option>
+            <option value="favorite">孩子最享受</option>
+            <option value="challenge">較抗拒／還在適應</option>
+            <option value="plan">下個月計畫</option>
+          </select>
+          <button id="addQuickSection" class="ghost small">＋常用分類</button>
         </div>
         <div id="sectionEditors"></div>
       </section>
@@ -127,21 +143,23 @@
               <p class="lead">把英文放進生活裡，記錄孩子與家長每個月真實的小小進步。</p>
             </div>
 
-            <div class="child-card">
-              <div class="child-avatar">👧🏻</div>
-              <div>
-                <strong id="childNameView">Jessie</strong>
-                <span id="childInfoView">6Y 大班</span>
+            <div class="header-side">
+              <div class="child-card">
+                <div class="child-avatar">👧🏻</div>
+                <div>
+                  <strong id="childNameView">Jessie</strong>
+                  <span id="childInfoView">6Y 大班</span>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div id="heroVisual" class="hero-visual">
-            <div class="family-scene">
-              <div class="scene-people">👩‍👧‍👦</div>
-              <div class="scene-book">📘</div>
-              <div class="scene-notes">♪ ♫ ✦</div>
-              <p>一起聽・一起玩・一起把英文留在生活裡</p>
+              <div id="heroVisual" class="hero-visual">
+                <div class="family-scene">
+                  <div class="scene-people">👩‍👧‍👦</div>
+                  <div class="scene-book">📘</div>
+                  <div class="scene-notes">♪ ♫ ✦</div>
+                  <p>一起聽・一起玩・一起把英文留在生活裡</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -190,6 +208,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="./app.js?v=20260814-7"></script>
+  <script src="./app.js?v=20260814-8"></script>
 </body>
 </html>
