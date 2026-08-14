@@ -207,7 +207,22 @@ button.small{padding:7px 10px;font-size:12px}
   box-shadow:0 8px 20px rgba(71,48,29,.08);
 }
 .hero-visual>img{width:100%;height:100%;object-fit:cover}
-.hero-visual>img.hero-asset{object-fit:contain;padding:22px}
+.hero-asset-frame{
+  width:420px;
+  height:230px;
+  max-width:52%;
+  max-height:82%;
+  margin:auto;
+  display:grid;
+  place-items:center;
+}
+.hero-asset-frame img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+}
 .hero-visual.is-hidden{display:none}
 .hero-placeholder{height:100%;display:grid;place-items:center;color:#8a7465;font-size:20px;font-weight:850}
 #heroFileLabel{opacity:.68}
