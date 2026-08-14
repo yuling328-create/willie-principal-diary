@@ -39,6 +39,9 @@
             <input id="period" value="6/6–7/5">
           </label>
         </div>
+        <label>本期主題
+          <input id="theme" value="陪你一起孵出英語母語寶寶">
+        </label>
       </section>
 
       <section class="control-section">
@@ -51,9 +54,13 @@
             <input id="childInfo" value="6Y 大班">
           </label>
         </div>
-        <label>家庭主圖（可選）
+        <label>最上方主圖
+          <select id="heroChoice"></select>
+        </label>
+        <label id="heroFileLabel">自行上傳照片（可選）
           <input id="heroFile" type="file" accept="image/*">
         </label>
+        <p class="mini-note">可選擇不顯示主圖、使用內建童趣素材，或自行上傳照片；不顯示時版面會自動收合。</p>
       </section>
 
       <section class="control-section">
@@ -142,7 +149,7 @@
           <div class="meta-bar">
             <div>園長 <b id="principalView">佳＊園長</b></div>
             <div>出刊 <b id="issueMetaView">2026年六月號</b></div>
-            <div>主題 <b>家庭英語共學</b></div>
+            <div>主題 <b id="themeView">陪你一起孵出英語母語寶寶</b></div>
           </div>
         </header>
 

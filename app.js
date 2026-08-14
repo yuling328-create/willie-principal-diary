@@ -17,6 +17,24 @@ const illustrationAssets = [
   { value:"none", label:"不放插圖" }
 ];
 
+const heroChoices = [
+  { value:"default", label:"預設家庭共學情境" },
+  { value:"none", label:"不顯示主圖（自動收合）" },
+  { value:"custom", label:"自行上傳照片" },
+  ...illustrationAssets.filter(item=>!["auto","none"].includes(item.value))
+];
+
+const defaultHeroMarkup = `
+  <div class="family-scene">
+    <div class="scene-people">👩‍👧‍👦</div>
+    <div class="scene-book">📘</div>
+    <div class="scene-notes">♪ ♫ ✦</div>
+    <p>一起聽・一起玩・一起把英文留在生活裡</p>
+  </div>
+`;
+
+let customHeroDataUrl = "";
+
 const defaultSections = [
   { icon:"📚", asset:"picture-book", title:"越來越熟悉，節奏更自在", text:"使用進入第二個月，孩子對教材越來越熟悉，連帶整個帶領的節奏也更自在。以前還會擔心有沒有照著流程走，現在反而能放鬆跟著感覺帶，和孩子一起享受學習的過程。" },
   { icon:"🎵", asset:"clap-siblings", title:"聽熟之後，自然開始跟唱", text:"最近最大的收穫，是孩子已經把歌曲聽得非常熟。熟悉感建立後，開口不再像是一項任務，而是生活裡自然發生的回應。" },
@@ -68,6 +86,27 @@ function assetUrl(asset){
   return `./assets/illustrations/${asset}.png`;
 }
 
+function renderHero(){
+  const hero = $("heroVisual");
+  const choice = $("heroChoice").value || "default";
+  const hidden = choice === "none";
+  hero.classList.toggle("is-hidden",hidden);
+  $("heroFileLabel").classList.toggle("is-active",choice === "custom");
+
+  if(hidden){
+    hero.innerHTML = "";
+  }else if(choice === "default"){
+    hero.innerHTML = defaultHeroMarkup;
+  }else if(choice === "custom"){
+    hero.innerHTML = customHeroDataUrl
+      ? `<img src="${customHeroDataUrl}" alt="自行上傳的主圖">`
+      : `<div class="hero-placeholder">請在左側選擇要上傳的照片</div>`;
+  }else{
+    const selected = heroChoices.find(item=>item.value === choice);
+    hero.innerHTML = `<img class="hero-asset" src="${assetUrl(choice)}" alt="${escapeHtml(selected?.label || "童趣主圖")}">`;
+  }
+}
+
 function renderEditors(){
   const host = $("sectionEditors");
   host.innerHTML = "";
@@ -116,7 +155,9 @@ function renderPoster(){
   $("childNameView").textContent = $("childName").value;
   $("childInfoView").textContent = $("childInfo").value;
   $("periodView").textContent = `使用期間｜${$("period").value}`;
+  $("themeView").textContent = $("theme").value;
   $("closingView").textContent = $("closing").value;
+  renderHero();
 
   const grid = $("diaryCards");
   grid.innerHTML = "";
@@ -129,13 +170,16 @@ function renderPoster(){
     const selectedAsset = s.asset === "auto" || !s.asset ? assetFor(s.text) : s.asset;
     const imageUrl = mode === "ai" ? safeImageUrl(s.imageUrl) : assetUrl(selectedAsset);
     const art = s.icon || illustrationFor(s.text);
+    const illustrationHtml = selectedAsset === "none" ? "" : `
+      <div class="card-illustration">${imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(s.title)}插圖">` : escapeHtml(art)}</div>
+    `;
     card.innerHTML = `
       <div class="card-head">
         <span class="card-no">${index+1}</span>
         <h2>${escapeHtml(s.title)}</h2>
       </div>
       <p>${escapeHtml(s.text)}</p>
-      <div class="card-illustration">${imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(s.title)}插圖">` : escapeHtml(art)}</div>
+      ${illustrationHtml}
     `;
     grid.appendChild(card);
   });
@@ -203,8 +247,8 @@ async function organizeDiary(){
           icon:s.icon || illustrationFor(s.text || ""),
           title:s.title || "本月紀錄",
           text:s.text || s.content || "",
-          imageUrl:s.imageUrl || ""
-          ,asset:s.asset || assetFor(s.text || s.content || "")
+          imageUrl:s.imageUrl || "",
+          asset:s.asset || assetFor(s.text || s.content || "")
         }));
         if(data.closing) $("closing").value=data.closing;
         renderEditors(); renderPoster(); saveDraft();
@@ -225,8 +269,10 @@ async function organizeDiary(){
 function saveDraft(){
   const data = {
     year:$("year").value, month:$("month").value, principal:$("principal").value,
-    period:$("period").value, childName:$("childName").value, childInfo:$("childInfo").value,
+    period:$("period").value, theme:$("theme").value,
+    childName:$("childName").value, childInfo:$("childInfo").value,
     rawDiary:$("rawDiary").value, closing:$("closing").value, apiBase:$("apiBase").value,
+    heroChoice:$("heroChoice").value,
     sections
   };
   localStorage.setItem("williePrincipalDiaryDraft",JSON.stringify(data));
@@ -237,27 +283,34 @@ function loadDraft(){
   if(!raw) return;
   try{
     const d=JSON.parse(raw);
-    ["year","month","principal","period","childName","childInfo","rawDiary","closing","apiBase"].forEach(k=>{
+    ["year","month","principal","period","theme","childName","childInfo","rawDiary","closing","apiBase","heroChoice"].forEach(k=>{
       if(d[k]!==undefined && $(k)) $(k).value=d[k];
     });
     if(Array.isArray(d.sections)) sections=d.sections;
   }catch{}
 }
 
-function imagePreview(input,targetId){
+function imagePreview(input){
   const file=input.files?.[0];
   if(!file) return;
   const reader=new FileReader();
-  reader.onload=e=>{ $(targetId).innerHTML=`<img src="${e.target.result}" alt="家庭主圖">`; };
+  reader.onload=e=>{
+    customHeroDataUrl=e.target.result;
+    $("heroChoice").value="custom";
+    renderHero();
+    saveDraft();
+  };
   reader.readAsDataURL(file);
 }
 
-["year","month","principal","period","childName","childInfo","closing","apiBase"].forEach(id=>{
+["year","month","principal","period","theme","childName","childInfo","closing","apiBase"].forEach(id=>{
   $(id).addEventListener("input",()=>{renderPoster(); saveDraft();});
 });
 document.querySelectorAll('input[name="illustrationMode"]').forEach(el=>el.addEventListener("change",renderPoster));
 
-$("heroFile").addEventListener("change",e=>imagePreview(e.target,"heroVisual"));
+heroChoices.forEach(item=>$("heroChoice").add(new Option(item.label,item.value)));
+$("heroChoice").addEventListener("change",()=>{renderHero();saveDraft();});
+$("heroFile").addEventListener("change",e=>imagePreview(e.target));
 $("smartOrganize").addEventListener("click",organizeDiary);
 $("clearRaw").addEventListener("click",()=>{$("rawDiary").value="";saveDraft();});
 $("addSection").addEventListener("click",()=>{
