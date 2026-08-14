@@ -223,6 +223,12 @@ button.small{padding:7px 10px;font-size:12px}
   object-fit:contain;
   object-position:center;
 }
+.hero-asset-frame.is-wide{
+  width:820px;
+  height:240px;
+  max-width:88%;
+  max-height:86%;
+}
 .hero-visual.is-hidden{display:none}
 .hero-placeholder{height:100%;display:grid;place-items:center;color:#8a7465;font-size:20px;font-weight:850}
 #heroFileLabel{opacity:.68}

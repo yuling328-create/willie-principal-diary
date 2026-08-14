@@ -17,11 +17,21 @@ const illustrationAssets = [
   { value:"none", label:"不放插圖" }
 ];
 
+const activityAssets = [
+  { value:"activity-i-spy", label:"活動｜I Spy", file:"i-spy.jpg" },
+  { value:"activity-shadow-matching", label:"活動｜Shadow Matching", file:"shadow-matching.jpg" },
+  { value:"activity-marker-sticks", label:"活動｜A-B-C Marker Sticks", file:"marker-sticks.jpg" },
+  { value:"activity-adventure-path", label:"活動｜English Adventure Path", file:"adventure-path.jpg" },
+  { value:"activity-english-adventure", label:"活動｜English Adventure", file:"english-adventure.jpg" },
+  { value:"activity-dot-and-stick", label:"活動｜A-B-C Dot and Stick", file:"dot-and-stick.jpg" }
+];
+
 const heroChoices = [
   { value:"default", label:"預設家庭共學情境" },
   { value:"none", label:"不顯示主圖（自動收合）" },
   { value:"custom", label:"自行上傳照片" },
-  ...illustrationAssets.filter(item=>!["auto","none"].includes(item.value))
+  ...illustrationAssets.filter(item=>!["auto","none"].includes(item.value)),
+  ...activityAssets
 ];
 
 const defaultHeroMarkup = `
@@ -86,6 +96,11 @@ function assetUrl(asset){
   return `./assets/illustrations/${asset}.png`;
 }
 
+function heroAssetUrl(choice){
+  const activity = activityAssets.find(item=>item.value === choice);
+  return activity ? `./assets/activities/${activity.file}` : assetUrl(choice);
+}
+
 function renderHero(){
   const hero = $("heroVisual");
   const choice = $("heroChoice").value || "default";
@@ -103,9 +118,10 @@ function renderHero(){
       : `<div class="hero-placeholder">請在左側選擇要上傳的照片</div>`;
   }else{
     const selected = heroChoices.find(item=>item.value === choice);
+    const isActivity = activityAssets.some(item=>item.value === choice);
     hero.innerHTML = `
-      <div class="hero-asset-frame">
-        <img src="${assetUrl(choice)}" alt="${escapeHtml(selected?.label || "童趣主圖")}">
+      <div class="hero-asset-frame${isActivity ? " is-wide" : ""}">
+        <img src="${heroAssetUrl(choice)}" alt="${escapeHtml(selected?.label || "童趣主圖")}">
       </div>
     `;
   }
@@ -153,12 +169,11 @@ function renderEditors(){
 function renderPoster(){
   const issue = `${$("year").value}年${$("month").value}號`;
   $("issueLabel").textContent = `${issue}｜精選分享`;
-  $("issueMetaView").textContent = issue;
   $("principalView").textContent = $("principal").value;
   $("principalFooter").textContent = `— ${$("principal").value}`;
   $("childNameView").textContent = $("childName").value;
   $("childInfoView").textContent = $("childInfo").value;
-  $("periodView").textContent = `使用期間｜${$("period").value}`;
+  $("periodView").textContent = $("period").value;
   $("themeView").textContent = $("theme").value;
   $("closingView").textContent = $("closing").value;
   renderHero();
