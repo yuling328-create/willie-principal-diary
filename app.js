@@ -322,7 +322,48 @@ $("addSection").addEventListener("click",()=>{
   renderEditors();renderPoster();
 });
 $("saveDraft").addEventListener("click",()=>{saveDraft();alert("已儲存在這台裝置的瀏覽器。");});
-$("printPdf").addEventListener("click",()=>window.print());
+$("printPdf").addEventListener("click",async()=>{
+  if(typeof html2canvas === "undefined" || !window.jspdf?.jsPDF){
+    alert("PDF 功能需要連網載入轉檔工具，請確認網路後再試一次。");
+    return;
+  }
+
+  const button = $("printPdf");
+  const originalLabel = button.textContent;
+  button.disabled = true;
+  button.textContent = "PDF 製作中…";
+
+  try{
+    const canvas = await html2canvas($("poster"),{
+      scale:1,
+      useCORS:true,
+      backgroundColor:"#fffaf1",
+      logging:false
+    });
+    const { jsPDF } = window.jspdf;
+    const pageWidth = 1080;
+    const pageHeight = 1920;
+    const ratio = Math.min(pageWidth / canvas.width,pageHeight / canvas.height);
+    const imageWidth = canvas.width * ratio;
+    const imageHeight = canvas.height * ratio;
+    const imageX = (pageWidth - imageWidth) / 2;
+    const imageY = (pageHeight - imageHeight) / 2;
+    const pdf = new jsPDF({
+      orientation:"portrait",
+      unit:"px",
+      format:[pageWidth,pageHeight],
+      hotfixes:["px_scaling"]
+    });
+    pdf.addImage(canvas.toDataURL("image/jpeg",0.94),"JPEG",imageX,imageY,imageWidth,imageHeight);
+    pdf.save(`園長日記_${$("year").value}年${$("month").value}號_${$("childName").value||"未命名"}.pdf`);
+  }catch(err){
+    console.error(err);
+    alert("PDF 製作失敗，請重新整理頁面後再試一次。");
+  }finally{
+    button.disabled = false;
+    button.textContent = originalLabel;
+  }
+});
 
 $("exportPng").addEventListener("click",async()=>{
   if(typeof html2canvas==="undefined"){
