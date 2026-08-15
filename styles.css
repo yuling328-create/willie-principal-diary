@@ -9,6 +9,11 @@
   --pink:#e77f9e;
   --line:#eadac6;
   --panel:#ffffff;
+  --banner:#fff1d6;
+  --banner-deep:#efb5a2;
+  --banner-line:#c78f69;
+  --accent-soft:#f7c5bb;
+  --frame:#efd8bc;
 }
 *{box-sizing:border-box}
 html{background:#eee9e1}
@@ -112,7 +117,7 @@ button.small{padding:7px 10px;font-size:12px}
   flex-direction:column;
   overflow:hidden;
   padding:48px 52px 42px;
-  border:16px solid #f0dec5;
+  border:16px solid var(--frame);
   border-radius:35px;
   background:
     radial-gradient(circle at 8% 7%,rgba(239,155,61,.14),transparent 18%),
@@ -129,9 +134,12 @@ button.small{padding:7px 10px;font-size:12px}
   border-radius:29px 23px 31px 21px;
   pointer-events:none;
 }
-.paper-doodles{position:absolute;font-size:24px;letter-spacing:10px;color:#cf7168}
+.paper-doodles{position:absolute;font-size:24px;letter-spacing:8px;color:var(--banner-line)}
 .paper-doodles.top-left{top:28px;left:39px}
 .paper-doodles.bottom-right{right:34px;bottom:31px}
+.kindy-corner{position:absolute;z-index:1;bottom:25px;font-size:52px;opacity:.82;filter:saturate(.78)}
+.kindy-corner.corner-left{left:30px;transform:rotate(-8deg)}
+.kindy-corner.corner-right{right:165px;transform:rotate(7deg)}
 .brand-banner{
   position:relative;
   z-index:2;
@@ -139,25 +147,35 @@ button.small{padding:7px 10px;font-size:12px}
   max-width:90%;
   margin:0 auto 25px;
   padding:17px 55px 20px;
-  color:white;
+  color:var(--ink);
   text-align:center;
-  border-radius:18px 18px 26px 26px;
-  background:linear-gradient(#f47b80,#e94f57);
-  box-shadow:0 8px 0 #cc4148,0 12px 22px rgba(124,45,47,.18);
+  border:3px solid var(--banner-line);
+  border-radius:48% 52% 19px 22px/20px 24px 17px 21px;
+  background:
+    radial-gradient(circle at 16% 20%,rgba(255,255,255,.76),transparent 24%),
+    linear-gradient(180deg,#fff9e9,var(--banner));
+  box-shadow:0 6px 0 var(--banner-deep),0 12px 24px rgba(124,81,49,.13);
   font-weight:950;
   letter-spacing:3px;
 }
 .brand-banner:before,.brand-banner:after{
-  content:"";position:absolute;top:11px;width:42px;height:62px;background:#ce434b;z-index:-1
+  content:"";position:absolute;top:12px;width:48px;height:58px;background:var(--banner-deep);z-index:-1;
+  border:2px solid var(--banner-line)
 }
-.brand-banner:before{left:-28px;transform:skewY(-15deg)}
-.brand-banner:after{right:-28px;transform:skewY(15deg)}
+.brand-banner:before{left:-34px;transform:skewY(-13deg);border-radius:8px 0 0 12px}
+.brand-banner:after{right:-34px;transform:skewY(13deg);border-radius:0 8px 12px 0}
+.banner-mascot,.banner-clock,.banner-balloons{position:absolute;z-index:3;line-height:1;filter:saturate(.78)}
+.banner-mascot{left:-75px;top:-21px;font-size:65px;transform:rotate(-9deg)}
+.banner-clock{left:50%;top:-39px;font-size:43px;transform:translateX(-50%)}
+.banner-balloons{right:-70px;top:-25px;font-size:60px;transform:rotate(7deg)}
 .brand-main{font-size:31px}
 .brand-play{
   margin-left:16px;
   padding:4px 14px;
   border-radius:999px;
-  background:rgba(255,255,255,.18);
+  color:#76503e;
+  background:rgba(255,255,255,.68);
+  border:2px dashed var(--banner-deep);
   font-size:25px;
 }
 .hero-title-row{
@@ -284,6 +302,11 @@ button.small{padding:7px 10px;font-size:12px}
   border:3px solid var(--line);
   border-radius:22px;
   background:rgba(255,255,255,.95);
+}
+.diary-card:after{
+  content:"";position:absolute;right:22px;top:-7px;width:54px;height:15px;
+  border-radius:3px;background:var(--accent-soft);
+  transform:rotate(3deg);opacity:.78;pointer-events:none
 }
 .diary-card.wide{grid-column:1/-1}
 .diary-card:nth-child(6n+1){border-color:#f0b3b5}
@@ -529,6 +552,32 @@ footer{
 .layout-observation .closing-icon,.layout-siblings .closing-icon,.layout-collage .closing-icon,.layout-structured .closing-icon{width:48px;height:48px;font-size:28px}
 .layout-observation .closing-card strong,.layout-siblings .closing-card strong,.layout-collage .closing-card strong,.layout-structured .closing-card strong{font-size:19px}
 .layout-observation footer,.layout-siblings footer,.layout-collage footer,.layout-structured footer{margin-top:14px;padding-top:13px;font-size:15px}
+
+/* 幼稚園系手繪配色：同一版型可自由換色，不影響文字與圖片位置。 */
+.poster.theme-peach{
+  --banner:#ffe8db;--banner-deep:#efb3aa;--banner-line:#b77a62;--accent-soft:#f7c0b8;--frame:#f0d7bd;
+  background:radial-gradient(circle at 10% 8%,#fbd8cf66,transparent 20%),radial-gradient(circle at 92% 18%,#f9d7b855,transparent 22%),#fffaf1
+}
+.poster.theme-meadow{
+  --banner:#eef1d3;--banner-deep:#bdc99d;--banner-line:#778c63;--accent-soft:#cdddb7;--frame:#dce3c9;
+  background:radial-gradient(circle at 9% 8%,#dbe8c977,transparent 21%),radial-gradient(circle at 91% 18%,#f8ddba55,transparent 21%),#fffdf2
+}
+.poster.theme-sunshine{
+  --banner:#fff0b9;--banner-deep:#f0c77c;--banner-line:#b67d43;--accent-soft:#f8d391;--frame:#f1ddae;
+  background:radial-gradient(circle at 10% 7%,#ffe58c66,transparent 20%),radial-gradient(circle at 92% 18%,#f8c9b855,transparent 21%),#fffaf0
+}
+.poster.theme-sky{
+  --banner:#dff0ec;--banner-deep:#abd0ca;--banner-line:#628b85;--accent-soft:#b9dcd7;--frame:#d1e3dd;
+  background:radial-gradient(circle at 9% 8%,#cce8e477,transparent 21%),radial-gradient(circle at 92% 18%,#f6d6ba55,transparent 22%),#fffdf4
+}
+.poster.theme-peach .issue-pill{background:#d98f82}
+.poster.theme-meadow .issue-pill{background:#78976d}
+.poster.theme-sunshine .issue-pill{background:#d99e4e}
+.poster.theme-sky .issue-pill{background:#659a9a}
+.poster.theme-peach .meta-bar b{color:#cb766e}
+.poster.theme-meadow .meta-bar b{color:#68865d}
+.poster.theme-sunshine .meta-bar b{color:#bd7c35}
+.poster.theme-sky .meta-bar b{color:#568b8a}
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
   .control-panel{position:relative;top:0;max-height:none}

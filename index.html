@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>威利兄弟3.0｜園長日記</title>
   <meta name="description" content="威利兄弟3.0 園長日記月刊產生器">
-  <link rel="stylesheet" href="./styles.css?v=20260815-2">
+  <link rel="stylesheet" href="./styles.css?v=20260815-3">
 </head>
 <body>
   <div class="app-shell">
@@ -53,6 +53,14 @@
           </select>
         </label>
         <p id="layoutHelp" class="mini-note">三欄重點整理，適合一頁快速閱讀。</p>
+        <label>幼稚園可愛配色
+          <select id="colorTheme">
+            <option value="peach" selected>蜜桃粉｜溫柔手帳</option>
+            <option value="meadow">嫩芽綠｜自然花園</option>
+            <option value="sunshine">陽光黃｜活潑童趣</option>
+            <option value="sky">天空藍｜清爽故事</option>
+          </select>
+        </label>
       </section>
 
       <section class="control-section">
@@ -144,12 +152,17 @@
     </aside>
 
     <main class="preview-stage">
-      <article id="poster" class="poster">
+      <article id="poster" class="poster theme-peach">
         <div class="paper-doodles top-left">✦ ♡ ♪</div>
-        <div class="paper-doodles bottom-right">🌿 ✦ ♫</div>
+        <div class="paper-doodles bottom-right">🌿 🌼 📚 ✦</div>
+        <div class="kindy-corner corner-left" aria-hidden="true">🌷</div>
+        <div class="kindy-corner corner-right" aria-hidden="true">🌱</div>
 
         <header>
           <div class="brand-banner">
+            <span class="banner-mascot" aria-hidden="true">🧸</span>
+            <span class="banner-clock" aria-hidden="true">🕰️</span>
+            <span class="banner-balloons" aria-hidden="true">🎈</span>
             <span class="brand-main">威利兄弟3.0</span>
             <span class="brand-play">一起玩</span>
           </div>
@@ -253,6 +266,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="./app.js?v=20260815-2"></script>
+  <script src="./app.js?v=20260815-3"></script>
 </body>
 </html>

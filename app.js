@@ -205,9 +205,13 @@ function renderEditors(){
 
 function renderPoster(){
   const layout = $("layoutMode").value || "cute";
+  const colorTheme = $("colorTheme").value || "peach";
   const poster = $("poster");
   ["cute","story","observation","siblings","collage","structured"].forEach(name=>{
     poster.classList.toggle(`layout-${name}`,layout === name);
+  });
+  ["peach","meadow","sunshine","sky"].forEach(name=>{
+    poster.classList.toggle(`theme-${name}`,colorTheme === name);
   });
   $("layoutHelp").textContent = layoutHelp[layout] || "";
   const issue = `${$("year").value}年${$("month").value}號`;
@@ -354,6 +358,7 @@ function saveDraft(){
     childName2:$("childName2").value, childInfo2:$("childInfo2").value,
     rawDiary:$("rawDiary").value, closing:$("closing").value, apiBase:$("apiBase").value,
     heroChoice:$("heroChoice").value, layoutMode:$("layoutMode").value,
+    colorTheme:$("colorTheme").value,
     sections
   };
   localStorage.setItem("williePrincipalDiaryDraft",JSON.stringify(data));
@@ -367,7 +372,7 @@ function loadDraft(){
     if(["家庭英語共學","陪你一起孵出英語母語寶寶共學"].includes(d.theme)){
       d.theme="陪你一起孵出英語母語寶寶";
     }
-    ["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","rawDiary","closing","apiBase","heroChoice","layoutMode"].forEach(k=>{
+    ["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","rawDiary","closing","apiBase","heroChoice","layoutMode","colorTheme"].forEach(k=>{
       if(d[k]!==undefined && $(k)) $(k).value=d[k];
     });
     if(Array.isArray(d.sections)) sections=d.sections;
@@ -387,7 +392,7 @@ function imagePreview(input){
   reader.readAsDataURL(file);
 }
 
-["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","closing","apiBase","layoutMode"].forEach(id=>{
+["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","closing","apiBase","layoutMode","colorTheme"].forEach(id=>{
   $(id).addEventListener("input",()=>{renderPoster(); saveDraft();});
 });
 document.querySelectorAll('input[name="illustrationMode"]').forEach(el=>el.addEventListener("change",renderPoster));
