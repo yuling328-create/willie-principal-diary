@@ -143,7 +143,7 @@ button.small{padding:7px 10px;font-size:12px}
 .brand-banner{
   position:relative;
   z-index:2;
-  width:72%;
+  width:78%;
   max-width:90%;
   margin:0 auto 25px;
   padding:17px 55px 20px;
@@ -168,7 +168,7 @@ button.small{padding:7px 10px;font-size:12px}
 .banner-mascot{left:-75px;top:-21px;font-size:65px;transform:rotate(-9deg)}
 .banner-clock{left:50%;top:-39px;font-size:43px;transform:translateX(-50%)}
 .banner-balloons{right:-70px;top:-25px;font-size:60px;transform:rotate(7deg)}
-.brand-main{font-size:36px}
+.brand-main{font-size:47px;line-height:1.05}
 .brand-play{
   margin-left:16px;
   padding:4px 14px;
@@ -176,7 +176,7 @@ button.small{padding:7px 10px;font-size:12px}
   color:#76503e;
   background:rgba(255,255,255,.68);
   border:2px dashed var(--banner-deep);
-  font-size:26px;
+  font-size:29px;
 }
 .hero-title-row{
   display:grid;
@@ -390,9 +390,9 @@ footer{
     radial-gradient(circle at 15% 90%,rgba(231,127,158,.13),transparent 18%),
     var(--paper);
 }
-.layout-cute .brand-banner{margin-bottom:20px;padding:15px 48px 18px}
-.layout-cute .brand-main{font-size:35px}
-.layout-cute .brand-play{font-size:25px}
+.layout-cute .brand-banner{margin-bottom:20px;padding:17px 48px 20px}
+.layout-cute .brand-main{font-size:46px}
+.layout-cute .brand-play{font-size:29px}
 .layout-cute .hero-title-row{grid-template-columns:minmax(0,1fr) 292px;gap:20px;align-items:stretch}
 .layout-cute .header-side{display:flex;flex-direction:column;gap:11px;min-width:0}
 .layout-cute .issue-pill{padding:7px 17px;font-size:21px}
@@ -458,10 +458,10 @@ footer{
 /* 四款延伸範本共用較精簡的手帳頁首。 */
 .layout-observation,.layout-siblings,.layout-collage,.layout-structured{padding:43px 46px 38px}
 .layout-observation .brand-banner,.layout-siblings .brand-banner,.layout-collage .brand-banner,.layout-structured .brand-banner{
-  margin-bottom:18px;padding:12px 46px 15px
+  margin-bottom:18px;padding:16px 46px 19px
 }
-.layout-observation .brand-main,.layout-siblings .brand-main,.layout-collage .brand-main,.layout-structured .brand-main{font-size:34px}
-.layout-observation .brand-play,.layout-siblings .brand-play,.layout-collage .brand-play,.layout-structured .brand-play{font-size:24px}
+.layout-observation .brand-main,.layout-siblings .brand-main,.layout-collage .brand-main,.layout-structured .brand-main{font-size:44px}
+.layout-observation .brand-play,.layout-siblings .brand-play,.layout-collage .brand-play,.layout-structured .brand-play{font-size:28px}
 .layout-observation .hero-title-row,.layout-siblings .hero-title-row,.layout-collage .hero-title-row,.layout-structured .hero-title-row{
   grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:stretch
 }
