@@ -14,46 +14,47 @@ const illustrationAssets = [
   { value:"picture-book", label:"繪本與自然" },
   { value:"growing-plant", label:"成長小芽" },
   { value:"decorations", label:"愛心星星裝飾" },
+  { value:"watercolor-parent-reading", label:"收藏風｜親子共讀與熊熊" },
+  { value:"watercolor-singing-child", label:"收藏風｜孩子唱歌" },
+  { value:"watercolor-sisters-talking-pen", label:"收藏風｜手足點讀" },
+  { value:"watercolor-outdoor-father-son", label:"收藏風｜親子戶外互動" },
   { value:"none", label:"不放插圖" }
 ];
 
 const heroChoices = [
-  { value:"default", label:"預設家庭英語情境" },
+  { value:"default", label:"預設收藏風親子共讀" },
   { value:"none", label:"不顯示主圖（自動收合）" },
   { value:"custom", label:"自行上傳照片" },
   ...illustrationAssets.filter(item=>!["auto","none"].includes(item.value))
 ];
 
 const defaultHeroMarkup = `
-  <div class="family-scene">
-    <div class="scene-people">👩‍👧‍👦</div>
-    <div class="scene-book">📘</div>
-    <div class="scene-notes">♪ ♫ ✦</div>
-    <p>一起聽・一起玩・一起把英文留在生活裡</p>
+  <div class="hero-asset-frame default-watercolor-hero">
+    <img src="./assets/illustrations/watercolor-parent-reading.jpg" alt="收藏風親子共讀插畫">
   </div>
 `;
 
 let customHeroDataUrl = "";
 
 const defaultSections = [
-  { icon:"📚", asset:"picture-book", title:"越來越熟悉，節奏更自在", text:"使用進入第二個月，孩子對教材越來越熟悉，連帶整個帶領的節奏也更自在。以前還會擔心有沒有照著流程走，現在反而能放鬆跟著感覺帶，和孩子一起享受學習的過程。" },
-  { icon:"🎵", asset:"clap-siblings", title:"聽熟之後，自然開始跟唱", text:"最近最大的收穫，是孩子已經把歌曲聽得非常熟。熟悉感建立後，開口不再像是一項任務，而是生活裡自然發生的回應。" },
-  { icon:"🌱", asset:"growing-plant", title:"相信自然吸收，給孩子時間", text:"孩子有時咬字還不清楚，但我開始提醒自己不用急著糾正。先讓孩子大量接觸、自然吸收，保留她願意開口的信心。" },
-  { icon:"☎️", asset:"video-call", title:"把英文放進生活互動", text:"電話美語、洗澡唱歌、走路時玩口令，都變成孩子很期待的活動。語言不只出現在教材裡，也可以存在每天自然發生的小事中。" },
-  { icon:"✨", asset:"talking-pen", title:"這個月的小亮點", text:"孩子開始主動拿卡片、跟著錄音，也會把熟悉的英文句子放進遊戲。這些小小的變化，讓我看到反覆輸入正在慢慢累積。" },
-  { icon:"❤️", asset:"parent-reading", title:"身為家長，最大的改變", text:"一路使用下來，最大的改變不只是孩子學了多少，而是身為家長的我越來越放鬆，也越來越相信孩子會照著自己的節奏成長。" }
+  { icon:"📚", asset:"watercolor-parent-reading", title:"越來越熟悉，節奏更自在", text:"使用進入第二個月，孩子對教材越來越熟悉，連帶整個帶領的節奏也更自在。以前還會擔心有沒有照著流程走，現在反而能放鬆跟著感覺帶，和孩子一起享受學習的過程。" },
+  { icon:"🎵", asset:"watercolor-singing-child", title:"聽熟之後，自然開始跟唱", text:"最近最大的收穫，是孩子已經把歌曲聽得非常熟。熟悉感建立後，開口不再像是一項任務，而是生活裡自然發生的回應。" },
+  { icon:"🌱", asset:"watercolor-outdoor-father-son", title:"相信自然吸收，給孩子時間", text:"孩子有時咬字還不清楚，但我開始提醒自己不用急著糾正。先讓孩子大量接觸、自然吸收，保留她願意開口的信心。" },
+  { icon:"☎️", asset:"watercolor-parent-reading", title:"把英文放進生活互動", text:"電話美語、洗澡唱歌、走路時玩口令，都變成孩子很期待的活動。語言不只出現在教材裡，也可以存在每天自然發生的小事中。" },
+  { icon:"✨", asset:"watercolor-sisters-talking-pen", title:"這個月的小亮點", text:"孩子開始主動拿卡片、跟著錄音，也會把熟悉的英文句子放進遊戲。這些小小的變化，讓我看到反覆輸入正在慢慢累積。" },
+  { icon:"❤️", asset:"watercolor-parent-reading", title:"身為家長，最大的改變", text:"一路使用下來，最大的改變不只是孩子學了多少，而是身為家長的我越來越放鬆，也越來越相信孩子會照著自己的節奏成長。" }
 ];
 
 const quickSections = {
   highlight:{ icon:"⭐", asset:"decorations", type:"story", title:"本月亮點", text:"請寫下這個月最想留下的亮點。" },
-  reflection:{ icon:"🌿", asset:"guide", type:"reflection", title:"家長反思", text:"請寫下陪伴過程中的觀察與心情。" },
-  favorite:{ icon:"😊", asset:"teddy-books", type:"story", title:"孩子最享受", text:"請記錄孩子最投入、最喜歡的活動。" },
-  challenge:{ icon:"💭", asset:"growing-plant", type:"reflection", title:"較抗拒／還在適應", text:"請記錄孩子目前較抗拒，或仍需要時間適應的部分。" },
+  reflection:{ icon:"🌿", asset:"watercolor-parent-reading", type:"reflection", title:"家長反思", text:"請寫下陪伴過程中的觀察與心情。" },
+  favorite:{ icon:"😊", asset:"watercolor-singing-child", type:"story", title:"孩子最享受", text:"請記錄孩子最投入、最喜歡的活動。" },
+  challenge:{ icon:"💭", asset:"watercolor-outdoor-father-son", type:"reflection", title:"較抗拒／還在適應", text:"請記錄孩子目前較抗拒，或仍需要時間適應的部分。" },
   plan:{ icon:"📘", asset:"picture-book", type:"plan", title:"下個月計畫", text:"請寫下想繼續保留、減少或新增的內容。" },
-  scene:{ icon:"📅", asset:"family-parachute", type:"scene", date:"請填日期／情境", title:"觀察情境", text:"請記錄當天發生的事情，以及孩子自然使用英文的反應。" },
-  song:{ icon:"🎵", asset:"clap-siblings", type:"song", title:"歌曲紀錄", text:"請記錄歌曲名稱、孩子喜歡的動作或自然跟唱的片段。" },
-  quote:{ icon:"💬", asset:"decorations", type:"quote", title:"英文金句", text:"請記錄孩子這個月自然說出的英文句子。" },
-  question:{ icon:"❓", asset:"guide", type:"question", title:"園長提問", text:"請寫下想請園長協助觀察或回應的問題。" }
+  scene:{ icon:"📅", asset:"watercolor-outdoor-father-son", type:"scene", date:"請填日期／情境", title:"觀察情境", text:"請記錄當天發生的事情，以及孩子自然使用英文的反應。" },
+  song:{ icon:"🎵", asset:"watercolor-singing-child", type:"song", title:"歌曲紀錄", text:"請記錄歌曲名稱、孩子喜歡的動作或自然跟唱的片段。" },
+  quote:{ icon:"💬", asset:"watercolor-sisters-talking-pen", type:"quote", title:"英文金句", text:"請記錄孩子這個月自然說出的英文句子。" },
+  question:{ icon:"❓", asset:"watercolor-parent-reading", type:"question", title:"園長提問", text:"請寫下想請園長協助觀察或回應的問題。" }
 };
 
 const layoutHelp = {
@@ -104,7 +105,8 @@ function assetFor(text=""){
 
 function assetUrl(asset){
   if(!asset || asset === "none") return "";
-  return `./assets/illustrations/${asset}.png`;
+  const extension = asset.startsWith("watercolor-") ? "jpg" : "png";
+  return `./assets/illustrations/${asset}.${extension}`;
 }
 
 function sentenceSegments(text=""){
@@ -243,6 +245,7 @@ function renderPoster(){
     const selectedAsset = s.asset === "auto" || !s.asset ? assetFor(s.text) : s.asset;
     const imageUrl = mode === "ai" ? safeImageUrl(s.imageUrl) : assetUrl(selectedAsset);
     if(selectedAsset === "none") card.classList.add("no-art");
+    if(selectedAsset.startsWith("watercolor-")) card.classList.add("watercolor-art");
     const art = s.icon || illustrationFor(s.text);
     const childLabel = s.child === "second"
       ? ($("childName2").value || "第二位孩子")
@@ -410,6 +413,28 @@ $("addQuickSection").addEventListener("click",()=>{
   const preset = quickSections[$("quickSection").value];
   if(!preset) return;
   sections.push({...preset});
+  renderEditors();
+  renderPoster();
+  saveDraft();
+});
+$("applyWatercolorArt").addEventListener("click",()=>{
+  const collection = [
+    "watercolor-parent-reading",
+    "watercolor-singing-child",
+    "watercolor-sisters-talking-pen",
+    "watercolor-outdoor-father-son"
+  ];
+  sections = sections.map((section,index)=>({
+    ...section,
+    asset:/唱|歌|music|song/i.test(section.text + section.title)
+      ? "watercolor-singing-child"
+      : /戶外|走路|公園|旅行|生活/i.test(section.text + section.title)
+        ? "watercolor-outdoor-father-son"
+        : /點讀|圖卡|卡片|手足|姊|妹/i.test(section.text + section.title)
+          ? "watercolor-sisters-talking-pen"
+          : collection[index % collection.length]
+  }));
+  $("heroChoice").value="default";
   renderEditors();
   renderPoster();
   saveDraft();

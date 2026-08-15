@@ -258,6 +258,7 @@ button.small{padding:7px 10px;font-size:12px}
   object-fit:contain;
   object-position:center;
 }
+.default-watercolor-hero{width:95%;height:95%;max-width:95%;max-height:95%}
 .hero-visual.is-hidden{display:none}
 .hero-placeholder{height:100%;display:grid;place-items:center;color:#8a7465;font-size:20px;font-weight:850}
 #heroFileLabel{opacity:.68}
@@ -351,6 +352,7 @@ button.small{padding:7px 10px;font-size:12px}
   background:rgba(255,247,232,.8);font-size:43px
 }
 .card-illustration img{width:100%;height:100%;object-fit:contain;border-radius:14px}
+.diary-card.watercolor-art .card-illustration{width:150px;height:122px;background:#fff9ee}
 .closing-card{
   display:grid;
   grid-template-columns:70px 1fr;
@@ -440,9 +442,11 @@ footer{
 .layout-cute .diary-card:nth-child(6n+4) .diary-points li:before{color:var(--pink)}
 .layout-cute .cute-copy{white-space:pre-wrap;flex:1}
 .layout-cute .card-illustration{width:82px;height:68px;margin-top:8px;border-radius:14px}
+.layout-cute .watercolor-art .card-illustration{width:118px;height:98px}
 .layout-cute .card-illustration img{border-radius:11px}
 .layout-cute .planning-card .card-illustration{position:absolute;right:14px;bottom:12px}
 .layout-cute .planning-card p,.layout-cute .planning-card .diary-points{padding-right:94px}
+.layout-cute .planning-card.watercolor-art p,.layout-cute .planning-card.watercolor-art .diary-points{padding-right:130px}
 .layout-cute .closing-card{margin-top:16px;padding:14px 20px;border-width:2px}
 .layout-cute .closing-icon{width:50px;height:50px;font-size:30px}
 .layout-cute .closing-card strong{font-size:20px}
@@ -509,6 +513,7 @@ footer{
 .layout-observation .card-illustration{
   grid-area:art;align-self:stretch;width:245px;height:173px;margin:0;border-radius:16px
 }
+.layout-observation .watercolor-art .card-illustration{width:245px;height:173px}
 .layout-observation .card-illustration img{border-radius:13px}
 .layout-observation .diary-card.no-art{grid-template-columns:1fr;grid-template-areas:"head" "copy"}
 .layout-observation .card-no{display:none}
@@ -522,6 +527,7 @@ footer{
 .layout-siblings .diary-card h2{font-size:23px}
 .layout-siblings .diary-card p{font-size:17px;line-height:1.62}
 .layout-siblings .card-illustration{width:112px;height:92px}
+.layout-siblings .watercolor-art .card-illustration{width:148px;height:118px}
 .layout-siblings .shared-card .card-illustration{position:absolute;right:18px;bottom:15px}
 .layout-siblings .shared-card p{padding-right:125px}
 
@@ -538,6 +544,7 @@ footer{
 .layout-collage .diary-card h2{font-size:22px}
 .layout-collage .diary-card p{font-size:16px;line-height:1.55}
 .layout-collage .card-illustration{width:96px;height:76px}
+.layout-collage .watercolor-art .card-illustration{width:128px;height:102px}
 
 /* 園長條列版：編號步驟清晰，適合目標、操作與提問。 */
 .layout-structured{background:linear-gradient(145deg,#fff8f1,#fffbf4 52%,#fff6ef)}
@@ -550,6 +557,7 @@ footer{
 .structured-points{margin:0;padding-left:25px;display:grid;gap:5px;flex:1}
 .structured-points li{padding-left:3px}
 .layout-structured .card-illustration{position:absolute;right:17px;bottom:14px;width:98px;height:78px}
+.layout-structured .watercolor-art .card-illustration{width:112px;height:92px}
 .layout-structured .diary-card.no-art{padding-right:18px}
 .layout-structured .diary-card[data-type="question"]{background:#f2f8ff;border-style:dashed}
 .layout-structured .diary-card[data-type="plan"]{background:#f4fbf3}
