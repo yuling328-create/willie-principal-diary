@@ -90,7 +90,9 @@ button.small{padding:7px 10px;font-size:12px}
   background:#fffcf7;
 }
 .editor-line{display:grid;grid-template-columns:68px 1fr;gap:7px;margin-bottom:7px}
+.editor-meta-line{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:8px}
 .asset-label{margin-top:8px}
+.is-hidden{display:none!important}
 .sticky-actions{
   position:sticky;
   bottom:-20px;
@@ -198,6 +200,9 @@ button.small{padding:7px 10px;font-size:12px}
 .child-card strong,.child-card span,.child-card small{display:block}
 .child-card strong{font-size:29px}
 .child-card span{font-size:21px;margin-top:4px}
+.child-two{margin-top:9px;padding-top:8px;border-top:1px dashed #decbb3}
+.child-two strong{font-size:18px;color:var(--green)}
+.child-two span{font-size:15px}
 .child-card small{font-size:17px;color:#78685e;margin-top:8px}
 .hero-visual{
   height:300px;
@@ -284,6 +289,12 @@ button.small{padding:7px 10px;font-size:12px}
 .diary-card:nth-child(6n+5){border-color:#d1c2e8}
 .diary-card:nth-child(6n+6){border-color:#efbfd0}
 .card-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.card-title-copy{min-width:0;flex:1}
+.section-date,.section-child{
+  display:inline-block;margin:0 6px 5px 0;padding:3px 9px;border-radius:999px;
+  color:#815b43;background:#f8e8ce;font-size:13px;font-weight:900
+}
+.section-child{color:#33765c;background:#e4f4e9}
 .card-no{
   width:44px;height:44px;display:grid;place-items:center;flex:none;
   border-radius:50%;color:#fff;background:var(--red);font-size:23px;font-weight:950
@@ -408,6 +419,112 @@ footer{
 .layout-story .header-side{display:contents}
 .layout-story .child-card{grid-area:child}
 .layout-story .hero-visual{grid-area:hero}
+
+/* 四款延伸範本共用較精簡的手帳頁首。 */
+.layout-observation,.layout-siblings,.layout-collage,.layout-structured{padding:43px 46px 38px}
+.layout-observation .brand-banner,.layout-siblings .brand-banner,.layout-collage .brand-banner,.layout-structured .brand-banner{
+  margin-bottom:18px;padding:12px 46px 15px
+}
+.layout-observation .brand-main,.layout-siblings .brand-main,.layout-collage .brand-main,.layout-structured .brand-main{font-size:27px}
+.layout-observation .brand-play,.layout-siblings .brand-play,.layout-collage .brand-play,.layout-structured .brand-play{font-size:21px}
+.layout-observation .hero-title-row,.layout-siblings .hero-title-row,.layout-collage .hero-title-row,.layout-structured .hero-title-row{
+  grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:stretch
+}
+.layout-observation .header-side,.layout-siblings .header-side,.layout-collage .header-side,.layout-structured .header-side{
+  display:flex;flex-direction:column;gap:9px;min-width:0
+}
+.layout-observation .issue-pill,.layout-siblings .issue-pill,.layout-collage .issue-pill,.layout-structured .issue-pill{font-size:20px;padding:6px 16px}
+.layout-observation .title-copy h1,.layout-siblings .title-copy h1,.layout-collage .title-copy h1,.layout-structured .title-copy h1{
+  margin:11px 0 7px;font-size:70px;letter-spacing:7px
+}
+.layout-observation .lead,.layout-siblings .lead,.layout-collage .lead,.layout-structured .lead{font-size:19px;line-height:1.45}
+.layout-observation .child-card,.layout-siblings .child-card,.layout-collage .child-card,.layout-structured .child-card{
+  grid-template-columns:62px 1fr;gap:10px;padding:10px 12px;border-width:2px;border-radius:17px
+}
+.layout-observation .child-avatar,.layout-siblings .child-avatar,.layout-collage .child-avatar,.layout-structured .child-avatar{
+  width:62px;height:62px;font-size:37px
+}
+.layout-observation .child-card strong,.layout-siblings .child-card strong,.layout-collage .child-card strong,.layout-structured .child-card strong{font-size:21px}
+.layout-observation .child-card span,.layout-siblings .child-card span,.layout-collage .child-card span,.layout-structured .child-card span{font-size:15px}
+.layout-observation .hero-visual,.layout-siblings .hero-visual,.layout-collage .hero-visual,.layout-structured .hero-visual{
+  height:126px;margin:0;border-width:3px;border-radius:18px
+}
+.layout-observation .hero-asset-frame,.layout-siblings .hero-asset-frame,.layout-collage .hero-asset-frame,.layout-structured .hero-asset-frame{
+  width:190px;height:108px;max-width:86%;max-height:88%
+}
+.layout-observation .scene-people,.layout-siblings .scene-people,.layout-collage .scene-people,.layout-structured .scene-people{font-size:58px;transform:translateY(-10px)}
+.layout-observation .scene-book,.layout-siblings .scene-book,.layout-collage .scene-book,.layout-structured .scene-book{left:34px;bottom:27px;font-size:30px}
+.layout-observation .scene-notes,.layout-siblings .scene-notes,.layout-collage .scene-notes,.layout-structured .scene-notes{right:24px;top:14px;font-size:22px}
+.layout-observation .family-scene p,.layout-siblings .family-scene p,.layout-collage .family-scene p,.layout-structured .family-scene p{bottom:7px;padding:4px 10px;font-size:11px}
+.layout-observation .meta-bar,.layout-siblings .meta-bar,.layout-collage .meta-bar,.layout-structured .meta-bar{gap:8px;margin-top:13px}
+.layout-observation .meta-bar>div,.layout-siblings .meta-bar>div,.layout-collage .meta-bar>div,.layout-structured .meta-bar>div{
+  padding:9px 7px;border-width:2px;border-radius:13px;font-size:14px
+}
+
+/* 情境觀察版：每張都是日期＋情境＋紀錄。 */
+.layout-observation{background:linear-gradient(145deg,#fffaf1,#f8f6e8 55%,#fff6ed)}
+.layout-observation .diary-grid{grid-template-columns:1fr;gap:13px;margin-top:16px}
+.layout-observation .diary-card{
+  min-height:205px;display:grid;grid-template-columns:245px minmax(0,1fr);
+  grid-template-areas:"art head" "art copy";column-gap:19px;align-content:start;
+  padding:15px;border-width:2px;border-radius:20px
+}
+.layout-observation .card-head{grid-area:head;margin:0 0 7px}
+.layout-observation .diary-card>p{grid-area:copy;font-size:16px;line-height:1.58}
+.layout-observation .card-illustration{
+  grid-area:art;align-self:stretch;width:245px;height:173px;margin:0;border-radius:16px
+}
+.layout-observation .card-illustration img{border-radius:13px}
+.layout-observation .diary-card.no-art{grid-template-columns:1fr;grid-template-areas:"head" "copy"}
+.layout-observation .card-no{display:none}
+.layout-observation .diary-card h2{font-size:23px;color:#4d7f61}
+
+/* 手足成長版：孩子各自一欄，共同紀錄橫跨整頁。 */
+.layout-siblings{background:linear-gradient(145deg,#fff7f1,#fffaf0 52%,#f2faf5)}
+.layout-siblings .diary-grid{grid-template-columns:1fr 1fr;gap:15px;margin-top:16px}
+.layout-siblings .diary-card{min-height:310px;padding:18px;border-width:2px}
+.layout-siblings .diary-card.shared-card{grid-column:1/-1;min-height:190px}
+.layout-siblings .diary-card h2{font-size:23px}
+.layout-siblings .diary-card p{font-size:17px;line-height:1.62}
+.layout-siblings .card-illustration{width:112px;height:92px}
+.layout-siblings .shared-card .card-illustration{position:absolute;right:18px;bottom:15px}
+.layout-siblings .shared-card p{padding-right:125px}
+
+/* 活動拼貼版：大故事搭配小活動，形成手帳拼貼節奏。 */
+.layout-collage{background:linear-gradient(145deg,#fff8ee,#fffaf4 50%,#f5fbf5)}
+.layout-collage .diary-grid{grid-template-columns:1fr 1fr;gap:13px;margin-top:16px}
+.layout-collage .diary-card{min-height:245px;padding:16px;border-width:2px;border-radius:18px}
+.layout-collage .diary-card:nth-child(5n+1){grid-column:1/-1;min-height:225px}
+.layout-collage .diary-card:nth-child(5n+1) .card-illustration{position:absolute;right:17px;bottom:15px;width:145px;height:112px}
+.layout-collage .diary-card:nth-child(5n+1) p{padding-right:160px}
+.layout-collage .diary-card[data-type="quote"]{background:#fff3e2;border-style:dashed}
+.layout-collage .diary-card[data-type="song"]{background:#fff7fa}
+.layout-collage .diary-card[data-type="question"]{background:#f2f8ff}
+.layout-collage .diary-card h2{font-size:22px}
+.layout-collage .diary-card p{font-size:16px;line-height:1.55}
+.layout-collage .card-illustration{width:96px;height:76px}
+
+/* 園長條列版：編號步驟清晰，適合目標、操作與提問。 */
+.layout-structured{background:linear-gradient(145deg,#fff8f1,#fffbf4 52%,#fff6ef)}
+.layout-structured .diary-grid{grid-template-columns:1fr;gap:11px;margin-top:15px}
+.layout-structured .diary-card{
+  min-height:155px;padding:15px 130px 14px 18px;border-width:2px;border-radius:18px
+}
+.layout-structured .diary-card h2{font-size:22px}
+.layout-structured .diary-card p,.layout-structured .structured-points{font-size:16px;line-height:1.55}
+.structured-points{margin:0;padding-left:25px;display:grid;gap:5px;flex:1}
+.structured-points li{padding-left:3px}
+.layout-structured .card-illustration{position:absolute;right:17px;bottom:14px;width:98px;height:78px}
+.layout-structured .diary-card.no-art{padding-right:18px}
+.layout-structured .diary-card[data-type="question"]{background:#f2f8ff;border-style:dashed}
+.layout-structured .diary-card[data-type="plan"]{background:#f4fbf3}
+
+.layout-observation .closing-card,.layout-siblings .closing-card,.layout-collage .closing-card,.layout-structured .closing-card{
+  margin-top:15px;padding:13px 19px;border-width:2px
+}
+.layout-observation .closing-icon,.layout-siblings .closing-icon,.layout-collage .closing-icon,.layout-structured .closing-icon{width:48px;height:48px;font-size:28px}
+.layout-observation .closing-card strong,.layout-siblings .closing-card strong,.layout-collage .closing-card strong,.layout-structured .closing-card strong{font-size:19px}
+.layout-observation footer,.layout-siblings footer,.layout-collage footer,.layout-structured footer{margin-top:14px;padding-top:13px;font-size:15px}
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
   .control-panel{position:relative;top:0;max-height:none}

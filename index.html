@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>威利兄弟3.0｜園長日記</title>
   <meta name="description" content="威利兄弟3.0 園長日記月刊產生器">
-  <link rel="stylesheet" href="./styles.css?v=20260814-8">
+  <link rel="stylesheet" href="./styles.css?v=20260815-1">
 </head>
 <body>
   <div class="app-shell">
@@ -46,8 +46,13 @@
           <select id="layoutMode">
             <option value="cute" selected>可愛月刊版（三欄）</option>
             <option value="story">日記故事版（雙欄）</option>
+            <option value="observation">情境觀察版（日期事件）</option>
+            <option value="siblings">手足成長版（多孩子）</option>
+            <option value="collage">活動拼貼版（大小卡片）</option>
+            <option value="structured">園長條列版（目標紀錄）</option>
           </select>
         </label>
+        <p id="layoutHelp" class="mini-note">三欄重點整理，適合一頁快速閱讀。</p>
       </section>
 
       <section class="control-section">
@@ -60,6 +65,15 @@
             <input id="childInfo" value="6Y 大班">
           </label>
         </div>
+        <div class="grid two optional-child">
+          <label>第二位孩子（選填）
+            <input id="childName2" placeholder="例如：Tori">
+          </label>
+          <label>第二位孩子年齡／班別
+            <input id="childInfo2" placeholder="例如：1Y 幼幼班">
+          </label>
+        </div>
+        <p class="mini-note">使用「手足成長版」時，可填寫第二位孩子；留白就維持單一孩子。</p>
         <label>最上方主圖（可不放或改用插畫）
           <select id="heroChoice"></select>
         </label>
@@ -93,6 +107,10 @@
             <option value="favorite">孩子最享受</option>
             <option value="challenge">較抗拒／還在適應</option>
             <option value="plan">下個月計畫</option>
+            <option value="scene">日期情境</option>
+            <option value="song">歌曲紀錄</option>
+            <option value="quote">英文金句</option>
+            <option value="question">園長提問</option>
           </select>
           <button id="addQuickSection" class="ghost small">＋常用分類</button>
         </div>
@@ -149,6 +167,10 @@
                 <div>
                   <strong id="childNameView">Jessie</strong>
                   <span id="childInfoView">6Y 大班</span>
+                  <div id="child2View" class="child-two is-hidden">
+                    <strong id="childName2View"></strong>
+                    <span id="childInfo2View"></span>
+                  </div>
                 </div>
               </div>
 
@@ -195,6 +217,29 @@
         <input class="title-input" aria-label="段落標題">
       </div>
       <textarea class="text-input" rows="5" aria-label="段落內容"></textarea>
+      <div class="editor-meta-line">
+        <label>段落類型
+          <select class="type-select" aria-label="選擇段落類型">
+            <option value="story">一般故事</option>
+            <option value="scene">日期情境</option>
+            <option value="song">歌曲紀錄</option>
+            <option value="quote">英文金句</option>
+            <option value="question">園長提問</option>
+            <option value="reflection">家長反思</option>
+            <option value="plan">下個月計畫</option>
+          </select>
+        </label>
+        <label>日期／小標（選填）
+          <input class="date-input" placeholder="例如：7/23 散步">
+        </label>
+        <label>所屬孩子
+          <select class="child-select" aria-label="選擇所屬孩子">
+            <option value="main">第一位孩子</option>
+            <option value="second">第二位孩子</option>
+            <option value="shared">共同紀錄</option>
+          </select>
+        </label>
+      </div>
       <label class="asset-label">段落插圖
         <select class="asset-select" aria-label="選擇段落插圖"></select>
       </label>
@@ -208,6 +253,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="./app.js?v=20260814-8"></script>
+  <script src="./app.js?v=20260815-1"></script>
 </body>
 </html>

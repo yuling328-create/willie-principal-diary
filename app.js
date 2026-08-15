@@ -45,11 +45,24 @@ const defaultSections = [
 ];
 
 const quickSections = {
-  highlight:{ icon:"⭐", asset:"decorations", title:"本月亮點", text:"請寫下這個月最想留下的亮點。" },
-  reflection:{ icon:"🌿", asset:"guide", title:"家長反思", text:"請寫下陪伴過程中的觀察與心情。" },
-  favorite:{ icon:"😊", asset:"teddy-books", title:"孩子最享受", text:"請記錄孩子最投入、最喜歡的活動。" },
-  challenge:{ icon:"💭", asset:"growing-plant", title:"較抗拒／還在適應", text:"請記錄孩子目前較抗拒，或仍需要時間適應的部分。" },
-  plan:{ icon:"📘", asset:"picture-book", title:"下個月計畫", text:"請寫下想繼續保留、減少或新增的內容。" }
+  highlight:{ icon:"⭐", asset:"decorations", type:"story", title:"本月亮點", text:"請寫下這個月最想留下的亮點。" },
+  reflection:{ icon:"🌿", asset:"guide", type:"reflection", title:"家長反思", text:"請寫下陪伴過程中的觀察與心情。" },
+  favorite:{ icon:"😊", asset:"teddy-books", type:"story", title:"孩子最享受", text:"請記錄孩子最投入、最喜歡的活動。" },
+  challenge:{ icon:"💭", asset:"growing-plant", type:"reflection", title:"較抗拒／還在適應", text:"請記錄孩子目前較抗拒，或仍需要時間適應的部分。" },
+  plan:{ icon:"📘", asset:"picture-book", type:"plan", title:"下個月計畫", text:"請寫下想繼續保留、減少或新增的內容。" },
+  scene:{ icon:"📅", asset:"family-parachute", type:"scene", date:"請填日期／情境", title:"觀察情境", text:"請記錄當天發生的事情，以及孩子自然使用英文的反應。" },
+  song:{ icon:"🎵", asset:"clap-siblings", type:"song", title:"歌曲紀錄", text:"請記錄歌曲名稱、孩子喜歡的動作或自然跟唱的片段。" },
+  quote:{ icon:"💬", asset:"decorations", type:"quote", title:"英文金句", text:"請記錄孩子這個月自然說出的英文句子。" },
+  question:{ icon:"❓", asset:"guide", type:"question", title:"園長提問", text:"請寫下想請園長協助觀察或回應的問題。" }
+};
+
+const layoutHelp = {
+  cute:"三欄重點整理，適合一頁快速閱讀。",
+  story:"雙欄長文敘述，適合保留完整家長故事。",
+  observation:"依日期呈現事件，插圖與情境紀錄左右分區。",
+  siblings:"分開呈現兩位孩子的故事，最後保留共同總結。",
+  collage:"用大小卡片整理歌曲、活動、金句與互動片段。",
+  structured:"以目標、操作方式、日常紀錄與園長提問清楚呈現。"
 };
 
 let sections = structuredClone(defaultSections);
@@ -108,8 +121,11 @@ function textPoints(text=""){
 }
 
 function cardTextHtml(text="",layout="cute"){
-  if(layout !== "cute") return `<p>${escapeHtml(text)}</p>`;
   const points = textPoints(text);
+  if(layout === "structured" && points.length > 1){
+    return `<ol class="structured-points">${points.map(point=>`<li>${escapeHtml(point)}</li>`).join("")}</ol>`;
+  }
+  if(layout !== "cute") return `<p>${escapeHtml(text)}</p>`;
   if(points.length < 2) return `<p class="cute-copy">${escapeHtml(text)}</p>`;
   return `<ul class="diary-points">${points.map(point=>`<li>${escapeHtml(point)}</li>`).join("")}</ul>`;
 }
@@ -149,16 +165,25 @@ function renderEditors(){
     const title = node.querySelector(".title-input");
     const text = node.querySelector(".text-input");
     const asset = node.querySelector(".asset-select");
+    const type = node.querySelector(".type-select");
+    const date = node.querySelector(".date-input");
+    const child = node.querySelector(".child-select");
     icon.value = s.icon;
     title.value = s.title;
     text.value = s.text;
     illustrationAssets.forEach(item=>asset.add(new Option(item.label,item.value)));
     asset.value = s.asset || "auto";
+    type.value = s.type || "story";
+    date.value = s.date || "";
+    child.value = s.child || "main";
 
     icon.addEventListener("input",()=>{ sections[index].icon=icon.value; renderPoster(); });
     title.addEventListener("input",()=>{ sections[index].title=title.value; renderPoster(); });
     text.addEventListener("input",()=>{ sections[index].text=text.value; renderPoster(); });
     asset.addEventListener("change",()=>{ sections[index].asset=asset.value; renderPoster(); saveDraft(); });
+    type.addEventListener("change",()=>{ sections[index].type=type.value; renderPoster(); saveDraft(); });
+    date.addEventListener("input",()=>{ sections[index].date=date.value; renderPoster(); saveDraft(); });
+    child.addEventListener("change",()=>{ sections[index].child=child.value; renderPoster(); saveDraft(); });
 
     node.querySelector(".move-up").addEventListener("click",()=>{
       if(index===0) return;
@@ -181,14 +206,20 @@ function renderEditors(){
 function renderPoster(){
   const layout = $("layoutMode").value || "cute";
   const poster = $("poster");
-  poster.classList.toggle("layout-cute",layout === "cute");
-  poster.classList.toggle("layout-story",layout === "story");
+  ["cute","story","observation","siblings","collage","structured"].forEach(name=>{
+    poster.classList.toggle(`layout-${name}`,layout === name);
+  });
+  $("layoutHelp").textContent = layoutHelp[layout] || "";
   const issue = `${$("year").value}年${$("month").value}號`;
   $("issueLabel").textContent = `${issue}｜精選分享`;
   $("principalView").textContent = $("principal").value;
   $("principalFooter").textContent = `— ${$("principal").value}`;
   $("childNameView").textContent = $("childName").value;
   $("childInfoView").textContent = $("childInfo").value;
+  const hasSecondChild = Boolean($("childName2").value.trim());
+  $("child2View").classList.toggle("is-hidden",!hasSecondChild);
+  $("childName2View").textContent = $("childName2").value;
+  $("childInfo2View").textContent = $("childInfo2").value;
   $("periodView").textContent = $("period").value;
   $("themeView").textContent = $("theme").value;
   $("closingView").textContent = $("closing").value;
@@ -201,18 +232,28 @@ function renderPoster(){
   sections.forEach((s,index)=>{
     const card = document.createElement("article");
     card.className = "diary-card";
+    card.dataset.type = s.type || "story";
     if(layout === "story" && sections.length % 2 === 1 && index === sections.length-1) card.classList.add("wide");
     if(layout === "cute" && /下個月|計畫/.test(s.title)) card.classList.add("planning-card");
+    if(layout === "siblings" && (s.child || "main") === "shared") card.classList.add("shared-card");
     const selectedAsset = s.asset === "auto" || !s.asset ? assetFor(s.text) : s.asset;
     const imageUrl = mode === "ai" ? safeImageUrl(s.imageUrl) : assetUrl(selectedAsset);
+    if(selectedAsset === "none") card.classList.add("no-art");
     const art = s.icon || illustrationFor(s.text);
+    const childLabel = s.child === "second"
+      ? ($("childName2").value || "第二位孩子")
+      : s.child === "shared"
+        ? "共同紀錄"
+        : ($("childName").value || "第一位孩子");
+    const dateHtml = s.date ? `<span class="section-date">${escapeHtml(s.date)}</span>` : "";
+    const childHtml = layout === "siblings" ? `<span class="section-child">${escapeHtml(childLabel)}</span>` : "";
     const illustrationHtml = selectedAsset === "none" ? "" : `
       <div class="card-illustration">${imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(s.title)}插圖">` : escapeHtml(art)}</div>
     `;
     card.innerHTML = `
       <div class="card-head">
         <span class="card-no">${index+1}</span>
-        <h2>${escapeHtml(s.title)}</h2>
+        <div class="card-title-copy">${dateHtml}${childHtml}<h2>${escapeHtml(s.title)}</h2></div>
       </div>
       ${cardTextHtml(s.text,layout)}
       ${illustrationHtml}
@@ -248,6 +289,9 @@ function localSmartOrganize(raw){
   return groups.slice(0,7).map((text,i)=>({
     icon: illustrationFor(text),
     asset: assetFor(text),
+    type:"story",
+    date:"",
+    child:"main",
     title:titleFor(text,i),
     text
   }));
@@ -281,7 +325,10 @@ async function organizeDiary(){
           title:s.title || "本月紀錄",
           text:s.text || s.content || "",
           imageUrl:s.imageUrl || "",
-          asset:s.asset || assetFor(s.text || s.content || "")
+          asset:s.asset || assetFor(s.text || s.content || ""),
+          type:s.type || "story",
+          date:s.date || "",
+          child:s.child || "main"
         }));
         if(data.closing) $("closing").value=data.closing;
         renderEditors(); renderPoster(); saveDraft();
@@ -304,6 +351,7 @@ function saveDraft(){
     year:$("year").value, month:$("month").value, principal:$("principal").value,
     period:$("period").value, theme:$("theme").value,
     childName:$("childName").value, childInfo:$("childInfo").value,
+    childName2:$("childName2").value, childInfo2:$("childInfo2").value,
     rawDiary:$("rawDiary").value, closing:$("closing").value, apiBase:$("apiBase").value,
     heroChoice:$("heroChoice").value, layoutMode:$("layoutMode").value,
     sections
@@ -319,7 +367,7 @@ function loadDraft(){
     if(["家庭英語共學","陪你一起孵出英語母語寶寶共學"].includes(d.theme)){
       d.theme="陪你一起孵出英語母語寶寶";
     }
-    ["year","month","principal","period","theme","childName","childInfo","rawDiary","closing","apiBase","heroChoice","layoutMode"].forEach(k=>{
+    ["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","rawDiary","closing","apiBase","heroChoice","layoutMode"].forEach(k=>{
       if(d[k]!==undefined && $(k)) $(k).value=d[k];
     });
     if(Array.isArray(d.sections)) sections=d.sections;
@@ -339,7 +387,7 @@ function imagePreview(input){
   reader.readAsDataURL(file);
 }
 
-["year","month","principal","period","theme","childName","childInfo","closing","apiBase","layoutMode"].forEach(id=>{
+["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","closing","apiBase","layoutMode"].forEach(id=>{
   $(id).addEventListener("input",()=>{renderPoster(); saveDraft();});
 });
 document.querySelectorAll('input[name="illustrationMode"]').forEach(el=>el.addEventListener("change",renderPoster));
@@ -350,7 +398,7 @@ $("heroFile").addEventListener("change",e=>imagePreview(e.target));
 $("smartOrganize").addEventListener("click",organizeDiary);
 $("clearRaw").addEventListener("click",()=>{$("rawDiary").value="";saveDraft();});
 $("addSection").addEventListener("click",()=>{
-  sections.push({icon:"⭐",asset:"auto",title:"新增段落",text:"請輸入家長日記內容。"});
+  sections.push({icon:"⭐",asset:"auto",type:"story",child:"main",date:"",title:"新增段落",text:"請輸入家長日記內容。"});
   renderEditors();renderPoster();
 });
 $("addQuickSection").addEventListener("click",()=>{
