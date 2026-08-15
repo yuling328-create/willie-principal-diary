@@ -429,8 +429,8 @@ $("printPdf").addEventListener("click",async()=>{
       logging:false
     });
     const { jsPDF } = window.jspdf;
-    const pageWidth = 1080;
-    const pageHeight = 1920;
+    const pageWidth = 210;
+    const pageHeight = 297;
     const ratio = Math.min(pageWidth / canvas.width,pageHeight / canvas.height);
     const imageWidth = canvas.width * ratio;
     const imageHeight = canvas.height * ratio;
@@ -438,9 +438,8 @@ $("printPdf").addEventListener("click",async()=>{
     const imageY = (pageHeight - imageHeight) / 2;
     const pdf = new jsPDF({
       orientation:"portrait",
-      unit:"px",
-      format:[pageWidth,pageHeight],
-      hotfixes:["px_scaling"]
+      unit:"mm",
+      format:"a4"
     });
     pdf.addImage(canvas.toDataURL("image/jpeg",0.94),"JPEG",imageX,imageY,imageWidth,imageHeight);
     pdf.save(`園長日記_${$("year").value}年${$("month").value}號_${$("childName").value||"未命名"}.pdf`);

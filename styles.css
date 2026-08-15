@@ -105,9 +105,11 @@ button.small{padding:7px 10px;font-size:12px}
 .preview-stage{overflow:auto;padding-bottom:30px}
 .poster{
   width:1080px;
-  min-height:1920px;
+  min-height:1528px;
   margin:auto;
   position:relative;
+  display:flex;
+  flex-direction:column;
   overflow:hidden;
   padding:48px 52px 42px;
   border:16px solid #f0dec5;
@@ -270,6 +272,8 @@ button.small{padding:7px 10px;font-size:12px}
   grid-template-columns:1fr 1fr;
   gap:19px;
   margin-top:23px;
+  flex:1;
+  align-content:stretch;
 }
 .diary-card{
   position:relative;
@@ -534,6 +538,6 @@ footer{
   .control-panel{display:none}
   .app-shell{display:block;padding:0}
   .preview-stage{padding:0;overflow:visible}
-  .poster{margin:0;box-shadow:none}
-  @page{size:1080px 1920px;margin:0}
+  .poster{width:210mm;min-height:297mm;margin:0;box-shadow:none}
+  @page{size:A4 portrait;margin:0}
 }
