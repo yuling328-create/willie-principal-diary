@@ -71,6 +71,12 @@ const layoutHelp = {
 
 let sections = structuredClone(defaultSections);
 
+const childAvatarIcons = {
+  girl:"👧🏻",
+  boy:"👦🏻",
+  baby:"👶🏻"
+};
+
 function escapeHtml(s=""){
   return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 }
@@ -227,10 +233,12 @@ function renderPoster(){
   $("principalFooter").textContent = `— ${$("principal").value}`;
   $("childNameView").textContent = $("childName").value;
   $("childInfoView").textContent = $("childInfo").value;
+  $("childAvatarView").textContent = childAvatarIcons[$("childAvatar").value] || childAvatarIcons.girl;
   const hasSecondChild = Boolean($("childName2").value.trim());
   $("child2View").classList.toggle("is-hidden",!hasSecondChild);
   $("childName2View").textContent = $("childName2").value;
   $("childInfo2View").textContent = $("childInfo2").value;
+  $("childAvatar2View").textContent = childAvatarIcons[$("childAvatar2").value] || childAvatarIcons.girl;
   $("periodView").textContent = $("period").value;
   $("themeView").textContent = $("theme").value;
   $("closingView").textContent = $("closing").value;
@@ -364,6 +372,7 @@ function saveDraft(){
     period:$("period").value, theme:$("theme").value,
     childName:$("childName").value, childInfo:$("childInfo").value,
     childName2:$("childName2").value, childInfo2:$("childInfo2").value,
+    childAvatar:$("childAvatar").value, childAvatar2:$("childAvatar2").value,
     rawDiary:$("rawDiary").value, closing:$("closing").value, apiBase:$("apiBase").value,
     heroChoice:$("heroChoice").value, layoutMode:$("layoutMode").value,
     colorTheme:$("colorTheme").value,
@@ -380,7 +389,7 @@ function loadDraft(){
     if(["家庭英語共學","陪你一起孵出英語母語寶寶共學"].includes(d.theme)){
       d.theme="陪你一起孵出英語母語寶寶";
     }
-    ["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","rawDiary","closing","apiBase","heroChoice","layoutMode","colorTheme"].forEach(k=>{
+    ["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","childAvatar","childAvatar2","rawDiary","closing","apiBase","heroChoice","layoutMode","colorTheme"].forEach(k=>{
       if(d[k]!==undefined && $(k)) $(k).value=d[k];
     });
     if(Array.isArray(d.sections)) sections=d.sections;
@@ -400,7 +409,7 @@ function imagePreview(input){
   reader.readAsDataURL(file);
 }
 
-["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","closing","apiBase","layoutMode","colorTheme"].forEach(id=>{
+["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","childAvatar","childAvatar2","closing","apiBase","layoutMode","colorTheme"].forEach(id=>{
   $(id).addEventListener("input",()=>{renderPoster(); saveDraft();});
 });
 document.querySelectorAll('input[name="illustrationMode"]').forEach(el=>el.addEventListener("change",renderPoster));

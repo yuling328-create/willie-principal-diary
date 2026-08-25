@@ -231,6 +231,7 @@ button.small{padding:7px 10px;font-size:12px}
 .child-two{margin-top:9px;padding-top:8px;border-top:1px dashed #decbb3}
 .child-two strong{font-size:18px;color:var(--green)}
 .child-two span{font-size:15px}
+.child-two .child-two-avatar{display:inline;margin-right:5px;font-size:18px}
 .child-card small{font-size:17px;color:#78685e;margin-top:8px}
 .hero-visual{
   height:300px;
