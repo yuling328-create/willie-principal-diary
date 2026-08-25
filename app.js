@@ -18,6 +18,9 @@ const illustrationAssets = [
   { value:"watercolor-singing-child", label:"收藏風｜孩子唱歌" },
   { value:"watercolor-sisters-talking-pen", label:"收藏風｜手足點讀" },
   { value:"watercolor-outdoor-father-son", label:"收藏風｜親子戶外互動" },
+  { value:"watercolor-boy-talking-pen-book", label:"收藏風｜小男孩點讀繪本" },
+  { value:"watercolor-boy-tablet", label:"收藏風｜小男孩使用平板" },
+  { value:"watercolor-boy-talking-pen-cards", label:"收藏風｜小男孩點讀圖卡" },
   { value:"none", label:"不放插圖" }
 ];
 
@@ -93,6 +96,8 @@ function illustrationFor(text=""){
 
 function assetFor(text=""){
   if(/電話|視訊|Face Call|video|call/i.test(text)) return "video-call";
+  if(/男孩|兒子|弟弟/.test(text) && /點讀|圖卡|卡片|flash/i.test(text)) return "watercolor-boy-talking-pen-cards";
+  if(/男孩|兒子|弟弟/.test(text) && /平板|pad|影片|卡通|tablet/i.test(text)) return "watercolor-boy-tablet";
   if(/點讀|圖卡|卡片|flash/i.test(text)) return "talking-pen";
   if(/平板|影片|卡通|tablet/i.test(text)) return "tablet-story";
   if(/繪本|共讀|故事|閱讀|read|book/i.test(text)) return "parent-reading";
@@ -400,6 +405,24 @@ function imagePreview(input){
 });
 document.querySelectorAll('input[name="illustrationMode"]').forEach(el=>el.addEventListener("change",renderPoster));
 
+async function preparePosterExport(){
+  renderPoster();
+  if(document.fonts?.ready) await document.fonts.ready;
+  const images = [...$("poster").querySelectorAll("img")];
+  await Promise.all(images.map(async img=>{
+    if(!img.complete){
+      await new Promise(resolve=>{
+        img.addEventListener("load",resolve,{once:true});
+        img.addEventListener("error",resolve,{once:true});
+      });
+    }
+    if(img.decode){
+      try{ await img.decode(); }catch(_err){ /* html2canvas will use the loaded fallback */ }
+    }
+  }));
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+}
+
 heroChoices.forEach(item=>$("heroChoice").add(new Option(item.label,item.value)));
 $("heroChoice").addEventListener("change",()=>{renderHero();saveDraft();});
 $("heroFile").addEventListener("change",e=>imagePreview(e.target));
@@ -422,7 +445,10 @@ $("applyWatercolorArt").addEventListener("click",()=>{
     "watercolor-parent-reading",
     "watercolor-singing-child",
     "watercolor-sisters-talking-pen",
-    "watercolor-outdoor-father-son"
+    "watercolor-outdoor-father-son",
+    "watercolor-boy-talking-pen-book",
+    "watercolor-boy-tablet",
+    "watercolor-boy-talking-pen-cards"
   ];
   sections = sections.map((section,index)=>({
     ...section,
@@ -452,6 +478,7 @@ $("printPdf").addEventListener("click",async()=>{
   button.textContent = "PDF 製作中…";
 
   try{
+    await preparePosterExport();
     const canvas = await html2canvas($("poster"),{
       scale:1,
       useCORS:true,
@@ -487,11 +514,24 @@ $("exportPng").addEventListener("click",async()=>{
     alert("PNG 功能需要連網載入 html2canvas；可先使用列印／PDF。");
     return;
   }
-  const canvas=await html2canvas($("poster"),{scale:2,useCORS:true,backgroundColor:null});
-  const a=document.createElement("a");
-  a.download=`園長日記_${$("year").value}年${$("month").value}號_${$("childName").value||"未命名"}.png`;
-  a.href=canvas.toDataURL("image/png");
-  a.click();
+  const button = $("exportPng");
+  const originalLabel = button.textContent;
+  button.disabled = true;
+  button.textContent = "PNG 製作中…";
+  try{
+    await preparePosterExport();
+    const canvas=await html2canvas($("poster"),{scale:2,useCORS:true,backgroundColor:"#fffaf1",logging:false});
+    const a=document.createElement("a");
+    a.download=`園長日記_${$("year").value}年${$("month").value}號_${$("childName").value||"未命名"}.png`;
+    a.href=canvas.toDataURL("image/png");
+    a.click();
+  }catch(err){
+    console.error(err);
+    alert("PNG 製作失敗，請重新整理頁面後再試一次。");
+  }finally{
+    button.disabled = false;
+    button.textContent = originalLabel;
+  }
 });
 
 loadDraft();
