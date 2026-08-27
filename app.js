@@ -61,6 +61,7 @@ const quickSections = {
 };
 
 const layoutHelp = {
+  scrapbook:"收藏風 A4 月刊：大標題、不對稱拼貼、水彩緞帶與人物插畫。",
   cute:"三欄重點整理，適合一頁快速閱讀。",
   story:"雙欄長文敘述，適合保留完整家長故事。",
   observation:"依日期呈現事件，插圖與情境紀錄左右分區。",
@@ -220,7 +221,7 @@ function renderPoster(){
   const layout = $("layoutMode").value || "cute";
   const colorTheme = $("colorTheme").value || "peach";
   const poster = $("poster");
-  ["cute","story","observation","siblings","collage","structured"].forEach(name=>{
+  ["scrapbook","cute","story","observation","siblings","collage","structured"].forEach(name=>{
     poster.classList.toggle(`layout-${name}`,layout === name);
   });
   ["peach","meadow","sunshine","sky"].forEach(name=>{
@@ -544,5 +545,8 @@ $("exportPng").addEventListener("click",async()=>{
 });
 
 loadDraft();
+if(new URLSearchParams(location.search).get("layout") === "scrapbook"){
+  $("layoutMode").value = "scrapbook";
+}
 renderEditors();
 renderPoster();
