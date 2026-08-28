@@ -61,7 +61,8 @@ const quickSections = {
 };
 
 const layoutHelp = {
-  scrapbook:"收藏風 A4 月刊：大標題、不對稱拼貼、水彩緞帶與人物插畫。",
+  scrapbook:"水彩故事月刊：大標題、彩色緞帶、照片與人物插畫穿插。",
+  focus:"童趣重點報：1～7編號雙欄，適合文字較多、重點清楚的月誌。",
   cute:"三欄重點整理，適合一頁快速閱讀。",
   story:"雙欄長文敘述，適合保留完整家長故事。",
   observation:"依日期呈現事件，插圖與情境紀錄左右分區。",
@@ -139,7 +140,7 @@ function cardTextHtml(text="",layout="cute"){
   if(layout === "structured" && points.length > 1){
     return `<ol class="structured-points">${points.map(point=>`<li>${escapeHtml(point)}</li>`).join("")}</ol>`;
   }
-  if(layout !== "cute") return `<p>${escapeHtml(text)}</p>`;
+  if(!["cute","focus"].includes(layout)) return `<p>${escapeHtml(text)}</p>`;
   if(points.length < 2) return `<p class="cute-copy">${escapeHtml(text)}</p>`;
   return `<ul class="diary-points">${points.map(point=>`<li>${escapeHtml(point)}</li>`).join("")}</ul>`;
 }
@@ -221,7 +222,7 @@ function renderPoster(){
   const layout = $("layoutMode").value || "cute";
   const colorTheme = $("colorTheme").value || "peach";
   const poster = $("poster");
-  ["scrapbook","cute","story","observation","siblings","collage","structured"].forEach(name=>{
+  ["scrapbook","focus","cute","story","observation","siblings","collage","structured"].forEach(name=>{
     poster.classList.toggle(`layout-${name}`,layout === name);
   });
   ["peach","meadow","sunshine","sky"].forEach(name=>{
@@ -230,6 +231,10 @@ function renderPoster(){
   $("layoutHelp").textContent = layoutHelp[layout] || "";
   const issue = `${$("year").value}年${$("month").value}號`;
   $("issueLabel").textContent = `${issue}｜精選分享`;
+  $("posterTitle").textContent = layout === "focus" ? `${$("month").value}園長日誌` : "園長日記";
+  $("posterLead").textContent = layout === "focus"
+    ? "記錄孩子在生活中，自然長出來的英語小種子。"
+    : "把英文放進生活裡，記錄孩子與家長每個月真實的小小進步。";
   $("principalView").textContent = $("principal").value;
   $("principalFooter").textContent = `— ${$("principal").value}`;
   $("childNameView").textContent = $("childName").value;
