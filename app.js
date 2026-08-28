@@ -61,14 +61,10 @@ const quickSections = {
 };
 
 const layoutHelp = {
-  scrapbook:"水彩故事月刊：大標題、彩色緞帶、照片與人物插畫穿插。",
-  focus:"童趣重點報：1～7編號雙欄，適合文字較多、重點清楚的月誌。",
-  cute:"三欄重點整理，適合一頁快速閱讀。",
-  story:"雙欄長文敘述，適合保留完整家長故事。",
-  observation:"依日期呈現事件，插圖與情境紀錄左右分區。",
-  siblings:"分開呈現兩位孩子的故事，最後保留共同總結。",
-  collage:"用大小卡片整理歌曲、活動、金句與互動片段。",
-  structured:"以目標、操作方式、日常紀錄與園長提問清楚呈現。"
+  focus:"預設推薦：以3～7個彩色重點呈現本月成長，最接近童趣親子雜誌。",
+  observation:"依日期整理2～4個生活事件，採左圖右文的水彩觀察誌構圖。",
+  siblings:"分開呈現兩位孩子的故事，最後保留共同心得與成長對照。",
+  collage:"把5～7個短故事、金句與趣事做成自由紙片拼貼。"
 };
 
 let sections = structuredClone(defaultSections);
@@ -348,6 +344,20 @@ function localSmartOrganize(raw){
   }));
 }
 
+function chooseRecommendedLayout(raw, organizedSections=sections){
+  if($("childName2").value.trim()) return "siblings";
+  const siblingMentions = raw.match(/姊姊|姐姐|妹妹|哥哥|弟弟|手足|姊妹|兄弟|兩個孩子/g) || [];
+  if(siblingMentions.length >= 2) return "siblings";
+
+  const dateMentions = raw.match(/(?:20\d{2}[\/.-])?\d{1,2}[\/.-]\d{1,2}|\d{1,2}月\d{1,2}日|今天|昨天|週末|夏令營/g) || [];
+  if(dateMentions.length >= 2) return "observation";
+
+  const lengths = organizedSections.map(item=>String(item.text || "").replace(/\s/g,"").length).filter(Boolean);
+  const averageLength = lengths.length ? lengths.reduce((sum,n)=>sum+n,0) / lengths.length : raw.length;
+  if(organizedSections.length >= 5 && averageLength <= 105 && raw.length <= 1000) return "collage";
+  return "focus";
+}
+
 async function organizeDiary(){
   const raw = $("rawDiary").value.trim();
   if(!raw){
@@ -367,7 +377,7 @@ async function organizeDiary(){
           childInfo:$("childInfo").value,
           issue:`${$("year").value}年${$("month").value}號`,
           layout:$("layoutMode").value,
-          layoutInstruction:"依內容整理為4至7個重點段落。請自行判斷每段的段落類型、閱讀順序、所屬孩子與最合適的插圖，不要要求使用者選擇。不要為了填滿版面重複或虛構內容；若文字較少，保留較少段落並交由版面自動放大插圖、以圖片補滿留白。文字較多時縮小插圖，優先確保文字完整可讀。",
+          layoutInstruction:"依內容整理為2至7個段落，並從 focus（童趣成長報）、observation（日期觀察）、siblings（手足故事）、collage（自由拼貼）選出 recommendedLayout。請自行判斷每段的段落類型、閱讀順序、所屬孩子與最合適的插圖，不要要求使用者選擇。不要重複或虛構內容；文字較少時用圖片補滿留白，文字較多時優先確保完整可讀。",
           preferredSections:$("layoutMode").value === "focus" ? 7 : 6
         })
       });
@@ -384,6 +394,10 @@ async function organizeDiary(){
           date:s.date || "",
           child:s.child || "main"
         }));
+        const recommended = ["focus","observation","siblings","collage"].includes(data.recommendedLayout)
+          ? data.recommendedLayout
+          : chooseRecommendedLayout(raw,sections);
+        $("layoutMode").value=recommended;
         if(data.closing) $("closing").value=data.closing;
         renderEditors(); renderPoster(); saveDraft();
         return;
@@ -395,6 +409,7 @@ async function organizeDiary(){
   }
 
   sections = localSmartOrganize(raw);
+  $("layoutMode").value=chooseRecommendedLayout(raw,sections);
   renderEditors();
   renderPoster();
   saveDraft();
@@ -420,6 +435,8 @@ function loadDraft(){
   if(!raw) return;
   try{
     const d=JSON.parse(raw);
+    const legacyLayoutMap={scrapbook:"focus",cute:"focus",structured:"focus",story:"observation"};
+    if(legacyLayoutMap[d.layoutMode]) d.layoutMode=legacyLayoutMap[d.layoutMode];
     if(["家庭英語共學","陪你一起孵出英語母語寶寶共學"].includes(d.theme)){
       d.theme="陪你一起孵出英語母語寶寶";
     }
@@ -579,7 +596,7 @@ $("exportPng").addEventListener("click",async()=>{
 
 loadDraft();
 const requestedLayout = new URLSearchParams(location.search).get("layout");
-if(["scrapbook","focus"].includes(requestedLayout)){
+if(["focus","observation","siblings","collage"].includes(requestedLayout)){
   $("layoutMode").value = requestedLayout;
 }
 renderEditors();
