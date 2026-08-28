@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>威利兄弟3.0｜園長日記</title>
   <meta name="description" content="威利兄弟3.0 園長日記月刊產生器">
-  <link rel="stylesheet" href="./styles.css?v=20260828-2">
+  <link rel="stylesheet" href="./styles.css?v=20260828-3">
 </head>
 <body>
   <div class="app-shell">
@@ -118,14 +118,15 @@
           <button id="smartOrganize" class="primary">✨ AI／智慧整理</button>
           <button id="clearRaw" class="ghost">清空</button>
         </div>
-        <p class="mini-note">預設可在瀏覽器本機做「智慧整理」示範；若串接 AI 後端，按同一顆按鈕即可改用真正 AI。</p>
+        <p class="mini-note">貼上日記後按「AI／智慧整理」，系統會自動決定段落、順序與配圖。</p>
       </section>
 
-      <section class="control-section">
+      <section class="control-section ai-section-editor">
         <div class="section-row">
-          <h2>④ 編輯整理後段落</h2>
+          <h2>④ AI整理後內容</h2>
           <button id="addSection" class="small">＋段落</button>
         </div>
+        <p class="mini-note ai-auto-note">段落分類、順序與配圖皆由AI／智慧規則自動判斷；如有需要，只要微調標題或文字即可。</p>
         <div class="quick-section-row">
           <select id="quickSection" aria-label="選擇常用分類">
             <option value="highlight">本月亮點</option>
@@ -143,8 +144,8 @@
         <div id="sectionEditors"></div>
       </section>
 
-      <section class="control-section">
-        <h2>⑤ 插圖模式</h2>
+      <section class="control-section automatic-art-section">
+        <h2>⑤ AI自動配圖</h2>
         <div class="choice-row">
           <label class="radio"><input type="radio" name="illustrationMode" value="fixed" checked> 固定童趣素材</label>
           <label class="radio"><input type="radio" name="illustrationMode" value="ai"> AI 插圖（需後端）</label>
@@ -157,7 +158,7 @@
       </section>
 
       <section class="control-section">
-        <h2>⑥ 本月收尾</h2>
+        <h2>⑤ 本月收尾</h2>
         <label>本月一句話
           <input id="closing" value="陪伴不是把進度做完，而是把英文留在生活裡。">
         </label>
@@ -285,6 +286,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="./app.js?v=20260828-2"></script>
+  <script src="./app.js?v=20260828-3"></script>
 </body>
 </html>
