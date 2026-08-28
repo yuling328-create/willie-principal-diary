@@ -40,24 +40,24 @@ const defaultHeroMarkup = `
 let customHeroDataUrl = "";
 
 const defaultSections = [
-  { icon:"📚", asset:"watercolor-parent-reading", title:"越來越熟悉，節奏更自在", text:"使用進入第二個月，孩子對教材越來越熟悉，連帶整個帶領的節奏也更自在。以前還會擔心有沒有照著流程走，現在反而能放鬆跟著感覺帶，和孩子一起享受學習的過程。" },
-  { icon:"🎵", asset:"watercolor-singing-child", title:"聽熟之後，自然開始跟唱", text:"最近最大的收穫，是孩子已經把歌曲聽得非常熟。熟悉感建立後，開口不再像是一項任務，而是生活裡自然發生的回應。" },
-  { icon:"🌱", asset:"watercolor-outdoor-father-son", title:"相信自然吸收，給孩子時間", text:"孩子有時咬字還不清楚，但我開始提醒自己不用急著糾正。先讓孩子大量接觸、自然吸收，保留她願意開口的信心。" },
-  { icon:"☎️", asset:"watercolor-parent-reading", title:"把英文放進生活互動", text:"電話美語、洗澡唱歌、走路時玩口令，都變成孩子很期待的活動。語言不只出現在教材裡，也可以存在每天自然發生的小事中。" },
-  { icon:"✨", asset:"watercolor-sisters-talking-pen", title:"這個月的小亮點", text:"孩子開始主動拿卡片、跟著錄音，也會把熟悉的英文句子放進遊戲。這些小小的變化，讓我看到反覆輸入正在慢慢累積。" },
-  { icon:"❤️", asset:"watercolor-parent-reading", title:"身為家長，最大的改變", text:"一路使用下來，最大的改變不只是孩子學了多少，而是身為家長的我越來越放鬆，也越來越相信孩子會照著自己的節奏成長。" }
+  { icon:"", asset:"watercolor-parent-reading", title:"越來越熟悉，節奏更自在", text:"使用進入第二個月，孩子對教材越來越熟悉，連帶整個帶領的節奏也更自在。以前還會擔心有沒有照著流程走，現在反而能放鬆跟著感覺帶，和孩子一起享受學習的過程。" },
+  { icon:"", asset:"watercolor-singing-child", title:"聽熟之後，自然開始跟唱", text:"最近最大的收穫，是孩子已經把歌曲聽得非常熟。熟悉感建立後，開口不再像是一項任務，而是生活裡自然發生的回應。" },
+  { icon:"", asset:"watercolor-outdoor-father-son", title:"相信自然吸收，給孩子時間", text:"孩子有時咬字還不清楚，但我開始提醒自己不用急著糾正。先讓孩子大量接觸、自然吸收，保留她願意開口的信心。" },
+  { icon:"", asset:"watercolor-parent-reading", title:"把英文放進生活互動", text:"電話美語、洗澡唱歌、走路時玩口令，都變成孩子很期待的活動。語言不只出現在教材裡，也可以存在每天自然發生的小事中。" },
+  { icon:"", asset:"watercolor-sisters-talking-pen", title:"這個月的小亮點", text:"孩子開始主動拿卡片、跟著錄音，也會把熟悉的英文句子放進遊戲。這些小小的變化，讓我看到反覆輸入正在慢慢累積。" },
+  { icon:"", asset:"watercolor-parent-reading", title:"身為家長，最大的改變", text:"一路使用下來，最大的改變不只是孩子學了多少，而是身為家長的我越來越放鬆，也越來越相信孩子會照著自己的節奏成長。" }
 ];
 
 const quickSections = {
-  highlight:{ icon:"⭐", asset:"decorations", type:"story", title:"本月亮點", text:"請寫下這個月最想留下的亮點。" },
-  reflection:{ icon:"🌿", asset:"watercolor-parent-reading", type:"reflection", title:"家長反思", text:"請寫下陪伴過程中的觀察與心情。" },
-  favorite:{ icon:"😊", asset:"watercolor-singing-child", type:"story", title:"孩子最享受", text:"請記錄孩子最投入、最喜歡的活動。" },
-  challenge:{ icon:"💭", asset:"watercolor-outdoor-father-son", type:"reflection", title:"較抗拒／還在適應", text:"請記錄孩子目前較抗拒，或仍需要時間適應的部分。" },
-  plan:{ icon:"📘", asset:"picture-book", type:"plan", title:"下個月計畫", text:"請寫下想繼續保留、減少或新增的內容。" },
-  scene:{ icon:"📅", asset:"watercolor-outdoor-father-son", type:"scene", date:"請填日期／情境", title:"觀察情境", text:"請記錄當天發生的事情，以及孩子自然使用英文的反應。" },
-  song:{ icon:"🎵", asset:"watercolor-singing-child", type:"song", title:"歌曲紀錄", text:"請記錄歌曲名稱、孩子喜歡的動作或自然跟唱的片段。" },
-  quote:{ icon:"💬", asset:"watercolor-sisters-talking-pen", type:"quote", title:"英文金句", text:"請記錄孩子這個月自然說出的英文句子。" },
-  question:{ icon:"❓", asset:"watercolor-parent-reading", type:"question", title:"園長提問", text:"請寫下想請園長協助觀察或回應的問題。" }
+  highlight:{ icon:"", asset:"decorations", type:"story", title:"本月亮點", text:"請寫下這個月最想留下的亮點。" },
+  reflection:{ icon:"", asset:"watercolor-parent-reading", type:"reflection", title:"家長反思", text:"請寫下陪伴過程中的觀察與心情。" },
+  favorite:{ icon:"", asset:"watercolor-singing-child", type:"story", title:"孩子最享受", text:"請記錄孩子最投入、最喜歡的活動。" },
+  challenge:{ icon:"", asset:"watercolor-outdoor-father-son", type:"reflection", title:"較抗拒／還在適應", text:"請記錄孩子目前較抗拒，或仍需要時間適應的部分。" },
+  plan:{ icon:"", asset:"picture-book", type:"plan", title:"下個月計畫", text:"請寫下想繼續保留、減少或新增的內容。" },
+  scene:{ icon:"", asset:"watercolor-outdoor-father-son", type:"scene", date:"請填日期／情境", title:"觀察情境", text:"請記錄當天發生的事情，以及孩子自然使用英文的反應。" },
+  song:{ icon:"", asset:"watercolor-singing-child", type:"song", title:"歌曲紀錄", text:"請記錄歌曲名稱、孩子喜歡的動作或自然跟唱的片段。" },
+  quote:{ icon:"", asset:"watercolor-sisters-talking-pen", type:"quote", title:"英文金句", text:"請記錄孩子這個月自然說出的英文句子。" },
+  question:{ icon:"", asset:"watercolor-parent-reading", type:"question", title:"園長提問", text:"請寫下想請園長協助觀察或回應的問題。" }
 };
 
 const layoutHelp = {
@@ -74,9 +74,9 @@ const layoutHelp = {
 let sections = structuredClone(defaultSections);
 
 const childAvatarIcons = {
-  girl:"👧🏻",
-  boy:"👦🏻",
-  baby:"👶🏻"
+  girl:"女",
+  boy:"男",
+  baby:"幼"
 };
 
 function escapeHtml(s=""){
@@ -89,17 +89,7 @@ function safeImageUrl(url=""){
 }
 
 function illustrationFor(text=""){
-  const t = text.toLowerCase();
-  if(/電話|call|phone/.test(t)) return "☎️";
-  if(/洗澡|水|bath|cup/.test(t)) return "🛁";
-  if(/睡前|故事|book|read|繪本/.test(t)) return "📚";
-  if(/唱|歌|music|song|聽/.test(t)) return "🎵";
-  if(/卡|flash|點讀/.test(t)) return "🪄";
-  if(/跳|舞|dance|動作/.test(t)) return "💃";
-  if(/姊|哥哥|妹妹|弟弟|手足/.test(t)) return "👧🏻👦🏻";
-  if(/戶外|走路|公園|outside/.test(t)) return "🌳";
-  if(/玩|遊戲|game/.test(t)) return "🧸";
-  return "✨";
+  return "";
 }
 
 function assetFor(text=""){
@@ -478,7 +468,7 @@ $("heroFile").addEventListener("change",e=>imagePreview(e.target));
 $("smartOrganize").addEventListener("click",organizeDiary);
 $("clearRaw").addEventListener("click",()=>{$("rawDiary").value="";saveDraft();});
 $("addSection").addEventListener("click",()=>{
-  sections.push({icon:"⭐",asset:"auto",type:"story",child:"main",date:"",title:"新增段落",text:"請輸入家長日記內容。"});
+  sections.push({icon:"",asset:"auto",type:"story",child:"main",date:"",title:"新增段落",text:"請輸入家長日記內容。"});
   renderEditors();renderPoster();
 });
 $("addQuickSection").addEventListener("click",()=>{
