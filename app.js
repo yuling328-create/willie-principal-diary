@@ -140,6 +140,14 @@ function assignDistinctAssets(items){
   return items;
 }
 
+function illustrationScore(item,index){
+  const text=`${item.title || ""} ${item.text || ""}`;
+  let score=index === 0 ? 1 : 0;
+  if(/點讀|刷卡|圖卡|平板|eTab|唱|歌|音樂|視訊|電話|戶外|公園|共讀|繪本|手足|姊|妹|哥|弟/i.test(text)) score+=4;
+  if(/主動|成長|進步|陪伴|反思/.test(text)) score+=2;
+  return score;
+}
+
 function assetUrl(asset){
   if(!asset || asset === "none") return "";
   const extension = asset.startsWith("watercolor-") ? "jpg" : "png";
@@ -247,6 +255,7 @@ function renderPoster(){
   const layout = $("layoutMode").value || "cute";
   const colorTheme = $("colorTheme").value || "peach";
   const poster = $("poster");
+  poster.classList.toggle("compact",sections.length >= 6);
   ["scrapbook","focus","cute","story","observation","siblings","collage","structured"].forEach(name=>{
     poster.classList.toggle(`layout-${name}`,layout === name);
   });
@@ -283,6 +292,11 @@ function renderPoster(){
   grid.innerHTML = "";
   const mode = document.querySelector('input[name="illustrationMode"]:checked')?.value || "fixed";
 
+  assignDistinctAssets(sections);
+  const artLimit=Math.min(3,Math.max(2,Math.ceil(sections.length/2)));
+  const artIndices=new Set(sections.map((item,index)=>({index,score:illustrationScore(item,index)}))
+    .sort((a,b)=>b.score-a.score || a.index-b.index).slice(0,artLimit).map(item=>item.index));
+
   sections.forEach((s,index)=>{
     const card = document.createElement("article");
     card.className = "diary-card";
@@ -293,7 +307,9 @@ function renderPoster(){
     if(layout === "story" && sections.length % 2 === 1 && index === sections.length-1) card.classList.add("wide");
     if(layout === "cute" && /下個月|計畫/.test(s.title)) card.classList.add("planning-card");
     if(layout === "siblings" && (s.child || "main") === "shared") card.classList.add("shared-card");
-    const selectedAsset = s.asset === "auto" || !s.asset ? assetFor(s.text) : s.asset;
+    const selectedAsset = artIndices.has(index)
+      ? (s.asset === "auto" || !s.asset ? assetFor(s.text) : s.asset)
+      : "none";
     const imageUrl = mode === "ai" ? safeImageUrl(s.imageUrl) : assetUrl(selectedAsset);
     if(selectedAsset === "none") card.classList.add("no-art");
     if(selectedAsset.startsWith("watercolor-")) card.classList.add("watercolor-art");
@@ -319,7 +335,7 @@ function renderPoster(){
     grid.appendChild(card);
   });
 
-  const fillerTarget = layout === "focus" ? 7 : layout === "scrapbook" ? 6 : 0;
+  const fillerTarget = 0;
   const fillerAssets = [
     "watercolor-boy-tablet",
     "watercolor-singing-child",
@@ -350,7 +366,7 @@ function localSmartOrganize(raw){
   const sentences = sentenceSegments(clean);
 
   const groups = [];
-  const maxSections = $("layoutMode").value === "focus" ? 7 : 6;
+  const maxSections = $("layoutMode").value === "focus" ? 5 : 6;
   const target = Math.min(maxSections, Math.max(4, Math.ceil(sentences.length/2)));
   const per = Math.max(1, Math.ceil(sentences.length/target));
 
