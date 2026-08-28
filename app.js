@@ -315,7 +315,8 @@ function localSmartOrganize(raw){
   const sentences = sentenceSegments(clean);
 
   const groups = [];
-  const target = Math.min(6, Math.max(4, Math.ceil(sentences.length/2)));
+  const maxSections = $("layoutMode").value === "focus" ? 7 : 6;
+  const target = Math.min(maxSections, Math.max(4, Math.ceil(sentences.length/2)));
   const per = Math.max(1, Math.ceil(sentences.length/target));
 
   for(let i=0;i<sentences.length;i+=per){
@@ -332,10 +333,20 @@ function localSmartOrganize(raw){
     return ["這個月，我們更熟悉彼此的節奏","生活裡的小小英語時刻","本月看見的成長","有趣的小記事"][i%4];
   };
 
+  const typeFor = (text) => {
+    if(/想問|請問|疑問|怎麼辦|如何/.test(text)) return "question";
+    if(/下個月|接下來|繼續|計畫|希望/.test(text)) return "plan";
+    if(/唱|歌|音樂|music|song/i.test(text)) return "song";
+    if(/[「“\"]|他說|她說|孩子說|英文句/.test(text)) return "quote";
+    if(/媽媽|爸爸|家長|我發現|我覺得|反思|焦慮|放鬆/.test(text)) return "reflection";
+    if(/今天|昨天|週末|早上|晚上|在家|戶外|公園|課堂/.test(text)) return "scene";
+    return "story";
+  };
+
   return groups.slice(0,7).map((text,i)=>({
     icon: illustrationFor(text),
     asset: assetFor(text),
-    type:"story",
+    type:typeFor(text),
     date:"",
     child:"main",
     title:titleFor(text,i),
@@ -362,7 +373,7 @@ async function organizeDiary(){
           childInfo:$("childInfo").value,
           issue:`${$("year").value}年${$("month").value}號`,
           layout:$("layoutMode").value,
-          layoutInstruction:"依內容整理為4至7個重點段落。不要為了填滿版面重複或虛構內容；若文字較少，保留較少段落並交由版面自動放大插圖、以圖片補滿留白。文字較多時縮小插圖，優先確保文字完整可讀。",
+          layoutInstruction:"依內容整理為4至7個重點段落。請自行判斷每段的段落類型、閱讀順序、所屬孩子與最合適的插圖，不要要求使用者選擇。不要為了填滿版面重複或虛構內容；若文字較少，保留較少段落並交由版面自動放大插圖、以圖片補滿留白。文字較多時縮小插圖，優先確保文字完整可讀。",
           preferredSections:$("layoutMode").value === "focus" ? 7 : 6
         })
       });
