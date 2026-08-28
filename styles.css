@@ -755,6 +755,21 @@ footer{
   border:7px solid #fff;box-shadow:0 4px 10px rgba(81,58,34,.12);transform:rotate(1.2deg)
 }
 .layout-scrapbook .diary-card:nth-child(4) .card-illustration img{transform:rotate(-1deg)}
+.layout-scrapbook .diary-card.short-copy:not(.image-filler) p{padding-right:185px}
+.layout-scrapbook .diary-card.short-copy:not(.image-filler) .card-illustration{
+  width:184px;height:158px;right:8px;bottom:8px
+}
+.layout-scrapbook .diary-card.very-short-copy:not(.image-filler) p{padding-right:220px}
+.layout-scrapbook .diary-card.very-short-copy:not(.image-filler) .card-illustration{
+  width:218px;height:184px;right:5px;bottom:5px
+}
+.layout-scrapbook .diary-card.image-filler{padding:7px;overflow:hidden;background:#fffaf0}
+.layout-scrapbook .diary-card.image-filler .card-illustration{
+  position:static;width:100%;height:100%;margin:0;background:transparent
+}
+.layout-scrapbook .diary-card.image-filler .card-illustration img{
+  width:100%;height:100%;border-radius:18px;object-fit:contain
+}
 .layout-scrapbook .closing-card{
   grid-template-columns:42px 1fr;gap:10px;margin-top:12px;padding:9px 19px;
   border:2px dashed #dfbd7e;border-radius:17px;background:rgba(255,248,225,.86)
@@ -905,6 +920,21 @@ footer{
 }
 .layout-focus .diary-card:nth-child(5) .card-illustration{width:92px;height:82px;opacity:.92}
 .layout-focus .card-illustration img{border-radius:10px;object-fit:contain}
+.layout-focus .diary-card.short-copy:not(.image-filler) .diary-points{padding-right:105px}
+.layout-focus .diary-card.short-copy:not(.image-filler) .card-illustration{
+  width:105px;height:92px;right:6px;bottom:6px
+}
+.layout-focus .diary-card.very-short-copy:not(.image-filler) .diary-points{padding-right:130px}
+.layout-focus .diary-card.very-short-copy:not(.image-filler) .card-illustration{
+  width:130px;height:112px;right:5px;bottom:5px
+}
+.layout-focus .diary-card.image-filler{padding:8px;background:#fffaf0;overflow:hidden}
+.layout-focus .diary-card.image-filler .card-illustration{
+  position:static;width:100%;height:100%;margin:0;background:transparent;opacity:1
+}
+.layout-focus .diary-card.image-filler .card-illustration img{
+  width:100%;height:100%;border-radius:15px;object-fit:contain
+}
 .layout-focus .closing-card{
   grid-template-columns:38px 1fr;gap:10px;margin-top:11px;padding:8px 20px 8px 58px;
   border:2px solid #efcbd4;border-radius:17px;background:#fff8fa
