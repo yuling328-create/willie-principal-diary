@@ -258,6 +258,9 @@ function renderPoster(){
     const card = document.createElement("article");
     card.className = "diary-card";
     card.dataset.type = s.type || "story";
+    const copyLength = String(s.text || "").replace(/\s/g,"").length;
+    if(copyLength <= 55) card.classList.add("short-copy");
+    if(copyLength <= 28) card.classList.add("very-short-copy");
     if(layout === "story" && sections.length % 2 === 1 && index === sections.length-1) card.classList.add("wide");
     if(layout === "cute" && /下個月|計畫/.test(s.title)) card.classList.add("planning-card");
     if(layout === "siblings" && (s.child || "main") === "shared") card.classList.add("shared-card");
@@ -286,6 +289,23 @@ function renderPoster(){
     `;
     grid.appendChild(card);
   });
+
+  const fillerTarget = layout === "focus" ? 7 : layout === "scrapbook" ? 6 : 0;
+  const fillerAssets = [
+    "watercolor-boy-tablet",
+    "watercolor-singing-child",
+    "watercolor-sisters-talking-pen",
+    "watercolor-outdoor-father-son",
+    "watercolor-parent-reading"
+  ];
+  for(let index=sections.length;index<fillerTarget;index++){
+    const card = document.createElement("article");
+    const asset = fillerAssets[index % fillerAssets.length];
+    card.className = "diary-card image-filler watercolor-art";
+    card.setAttribute("aria-label","自動補位插圖");
+    card.innerHTML = `<div class="card-illustration"><img src="${assetUrl(asset)}" alt="自動補位的收藏風插圖"></div>`;
+    grid.appendChild(card);
+  }
 }
 
 function localSmartOrganize(raw){
@@ -340,7 +360,10 @@ async function organizeDiary(){
           rawDiary: raw,
           childName:$("childName").value,
           childInfo:$("childInfo").value,
-          issue:`${$("year").value}年${$("month").value}號`
+          issue:`${$("year").value}年${$("month").value}號`,
+          layout:$("layoutMode").value,
+          layoutInstruction:"依內容整理為4至7個重點段落。不要為了填滿版面重複或虛構內容；若文字較少，保留較少段落並交由版面自動放大插圖、以圖片補滿留白。文字較多時縮小插圖，優先確保文字完整可讀。",
+          preferredSections:$("layoutMode").value === "focus" ? 7 : 6
         })
       });
       if(!res.ok) throw new Error("API error");
