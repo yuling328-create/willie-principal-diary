@@ -1133,6 +1133,58 @@ footer{
 .layout-structured .diary-card[data-type="question"]{border:0;background:#f4e3e6;box-shadow:inset 0 12px 0 #c87582}
 .layout-structured .closing-card{border:0;border-left:16px solid #473b31;border-radius:0;background:#f4dda7}
 
+/* 字型配置：一個選項同時管理品牌、主標、段落標題與內文。 */
+.poster.font-rounded{
+  font-family:"Arial Rounded MT Bold","Microsoft JhengHei","PingFang TC",sans-serif
+}
+.poster.font-rounded .brand-main,.poster.font-rounded .title-copy h1,
+.poster.font-rounded .diary-card h2{font-family:inherit;font-weight:900;letter-spacing:2px}
+.poster.font-rounded .title-copy h1{letter-spacing:7px}
+
+.poster.font-handwritten{
+  font-family:"Microsoft JhengHei","PingFang TC",sans-serif
+}
+.poster.font-handwritten .brand-main,.poster.font-handwritten .title-copy h1,
+.poster.font-handwritten .diary-card h2{
+  font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive;font-weight:700;letter-spacing:3px
+}
+.poster.font-handwritten .diary-card h2{transform:rotate(-.45deg)}
+
+.poster.font-storybook{
+  font-family:"Noto Serif TC","Songti TC","PMingLiU",serif
+}
+.poster.font-storybook .brand-main,.poster.font-storybook .title-copy h1{
+  font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-weight:900;letter-spacing:5px
+}
+.poster.font-storybook .diary-card h2{font-family:"DFKai-SB","BiauKai",serif;font-weight:700}
+.poster.font-storybook .diary-points,.poster.font-storybook .diary-copy{line-height:1.72}
+
+.poster.font-editorial{
+  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif
+}
+.poster.font-editorial .brand-main,.poster.font-editorial .title-copy h1{
+  font-family:"Arial Black","Microsoft JhengHei",sans-serif;font-weight:950;letter-spacing:1px
+}
+.poster.font-editorial .diary-card h2{font-family:inherit;font-weight:900;letter-spacing:.5px}
+.poster.font-editorial .issue-pill{text-transform:uppercase;letter-spacing:2px}
+
+.poster.font-mixed{font-family:"Microsoft JhengHei","PingFang TC",sans-serif}
+.poster.font-mixed .brand-main{font-family:"Arial Rounded MT Bold","Microsoft JhengHei",sans-serif;font-weight:900}
+.poster.font-mixed .title-copy h1{font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive;font-weight:700;letter-spacing:8px;transform:rotate(-1deg)}
+.poster.font-mixed .diary-card h2{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-weight:900}
+
+/* 自動模式：每種海報採用不同的字體角色。 */
+.font-auto.layout-scrapbook,.font-auto.layout-story{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif}
+.font-auto.layout-scrapbook .diary-card h2,.font-auto.layout-story .diary-card h2{font-family:"DFKai-SB","BiauKai",serif}
+.font-auto.layout-focus,.font-auto.layout-structured{font-family:"Microsoft JhengHei","PingFang TC",sans-serif}
+.font-auto.layout-focus .title-copy h1,.font-auto.layout-structured .title-copy h1{font-family:"Arial Black","Microsoft JhengHei",sans-serif}
+.font-auto.layout-cute,.font-auto.layout-siblings{font-family:"Arial Rounded MT Bold","Microsoft JhengHei",sans-serif}
+.font-auto.layout-cute .title-copy h1,.font-auto.layout-siblings .title-copy h1{font-family:inherit;font-weight:900}
+.font-auto.layout-observation .title-copy h1,.font-auto.layout-observation .diary-card h2{font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive}
+.font-auto.layout-collage .brand-main{font-family:"Arial Rounded MT Bold","Microsoft JhengHei",sans-serif}
+.font-auto.layout-collage .title-copy h1{font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive}
+.font-auto.layout-collage .diary-card h2{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif}
+
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
   .control-panel{position:relative;top:0;max-height:none}
