@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>威利兄弟3.0｜園長日記</title>
   <meta name="description" content="威利兄弟3.0 園長日記月刊產生器">
-  <link rel="stylesheet" href="./styles.css?v=20260828-5">
+  <link rel="stylesheet" href="./styles.css?v=20260828-6">
 </head>
 <body>
   <div class="app-shell">
@@ -63,6 +63,17 @@
             <option value="sky">天空藍｜清爽故事</option>
           </select>
         </label>
+        <label>字型風格
+          <select id="fontStyle">
+            <option value="auto" selected>依版型自動搭配</option>
+            <option value="rounded">圓潤童書｜可愛柔和</option>
+            <option value="handwritten">手寫日記｜自然溫度</option>
+            <option value="storybook">故事繪本｜優雅溫暖</option>
+            <option value="editorial">雜誌編輯｜醒目俐落</option>
+            <option value="mixed">趣味混搭｜標題有變化</option>
+          </select>
+        </label>
+        <p class="mini-note">只需選一種風格，標題、段落標題與內文會自動搭配。</p>
       </section>
 
       <section class="control-section">
@@ -275,6 +286,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="./app.js?v=20260828-4"></script>
+  <script src="./app.js?v=20260828-6"></script>
 </body>
 </html>
