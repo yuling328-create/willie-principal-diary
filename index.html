@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>威利兄弟3.0｜園長日記</title>
   <meta name="description" content="威利兄弟3.0 園長日記月刊產生器">
-  <link rel="stylesheet" href="./styles.css?v=20260828-3">
+  <link rel="stylesheet" href="./styles.css?v=20260828-4">
 </head>
 <body>
   <div class="app-shell">
@@ -78,16 +78,16 @@
         <div class="grid two avatar-options">
           <label>第一位孩子頭像
             <select id="childAvatar">
-              <option value="girl" selected>👧🏻 女生</option>
-              <option value="boy">👦🏻 男生</option>
-              <option value="baby">👶🏻 寶寶</option>
+              <option value="girl" selected>女生</option>
+              <option value="boy">男生</option>
+              <option value="baby">幼兒</option>
             </select>
           </label>
           <label>第二位孩子頭像
             <select id="childAvatar2">
-              <option value="girl" selected>👧🏻 女生</option>
-              <option value="boy">👦🏻 男生</option>
-              <option value="baby">👶🏻 寶寶</option>
+              <option value="girl" selected>女生</option>
+              <option value="boy">男生</option>
+              <option value="baby">幼兒</option>
             </select>
           </label>
         </div>
@@ -115,7 +115,7 @@
           <textarea id="rawDiary" rows="11" placeholder="直接貼上家長原始文字，不需要先整理。"></textarea>
         </label>
         <div class="button-row">
-          <button id="smartOrganize" class="primary">✨ AI／智慧整理</button>
+          <button id="smartOrganize" class="primary">AI／智慧整理</button>
           <button id="clearRaw" class="ghost">清空</button>
         </div>
         <p class="mini-note">貼上日記後按「AI／智慧整理」，系統會自動決定段落、順序與配圖。</p>
@@ -150,7 +150,7 @@
           <label class="radio"><input type="radio" name="illustrationMode" value="fixed" checked> 固定童趣素材</label>
           <label class="radio"><input type="radio" name="illustrationMode" value="ai"> AI 插圖（需後端）</label>
         </div>
-        <button id="applyWatercolorArt" class="ghost">🎨 一鍵換成收藏風人物</button>
+        <button id="applyWatercolorArt" class="ghost">一鍵換成收藏風人物</button>
         <label>AI API Proxy（選填）
           <input id="apiBase" placeholder="https://your-backend.example.com">
         </label>
@@ -173,16 +173,8 @@
 
     <main class="preview-stage">
       <article id="poster" class="poster theme-peach">
-        <div class="paper-doodles top-left">✦ ♡ ♪</div>
-        <div class="paper-doodles bottom-right">🌿 🌼 📚 ✦</div>
-        <div class="kindy-corner corner-left" aria-hidden="true">🌷</div>
-        <div class="kindy-corner corner-right" aria-hidden="true">🌱</div>
-
         <header>
           <div class="brand-banner">
-            <span class="banner-mascot" aria-hidden="true">🧸</span>
-            <span class="banner-clock" aria-hidden="true">🕰️</span>
-            <span class="banner-balloons" aria-hidden="true">🎈</span>
             <span class="brand-main">威利兄弟3.0</span>
             <span class="brand-play">一起玩</span>
           </div>
@@ -196,12 +188,12 @@
 
             <div class="header-side">
               <div class="child-card">
-                <div id="childAvatarView" class="child-avatar">👧🏻</div>
+                <div id="childAvatarView" class="child-avatar">女</div>
                 <div>
                   <strong id="childNameView">Jessie</strong>
                   <span id="childInfoView">6Y 大班</span>
                   <div id="child2View" class="child-two is-hidden">
-                    <strong><span id="childAvatar2View" class="child-two-avatar">👧🏻</span><span id="childName2View"></span></strong>
+                    <strong><span id="childAvatar2View" class="child-two-avatar">女</span><span id="childName2View"></span></strong>
                     <span id="childInfo2View"></span>
                   </div>
                 </div>
@@ -209,9 +201,6 @@
 
               <div id="heroVisual" class="hero-visual">
                 <div class="family-scene">
-                  <div class="scene-people">👩‍👧‍👦</div>
-                  <div class="scene-book">📘</div>
-                  <div class="scene-notes">♪ ♫ ✦</div>
                   <p>一起聽・一起玩・一起把英文留在生活裡</p>
                 </div>
               </div>
@@ -228,7 +217,7 @@
         <section id="diaryCards" class="diary-grid"></section>
 
         <section class="closing-card">
-          <div class="closing-icon">♡</div>
+          <div class="closing-icon">記</div>
           <div>
             <span>身為家長，這個月最想留下的一句話</span>
             <strong id="closingView">陪伴不是把進度做完，而是把英文留在生活裡。</strong>
@@ -286,6 +275,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="./app.js?v=20260828-3"></script>
+  <script src="./app.js?v=20260828-4"></script>
 </body>
 </html>
