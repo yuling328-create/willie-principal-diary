@@ -49,11 +49,18 @@
     };
   }
 
+  function genderDefaultImage(){
+    const childType = document.getElementById('childAvatar')?.value || 'girl';
+    if (childType === 'boy') return './assets/illustrations/watercolor-boy-tablet.jpg';
+    if (childType === 'baby') return './assets/illustrations/talking-pen.png';
+    return './assets/illustrations/watercolor-parent-reading.jpg';
+  }
+
   function heroSrc(){
     const choice = document.getElementById('heroChoice')?.value || 'default';
     if (choice === 'custom' && typeof customHeroDataUrl !== 'undefined' && customHeroDataUrl) return customHeroDataUrl;
     if (choice !== 'none' && choice !== 'custom' && choice !== 'default') return assetUrl(choice);
-    return './assets/illustrations/watercolor-parent-reading.jpg';
+    return genderDefaultImage();
   }
 
   function sectionImage(item){
@@ -69,6 +76,7 @@
     const childType = document.getElementById('childAvatar')?.value || 'girl';
     if (childType === 'boy') return './assets/illustrations/watercolor-boy-tablet.jpg';
     if (childType === 'baby') return './assets/illustrations/talking-pen.png';
+    if (childType === 'girl') return './assets/illustrations/watercolor-parent-reading.jpg';
     return sectionImage(item);
   }
 
