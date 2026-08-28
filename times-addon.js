@@ -1,4 +1,12 @@
 (() => {
+  const socialCssHref = './social-feed-v8.css?v=20260828-9';
+  if (![...document.querySelectorAll('link[rel="stylesheet"]')].some(link => link.getAttribute('href') === socialCssHref)) {
+    const socialCss = document.createElement('link');
+    socialCss.rel = 'stylesheet';
+    socialCss.href = socialCssHref;
+    document.head.appendChild(socialCss);
+  }
+
   const layoutSelect = document.getElementById('layoutMode');
   const poster = document.getElementById('poster');
   if (!layoutSelect || !poster || typeof window.renderPoster !== 'function') return;
@@ -82,22 +90,22 @@
       <section class="tm-feature">
         <div class="tm-feature-copy">
           <div class="tm-ribbon">本月封面故事</div><div class="tm-cover-en">COVER STORY ★★★</div>
-          <h2>${safe(cover.title)}</h2><p>${safe(shortText(cover.text,100))}</p>
+          <h2>${safe(cover.title)}</h2><p>${safe(shortText(cover.text,110))}</p>
           <div class="tm-meta-lines"><span>園長｜${safe(principal)}</span><span>紀錄｜${safe(period)}</span><span>主題｜${safe(theme)}</span></div>
         </div>
         <div class="tm-hero-wrap"><img src="${safe(hero)}" alt="本月封面主圖"><div class="tm-hero-caption">${safe(childName)} · ${safe(childInfo)}</div></div>
       </section>
       <section class="tm-highlight-list">
-        ${highlights.map((item,index)=>`<article class="tm-highlight tm-h${index+1}"><div class="tm-num">0${index+1}</div><div class="tm-highlight-copy"><h3>${safe(item.title)}</h3><p>${safe(shortText(item.text,58))}</p></div><img src="${safe(sectionImage(item))}" alt="${safe(item.title)}插圖"></article>`).join('')}
+        ${highlights.map((item,index)=>`<article class="tm-highlight tm-h${index+1}"><div class="tm-num">0${index+1}</div><div class="tm-highlight-copy"><h3>${safe(item.title)}</h3><p>${safe(shortText(item.text,72))}</p></div><img src="${safe(sectionImage(item))}" alt="${safe(item.title)}插圖"></article>`).join('')}
       </section>
       <section class="tm-bottom-grid">
-        <article class="tm-note-card"><div class="tm-tape"></div><h3>本月學習亮點 ✦</h3><p>${safe(shortText(learning.text,140))}</p><div class="tm-checks">✓ 看見小小進步　✓ 保留生活感　✓ 不趕進度</div></article>
-        <article class="tm-photo-card"><img src="${safe(sectionImage(story))}" alt="本月小故事插圖"><strong>${safe(story.title)}</strong><span>${safe(shortText(story.text,80))}</span></article>
+        <article class="tm-note-card"><div class="tm-tape"></div><h3>本月學習亮點 ✦</h3><p>${safe(shortText(learning.text,180))}</p><div class="tm-checks">✓ 看見小小進步　✓ 保留生活感　✓ 不趕進度</div></article>
+        <article class="tm-photo-card"><img src="${safe(sectionImage(story))}" alt="本月小故事插圖"><strong>${safe(story.title)}</strong><span>${safe(shortText(story.text,100))}</span></article>
       </section>
       <footer class="tm-footer"><span>記錄今天的小進步，成為明天的大自信。</span><strong>${safe(closing)}</strong></footer>
     `;
     const help = document.getElementById('layoutHelp');
-    if(help) help.textContent = '社群貼文版 1080×1350｜IG 與 Facebook 都可直接使用。';
+    if(help) help.textContent = 'IG / FB 4:5 社群貼文版：1080 × 1350，自動填滿版面。';
     timesActive = true;
   }
 
@@ -112,13 +120,13 @@
     if (layoutSelect.value === 'times') { renderTimesPoster(); return; }
     restoreDefaultPoster();
     originalRenderPoster(...args);
-    const help = document.getElementById('layoutHelp');
-    if(help) help.textContent = '社群貼文版 1080×1350｜IG 與 Facebook 都可直接使用。';
   };
 
   const keepChosenStyle = () => {
     const chosen = layoutSelect.value;
-    setTimeout(() => { layoutSelect.value = chosen; window.renderPoster(); }, 120);
+    setTimeout(() => {
+      if (chosen === 'times') { layoutSelect.value = 'times'; window.renderPoster(); }
+    }, 120);
   };
 
   document.getElementById('smartOrganize')?.addEventListener('click', keepChosenStyle);
