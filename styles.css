@@ -1004,6 +1004,60 @@ footer{
 .ai-section-editor .icon-input{display:none}
 .automatic-art-section{display:none}
 
+/* 2026-08 海報視覺重製：不用 Emoji、虛線或同款膠囊換色。 */
+#poster *,#poster *:before,#poster *:after{border-style:solid}
+#poster .paper-doodles,#poster .kindy-corner,
+#poster .banner-mascot,#poster .banner-clock,#poster .banner-balloons{display:none!important}
+#poster .brand-banner:before,#poster .brand-banner:after{content:""}
+#poster .brand-play{border-style:solid}
+
+/* 1. 水彩故事月刊｜中央雜誌刊頭與溫暖紙張 */
+.layout-scrapbook{background:linear-gradient(135deg,#fffaf0 0 60%,#f6ead6 60% 100%)}
+.layout-scrapbook .brand-banner{width:82%;padding:8px 24px 12px;border-bottom:5px solid #d4a85f;text-align:center}
+.layout-scrapbook .brand-main{font-family:"Noto Serif TC",serif;letter-spacing:5px}
+.layout-scrapbook .title-copy h1{font-family:"Noto Serif TC",serif}
+
+/* 2. 童趣重點報｜藍紅報紙刊頭 */
+.layout-focus{background:linear-gradient(90deg,rgba(36,116,177,.035) 1px,transparent 1px),#fffdf8;background-size:34px 34px}
+.layout-focus .brand-banner{width:49%;margin-left:0;border-left:13px solid #df4965;border-radius:0 28px 28px 0;transform:none}
+.layout-focus .brand-main{letter-spacing:2px}
+
+/* 3. 可愛月刊版｜拱門兒童刊物，不使用虛線圓框 */
+.layout-cute{background:linear-gradient(180deg,#fff0d1 0 155px,#fffdf8 155px)}
+.layout-cute .brand-banner{width:66%;padding:22px 52px;border:0;border-radius:90px 90px 18px 18px;background:#f4b88f;box-shadow:10px 10px 0 #f7dd9e}
+.layout-cute .brand-play{border:0;border-radius:0;background:transparent;border-bottom:4px solid #fff}
+.layout-cute .title-copy h1{color:#b55445;letter-spacing:8px}
+
+/* 4. 日記故事版｜左側書封書籤式標題 */
+.layout-story{background:linear-gradient(90deg,#edd0be 0 72px,#fffaf5 72px)}
+.layout-story .brand-banner{width:55%;margin-left:18px;padding:18px 32px;border:0;border-left:14px solid #924f45;border-radius:0;background:#f1cbb9;box-shadow:8px 8px 0 #eadfd4;text-align:left}
+.layout-story .brand-play{border:0;background:transparent;color:#7b463d}
+.layout-story .title-copy h1{font-family:"Noto Serif TC",serif;color:#70413a}
+
+/* 5. 情境觀察版｜植物研究手冊式橫條 */
+.layout-observation{background:linear-gradient(90deg,#edf2e7 0 28%,#fffdf8 28%)}
+.layout-observation .brand-banner{width:64%;margin-right:34px;padding:17px 28px;border:3px solid #78906b;border-radius:0;background:#dce8d2;box-shadow:7px 7px 0 #b8c9ad;transform:rotate(-1deg)}
+.layout-observation .brand-play{border:0;border-left:2px solid #78906b;border-radius:0;background:transparent}
+.layout-observation .title-copy h1{color:#52704d}
+
+/* 6. 手足成長版｜雙色對開海報 */
+.layout-siblings{background:linear-gradient(90deg,#fff4f3 0 50%,#eff7ef 50% 100%)}
+.layout-siblings .brand-banner{width:78%;padding:18px 34px;border:0;border-radius:0;background:linear-gradient(90deg,#efaeb9 0 50%,#a8c9ae 50%);box-shadow:0 8px 0 #e4d4c6}
+.layout-siblings .brand-play{border:0;border-radius:0;background:#fff;color:#674b43}
+.layout-siblings .title-copy h1{text-align:center;letter-spacing:7px}
+
+/* 7. 活動拼貼版｜斜切色紙海報 */
+.layout-collage{background:linear-gradient(145deg,#fff7e8 0 46%,#edf5f8 46% 100%)}
+.layout-collage .brand-banner{width:70%;padding:20px 48px;border:0;border-radius:0;background:#8fbdd2;box-shadow:12px 10px 0 #f2c67e;clip-path:polygon(3% 0,100% 7%,96% 100%,0 91%);transform:rotate(.7deg)}
+.layout-collage .brand-play{border:0;border-radius:0;background:#f8de8e;color:#55432e}
+.layout-collage .title-copy h1{transform:rotate(-1deg);color:#397d9c}
+
+/* 8. 園長條列版｜清楚的大字校園公告 */
+.layout-structured{background:linear-gradient(180deg,#f2cf83 0 118px,#fffdf8 118px)}
+.layout-structured .brand-banner{width:58%;margin-left:0;padding:18px 36px;border:4px solid #473b31;border-left:0;border-radius:0;background:#fff4cc;box-shadow:8px 8px 0 #473b31;text-align:left}
+.layout-structured .brand-play{border:0;border-radius:0;background:#473b31;color:#fff}
+.layout-structured .title-copy h1{color:#473b31;text-transform:uppercase;letter-spacing:9px}
+
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
   .control-panel{position:relative;top:0;max-height:none}
