@@ -1365,6 +1365,55 @@ footer{
 .layout-collage .brand-main{color:#4d392d;font-family:"JF Open Huninn",sans-serif;font-size:41px;letter-spacing:4px}
 .layout-collage .brand-play{margin-left:12px;padding:3px 12px;border:0;border-radius:18px;background:#fff7dc;color:#377b99;font-size:25px}
 
+/* 童趣成長報補位插畫：少內容時合併為一張完整水彩主視覺，不切成人頭圖片牆。 */
+.layout-focus .image-filler{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px!important;
+  border:0!important;border-radius:30px 10px 30px 10px!important;
+  background:linear-gradient(145deg,#fff3d7,#e8f2e5 58%,#f7dfe4)!important;overflow:hidden!important
+}
+.layout-focus .image-filler:before{
+  content:"";display:block;position:absolute;left:-45px;top:-52px;width:170px;height:170px;
+  border-radius:50%;background:rgba(118,178,193,.20);z-index:0
+}
+.layout-focus .image-filler:after{
+  content:"";display:block;position:absolute;right:-38px;bottom:-45px;width:145px;height:145px;
+  border-radius:42% 58% 48% 52%;background:rgba(235,166,151,.24);z-index:0
+}
+.layout-focus .image-filler .art-panel-label{
+  position:relative;z-index:2;align-self:flex-start;margin:0 0 8px 5px;padding:7px 15px;
+  border-radius:15px 5px 15px 5px;background:#6ca9a0;color:#fff;
+  font-family:"JF Open Huninn",sans-serif;font-size:17px;font-weight:900;letter-spacing:1px
+}
+.layout-focus .image-filler .card-illustration,
+.layout-focus .diary-card.image-filler .card-illustration{
+  position:relative;right:auto;bottom:auto;z-index:1;width:84%;height:72%;margin:0 auto;
+  border:8px solid rgba(255,255,255,.82);border-radius:24px 8px 24px 8px;
+  background:rgba(255,255,255,.48);box-shadow:0 8px 18px rgba(90,76,58,.10)
+}
+.layout-focus .image-filler .card-illustration img{
+  width:100%;height:100%;padding:5px;border-radius:17px 5px 17px 5px;object-fit:contain;object-position:center
+}
+.layout-focus .image-filler .art-panel-note{
+  position:relative;z-index:2;margin-top:8px;color:#937064;font-size:12px;font-weight:750;letter-spacing:1px
+}
+.layout-focus .diary-grid:has(>.diary-card:nth-child(5).image-filler)>.diary-card:nth-child(5){
+  grid-column:2;grid-row:1/span 4
+}
+.layout-focus .diary-grid:has(>.diary-card:nth-child(5).image-filler)>.diary-card:nth-child(6),
+.layout-focus .diary-grid:has(>.diary-card:nth-child(5).image-filler)>.diary-card:nth-child(7){display:none}
+.layout-focus .diary-grid:has(>.diary-card:nth-child(5).image-filler)>.diary-card:nth-child(5) .card-illustration{
+  width:88%;height:78%
+}
+.layout-focus .diary-grid:not(:has(>.diary-card:nth-child(5).image-filler)):has(>.diary-card:nth-child(6).image-filler)>.diary-card:nth-child(6){
+  grid-column:2;grid-row:3/span 2
+}
+.layout-focus .diary-grid:not(:has(>.diary-card:nth-child(5).image-filler)):has(>.diary-card:nth-child(6).image-filler)>.diary-card:nth-child(7){display:none}
+.layout-focus .diary-grid:not(:has(>.diary-card:nth-child(5).image-filler)):has(>.diary-card:nth-child(6).image-filler)>.diary-card:nth-child(6) .card-illustration{
+  width:86%;height:72%
+}
+.layout-focus .diary-card:nth-child(7).image-filler .art-panel-label{font-size:13px;padding:4px 9px}
+.layout-focus .diary-card:nth-child(7).image-filler .art-panel-note{display:none}
+
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
   .control-panel{position:relative;top:0;max-height:none}
