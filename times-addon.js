@@ -1,5 +1,5 @@
 (() => {
-  const socialCssHref = './social-feed-v8.css?v=20260828-9';
+  const socialCssHref = './social-feed-v8.css?v=20260828-10';
   if (![...document.querySelectorAll('link[rel="stylesheet"]')].some(link => link.getAttribute('href') === socialCssHref)) {
     const socialCss = document.createElement('link');
     socialCss.rel = 'stylesheet';
@@ -62,6 +62,16 @@
     return assetUrl(item.asset || 'watercolor-parent-reading');
   }
 
+  function storyImage(item){
+    const choice = document.getElementById('heroChoice')?.value || 'default';
+    if (choice === 'custom' && typeof customHeroDataUrl !== 'undefined' && customHeroDataUrl) return customHeroDataUrl;
+
+    const childType = document.getElementById('childAvatar')?.value || 'girl';
+    if (childType === 'boy') return './assets/illustrations/watercolor-boy-tablet.jpg';
+    if (childType === 'baby') return './assets/illustrations/talking-pen.png';
+    return sectionImage(item);
+  }
+
   function renderTimesPoster(){
     const month = document.getElementById('month').value;
     const year = document.getElementById('year').value;
@@ -76,6 +86,7 @@
     const learning = itemAt(5);
     const story = itemAt(6);
     const hero = heroSrc();
+    const storyArt = storyImage(story);
 
     poster.className = 'poster layout-times-master';
     poster.innerHTML = `
@@ -98,9 +109,9 @@
       <section class="tm-highlight-list">
         ${highlights.map((item,index)=>`<article class="tm-highlight tm-h${index+1}"><div class="tm-num">0${index+1}</div><div class="tm-highlight-copy"><h3>${safe(item.title)}</h3><p>${safe(shortText(item.text,72))}</p></div><img src="${safe(sectionImage(item))}" alt="${safe(item.title)}插圖"></article>`).join('')}
       </section>
-      <section class="tm-bottom-grid">
+      <section class="tm-bottom-grid ${String(learning.text || '').length < 95 ? 'tm-bottom-short' : ''}">
         <article class="tm-note-card"><div class="tm-tape"></div><h3>本月學習亮點 ✦</h3><p>${safe(shortText(learning.text,180))}</p><div class="tm-checks">✓ 看見小小進步　✓ 保留生活感　✓ 不趕進度</div></article>
-        <article class="tm-photo-card"><img src="${safe(sectionImage(story))}" alt="本月小故事插圖"><strong>${safe(story.title)}</strong><span>${safe(shortText(story.text,100))}</span></article>
+        <article class="tm-photo-card"><img src="${safe(storyArt)}" alt="本月小故事插圖"><strong>${safe(story.title)}</strong><span>${safe(shortText(story.text,100))}</span></article>
       </section>
       <footer class="tm-footer"><span>記錄今天的小進步，成為明天的大自信。</span><strong>${safe(closing)}</strong></footer>
     `;
@@ -132,6 +143,8 @@
   document.getElementById('smartOrganize')?.addEventListener('click', keepChosenStyle);
   layoutSelect.addEventListener('input', () => window.renderPoster());
   layoutSelect.addEventListener('change', () => window.renderPoster());
+  document.getElementById('childAvatar')?.addEventListener('change', () => { if(layoutSelect.value === 'times') window.renderPoster(); });
+  document.getElementById('heroChoice')?.addEventListener('change', () => { if(layoutSelect.value === 'times') window.renderPoster(); });
 
   const draft = (() => { try { return JSON.parse(localStorage.getItem('williePrincipalDiaryDraft') || '{}'); } catch { return {}; } })();
   const requested = new URLSearchParams(location.search).get('layout');
