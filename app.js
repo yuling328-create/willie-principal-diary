@@ -218,6 +218,10 @@ function renderPoster(){
   ["peach","meadow","sunshine","sky"].forEach(name=>{
     poster.classList.toggle(`theme-${name}`,colorTheme === name);
   });
+  const fontStyle = $("fontStyle").value || "auto";
+  ["auto","rounded","handwritten","storybook","editorial","mixed"].forEach(name=>{
+    poster.classList.toggle(`font-${name}`,fontStyle === name);
+  });
   $("layoutHelp").textContent = layoutHelp[layout] || "";
   const issue = `${$("year").value}年${$("month").value}號`;
   $("issueLabel").textContent = `${issue}｜精選分享`;
@@ -405,7 +409,7 @@ function saveDraft(){
     childAvatar:$("childAvatar").value, childAvatar2:$("childAvatar2").value,
     rawDiary:$("rawDiary").value, closing:$("closing").value, apiBase:$("apiBase").value,
     heroChoice:$("heroChoice").value, layoutMode:$("layoutMode").value,
-    colorTheme:$("colorTheme").value,
+    colorTheme:$("colorTheme").value, fontStyle:$("fontStyle").value,
     sections
   };
   localStorage.setItem("williePrincipalDiaryDraft",JSON.stringify(data));
@@ -419,7 +423,7 @@ function loadDraft(){
     if(["家庭英語共學","陪你一起孵出英語母語寶寶共學"].includes(d.theme)){
       d.theme="陪你一起孵出英語母語寶寶";
     }
-    ["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","childAvatar","childAvatar2","rawDiary","closing","apiBase","heroChoice","layoutMode","colorTheme"].forEach(k=>{
+    ["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","childAvatar","childAvatar2","rawDiary","closing","apiBase","heroChoice","layoutMode","colorTheme","fontStyle"].forEach(k=>{
       if(d[k]!==undefined && $(k)) $(k).value=d[k];
     });
     if(Array.isArray(d.sections)) sections=d.sections;
@@ -439,7 +443,7 @@ function imagePreview(input){
   reader.readAsDataURL(file);
 }
 
-["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","childAvatar","childAvatar2","closing","apiBase","layoutMode","colorTheme"].forEach(id=>{
+["year","month","principal","period","theme","childName","childInfo","childName2","childInfo2","childAvatar","childAvatar2","closing","apiBase","layoutMode","colorTheme","fontStyle"].forEach(id=>{
   $(id).addEventListener("input",()=>{renderPoster(); saveDraft();});
 });
 document.querySelectorAll('input[name="illustrationMode"]').forEach(el=>el.addEventListener("change",renderPoster));
