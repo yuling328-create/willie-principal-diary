@@ -102,6 +102,44 @@ function assetFor(text=""){
   return "decorations";
 }
 
+function assetCandidatesFor(text="",index=0){
+  const t=String(text);
+  const isBoy=$("childAvatar")?.value === "boy" || /男孩|兒子|弟弟|哥哥/.test(t);
+  if(/電話|視訊|Face\s*Call|video|call/i.test(t)) return ["video-call","watercolor-parent-reading","guide"];
+  if(/點讀|點讀筆|刷卡|圖卡|卡片|flash/i.test(t)) return isBoy
+    ? ["watercolor-boy-talking-pen-cards","watercolor-boy-talking-pen-book","talking-pen"]
+    : ["watercolor-sisters-talking-pen","talking-pen","picture-book"];
+  if(/平板|eTab|pad|影片|卡通|tablet/i.test(t)) return isBoy
+    ? ["watercolor-boy-tablet","tablet-story","watercolor-parent-reading"]
+    : ["tablet-story","watercolor-parent-reading","video-call"];
+  if(/唱|歌|音樂|拍手|麥克風|music|song|聽/i.test(t)) return ["watercolor-singing-child","clap-siblings","dancing-child"];
+  if(/跳|舞|律動|動作|dance/i.test(t)) return ["dancing-child","family-parachute","watercolor-singing-child"];
+  if(/戶外|走路|公園|散步|旅行|夏令營|outside/i.test(t)) return ["watercolor-outdoor-father-son","family-parachute","growing-plant"];
+  if(/繪本|共讀|故事|閱讀|睡前|read|book/i.test(t)) return ["watercolor-parent-reading","parent-reading","picture-book"];
+  if(/問|回答|回應|英文句|表達|翻譯|為什麼|是什麼|句子/i.test(t)) return isBoy
+    ? ["watercolor-boy-talking-pen-book","watercolor-boy-talking-pen-cards","guide"]
+    : ["guide","watercolor-sisters-talking-pen","parent-reading"];
+  if(/姊|姐姐|妹妹|哥哥|弟弟|手足|一起/.test(t)) return ["watercolor-sisters-talking-pen","clap-siblings","family-parachute"];
+  if(/媽媽|爸爸|家長|陪伴|反思|焦慮|放鬆/.test(t)) return ["watercolor-parent-reading","parent-reading","watercolor-outdoor-father-son"];
+  if(/成長|進步|主動|慢慢|吸收|嘗試/.test(t)) return ["growing-plant","watercolor-parent-reading","guide"];
+  const fallback=[
+    "watercolor-boy-tablet","watercolor-parent-reading","watercolor-singing-child",
+    "watercolor-outdoor-father-son","watercolor-sisters-talking-pen","picture-book","guide"
+  ];
+  return [...fallback.slice(index%fallback.length),...fallback.slice(0,index%fallback.length)];
+}
+
+function assignDistinctAssets(items){
+  const used=new Set();
+  items.forEach((item,index)=>{
+    const candidates=assetCandidatesFor(`${item.title || ""} ${item.text || ""}`,index);
+    const chosen=candidates.find(asset=>!used.has(asset)) || candidates[0] || "guide";
+    item.asset=chosen;
+    used.add(chosen);
+  });
+  return items;
+}
+
 function assetUrl(asset){
   if(!asset || asset === "none") return "";
   const extension = asset.startsWith("watercolor-") ? "jpg" : "png";
@@ -159,6 +197,7 @@ function renderHero(){
 function renderEditors(){
   const host = $("sectionEditors");
   host.innerHTML = "";
+  assignDistinctAssets(sections);
   sections.forEach((s,index)=>{
     const node = $("sectionEditorTemplate").content.cloneNode(true);
     const root = node.querySelector(".section-editor");
@@ -288,9 +327,11 @@ function renderPoster(){
     "watercolor-outdoor-father-son",
     "watercolor-parent-reading"
   ];
+  const usedFillerAssets=new Set(sections.map(item=>item.asset).filter(Boolean));
   for(let index=sections.length;index<fillerTarget;index++){
     const card = document.createElement("article");
-    const asset = fillerAssets[index % fillerAssets.length];
+    const asset = fillerAssets.find(item=>!usedFillerAssets.has(item)) || fillerAssets[index % fillerAssets.length];
+    usedFillerAssets.add(asset);
     card.className = "diary-card image-filler watercolor-art";
     card.setAttribute("aria-label","自動補位插圖");
     card.innerHTML = `
