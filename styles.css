@@ -1014,8 +1014,8 @@ footer{
 #poster .paper-doodles,#poster .kindy-corner,
 #poster .banner-mascot,#poster .banner-clock,#poster .banner-balloons{display:none!important}
 #poster .brand-banner:before,#poster .brand-banner:after{content:""}
-#poster .brand-play,#poster .child-two,#poster .issue-pill,#poster .meta-bar,
-#poster .title-copy,#poster .closing-card,#poster footer{border-style:solid}
+#poster .brand-play,#poster .child-two,#poster .title-copy,
+#poster .closing-card,#poster footer{border-style:solid}
 
 /* 1. 水彩故事月刊｜中央雜誌刊頭與溫暖紙張 */
 .layout-scrapbook{background:linear-gradient(135deg,#fffaf0 0 60%,#f6ead6 60% 100%)}
@@ -1278,6 +1278,20 @@ footer{
 }
 .layout-structured .closing-icon{border-radius:12px 4px 12px 4px;background:#fff8e9;color:#9a6959}
 .layout-structured footer{border:0;color:#8b7569}
+
+/* 出刊資訊改成獨立粉彩標籤，不使用包住三欄的黑色表格框。 */
+.layout-focus .meta-bar,.layout-observation .meta-bar,
+.layout-siblings .meta-bar,.layout-collage .meta-bar{
+  border:0!important;background:transparent!important;box-shadow:none!important
+}
+.layout-focus .meta-bar>div,.layout-observation .meta-bar>div,
+.layout-siblings .meta-bar>div,.layout-collage .meta-bar>div{
+  border:0;border-radius:15px 6px 15px 6px;background:#f6e4d8;box-shadow:none
+}
+.layout-focus .meta-bar>div:nth-child(2),.layout-observation .meta-bar>div:nth-child(2),
+.layout-siblings .meta-bar>div:nth-child(2),.layout-collage .meta-bar>div:nth-child(2){background:#dfece8}
+.layout-focus .meta-bar>div:nth-child(3),.layout-observation .meta-bar>div:nth-child(3),
+.layout-siblings .meta-bar>div:nth-child(3),.layout-collage .meta-bar>div:nth-child(3){background:#f6e9be}
 
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
