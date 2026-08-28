@@ -15,6 +15,12 @@
   --accent-soft:#f7c5bb;
   --frame:#efd8bc;
 }
+
+@font-face{
+  font-family:"JF Open Huninn";
+  src:url("https://cdn.jsdelivr.net/gh/justfont/open-huninn-font@master/font/jf-openhuninn-2.0.ttf") format("truetype");
+  font-display:swap;
+}
 *{box-sizing:border-box}
 html{background:#eee9e1}
 body{
@@ -1135,18 +1141,18 @@ footer{
 
 /* 字型配置：一個選項同時管理品牌、主標、段落標題與內文。 */
 .poster.font-rounded{
-  font-family:"Arial Rounded MT Bold","Microsoft JhengHei","PingFang TC",sans-serif
+  font-family:"JF Open Huninn","Microsoft JhengHei","PingFang TC",sans-serif
 }
 .poster.font-rounded .brand-main,.poster.font-rounded .title-copy h1,
 .poster.font-rounded .diary-card h2{font-family:inherit;font-weight:900;letter-spacing:2px}
-.poster.font-rounded .title-copy h1{letter-spacing:7px}
+.poster.font-rounded .title-copy h1{letter-spacing:7px;text-shadow:3px 3px 0 rgba(255,255,255,.66)}
 
 .poster.font-handwritten{
   font-family:"Microsoft JhengHei","PingFang TC",sans-serif
 }
 .poster.font-handwritten .brand-main,.poster.font-handwritten .title-copy h1,
 .poster.font-handwritten .diary-card h2{
-  font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive;font-weight:700;letter-spacing:3px
+  font-family:"JF Open Huninn","Kaiti TC",cursive;font-weight:700;letter-spacing:3px
 }
 .poster.font-handwritten .diary-card h2{transform:rotate(-.45deg)}
 
@@ -1156,7 +1162,7 @@ footer{
 .poster.font-storybook .brand-main,.poster.font-storybook .title-copy h1{
   font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-weight:900;letter-spacing:5px
 }
-.poster.font-storybook .diary-card h2{font-family:"DFKai-SB","BiauKai",serif;font-weight:700}
+.poster.font-storybook .diary-card h2{font-family:"JF Open Huninn","BiauKai",serif;font-weight:700}
 .poster.font-storybook .diary-points,.poster.font-storybook .diary-copy{line-height:1.72}
 
 .poster.font-editorial{
@@ -1169,20 +1175,25 @@ footer{
 .poster.font-editorial .issue-pill{text-transform:uppercase;letter-spacing:2px}
 
 .poster.font-mixed{font-family:"Microsoft JhengHei","PingFang TC",sans-serif}
-.poster.font-mixed .brand-main{font-family:"Arial Rounded MT Bold","Microsoft JhengHei",sans-serif;font-weight:900}
-.poster.font-mixed .title-copy h1{font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive;font-weight:700;letter-spacing:8px;transform:rotate(-1deg)}
+.poster.font-mixed .brand-main{font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif;font-weight:900}
+.poster.font-mixed .title-copy h1{font-family:"JF Open Huninn","Kaiti TC",cursive;font-weight:900;letter-spacing:8px;transform:rotate(-1deg)}
 .poster.font-mixed .diary-card h2{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-weight:900}
 
 /* 自動模式：每種海報採用不同的字體角色。 */
 .font-auto.layout-scrapbook,.font-auto.layout-story{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif}
-.font-auto.layout-scrapbook .diary-card h2,.font-auto.layout-story .diary-card h2{font-family:"DFKai-SB","BiauKai",serif}
+.font-auto.layout-scrapbook .brand-main,.font-auto.layout-story .brand-main,
+.font-auto.layout-scrapbook .title-copy h1,.font-auto.layout-story .title-copy h1,
+.font-auto.layout-scrapbook .diary-card h2,.font-auto.layout-story .diary-card h2{font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif}
 .font-auto.layout-focus,.font-auto.layout-structured{font-family:"Microsoft JhengHei","PingFang TC",sans-serif}
-.font-auto.layout-focus .title-copy h1,.font-auto.layout-structured .title-copy h1{font-family:"Arial Black","Microsoft JhengHei",sans-serif}
-.font-auto.layout-cute,.font-auto.layout-siblings{font-family:"Arial Rounded MT Bold","Microsoft JhengHei",sans-serif}
+.font-auto.layout-focus .brand-main,.font-auto.layout-structured .brand-main,
+.font-auto.layout-focus .title-copy h1,.font-auto.layout-structured .title-copy h1,
+.font-auto.layout-focus .diary-card h2,.font-auto.layout-structured .diary-card h2{font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif}
+.font-auto.layout-cute,.font-auto.layout-siblings{font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif}
 .font-auto.layout-cute .title-copy h1,.font-auto.layout-siblings .title-copy h1{font-family:inherit;font-weight:900}
-.font-auto.layout-observation .title-copy h1,.font-auto.layout-observation .diary-card h2{font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive}
-.font-auto.layout-collage .brand-main{font-family:"Arial Rounded MT Bold","Microsoft JhengHei",sans-serif}
-.font-auto.layout-collage .title-copy h1{font-family:"DFKai-SB","BiauKai","Kaiti TC",cursive}
+.font-auto.layout-observation .brand-main,.font-auto.layout-observation .title-copy h1,
+.font-auto.layout-observation .diary-card h2{font-family:"JF Open Huninn","Kaiti TC",cursive}
+.font-auto.layout-collage .brand-main{font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif}
+.font-auto.layout-collage .title-copy h1{font-family:"JF Open Huninn","Kaiti TC",cursive}
 .font-auto.layout-collage .diary-card h2{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif}
 
 /* 園長條列版 V2｜奶油編輯海報：柔和色塊取代粗框與表格感。 */
@@ -1204,7 +1215,7 @@ footer{
   box-shadow:10px 10px 0 rgba(135,183,174,.28);text-align:center;transform:rotate(-.35deg)
 }
 .layout-structured .brand-main{
-  font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-size:43px;font-weight:900;letter-spacing:4px
+  font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif;font-size:43px;font-weight:900;letter-spacing:4px
 }
 .layout-structured .brand-play{
   margin-left:18px;padding:5px 16px;border:0;border-radius:14px 4px 14px 4px;
@@ -1220,8 +1231,9 @@ footer{
   font-size:20px;letter-spacing:1px
 }
 .font-auto.layout-structured .title-copy h1,.layout-structured .title-copy h1{
-  margin:15px 0 7px;font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;
-  color:#65463c;font-size:78px;font-weight:900;letter-spacing:8px;text-transform:none
+  margin:15px 0 7px;font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif;
+  color:#65463c;font-size:78px;font-weight:900;letter-spacing:8px;text-transform:none;
+  text-shadow:3px 3px 0 rgba(255,255,255,.75)
 }
 .layout-structured .lead{color:#705a50;font-size:21px;font-weight:650;line-height:1.55}
 .layout-structured .child-card{
@@ -1254,7 +1266,7 @@ footer{
 .layout-structured .diary-card:nth-child(even) .card-no{background:#639b90}
 .layout-structured .diary-card:nth-child(3n) .card-no{background:#c89c3f}
 .font-auto.layout-structured .diary-card h2,.layout-structured .diary-card h2{
-  font-family:"DFKai-SB","BiauKai","Kaiti TC",serif;color:#62483e;font-size:22px;font-weight:700;letter-spacing:1px
+  font-family:"JF Open Huninn","Microsoft JhengHei",sans-serif;color:#62483e;font-size:22px;font-weight:900;letter-spacing:1px
 }
 .layout-structured .structured-points,.layout-structured .diary-card p{
   color:#51463f;font-family:"Microsoft JhengHei","PingFang TC",sans-serif;font-size:15px;font-weight:500;line-height:1.65
