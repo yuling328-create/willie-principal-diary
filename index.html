@@ -14,7 +14,7 @@
       <div class="control-head">
         <p class="kicker">WILLIE BROTHERS 3.0</p>
         <h1>園長日記產生器</h1>
-        <p>選月份、貼家長日記、整理內容、選配圖，版面會自動完成。</p>
+        <p>填資料、貼日記、選喜歡的海報風格，就可以直接生成。</p>
       </div>
 
       <section class="control-section">
@@ -43,35 +43,39 @@
         <label>本期主題
           <input id="theme" value="陪你一起孵出英語母語寶寶">
         </label>
-        <label>輸出版型
+
+        <label>選擇海報風格
           <select id="layoutMode">
-            <option value="times">TiMES 特刊版｜復古童趣封面</option>
-            <option value="focus" selected>童趣成長報｜彩色重點</option>
-            <option value="observation">童趣觀察報｜日期情境</option>
-            <option value="siblings">童趣手足報｜雙孩子故事</option>
-            <option value="collage">童趣探索報｜自由拼貼</option>
+            <option value="times">TiMES 特刊｜復古童趣雜誌</option>
+            <option value="focus" selected>童趣重點報｜活潑彩色</option>
+            <option value="observation">生活觀察誌｜溫暖故事感</option>
+            <option value="siblings">手足成長誌｜雙寶故事</option>
+            <option value="collage">探索拼貼誌｜自由可愛</option>
           </select>
         </label>
-        <p id="layoutHelp" class="mini-note">三欄重點整理，適合一頁快速閱讀。</p>
-        <label>幼稚園可愛配色
-          <select id="colorTheme">
-            <option value="peach" selected>蜜桃粉｜溫柔手帳</option>
-            <option value="meadow">嫩芽綠｜自然花園</option>
-            <option value="sunshine">陽光黃｜活潑童趣</option>
-            <option value="sky">天空藍｜清爽故事</option>
-          </select>
-        </label>
-        <label>字型風格
-          <select id="fontStyle">
-            <option value="auto" selected>依版型自動搭配</option>
-            <option value="rounded">台灣粉圓｜童書可愛</option>
-            <option value="handwritten">手寫日記｜自然溫度</option>
-            <option value="storybook">故事繪本｜優雅溫暖</option>
-            <option value="editorial">雜誌編輯｜醒目俐落</option>
-            <option value="mixed">趣味混搭｜標題有變化</option>
-          </select>
-        </label>
-        <p class="mini-note">只需選一種風格，標題、段落標題與內文會自動搭配。</p>
+        <p id="layoutHelp" class="mini-note">挑一個喜歡的風格即可，內容會自動套入版面。</p>
+
+        <!-- 顧問不需要理解技術設定，但保留欄位供 renderPoster 自動使用。 -->
+        <div style="display:none" aria-hidden="true">
+          <label>配色
+            <select id="colorTheme">
+              <option value="peach" selected>蜜桃粉</option>
+              <option value="meadow">嫩芽綠</option>
+              <option value="sunshine">陽光黃</option>
+              <option value="sky">天空藍</option>
+            </select>
+          </label>
+          <label>字型
+            <select id="fontStyle">
+              <option value="auto" selected>自動</option>
+              <option value="rounded">童書可愛</option>
+              <option value="handwritten">手寫日記</option>
+              <option value="storybook">故事繪本</option>
+              <option value="editorial">雜誌編輯</option>
+              <option value="mixed">趣味混搭</option>
+            </select>
+          </label>
+        </div>
       </section>
 
       <section class="control-section">
@@ -108,34 +112,34 @@
             <input id="childInfo2" placeholder="例如：1Y 幼幼班">
           </label>
         </div>
-        <p class="mini-note">使用「手足成長版」時，可填寫第二位孩子；留白就維持單一孩子。</p>
-        <label>最上方主圖（可不放或改用插畫）
+        <p class="mini-note">如果有兩位孩子一起記錄再填第二位；沒有就留白。</p>
+        <label>主圖
           <select id="heroChoice"></select>
         </label>
-        <label id="heroFileLabel">自行上傳照片（可選）
+        <label id="heroFileLabel">上傳自己的照片（可選）
           <input id="heroFile" type="file" accept="image/*">
         </label>
-        <p class="mini-note">可選擇不顯示主圖、使用內建童趣素材，或自行上傳照片；不顯示時版面會自動收合。</p>
+        <p class="mini-note">可以直接用內建插畫，也可以換成自己的照片。</p>
       </section>
 
       <section class="control-section">
-        <h2>③ 貼上家長原始日記</h2>
+        <h2>③ 貼上這個月的日記</h2>
         <label>
-          <textarea id="rawDiary" rows="11" placeholder="直接貼上家長原始文字，不需要先整理。"></textarea>
+          <textarea id="rawDiary" rows="11" placeholder="直接把原始日記貼進來，不需要先整理。"></textarea>
         </label>
         <div class="button-row">
-          <button id="smartOrganize" class="primary">AI／智慧整理</button>
+          <button id="smartOrganize" class="primary">幫我整理成海報</button>
           <button id="clearRaw" class="ghost">清空</button>
         </div>
-        <p class="mini-note">貼上日記後按「AI／智慧整理」，系統會自動決定段落、順序與配圖。</p>
+        <p class="mini-note">系統會自動整理重點、安排順序與配圖；海報風格仍由你自己選。</p>
       </section>
 
       <section class="control-section ai-section-editor">
         <div class="section-row">
-          <h2>④ AI整理後內容</h2>
+          <h2>④ 整理後內容</h2>
           <button id="addSection" class="small">＋段落</button>
         </div>
-        <p class="mini-note ai-auto-note">段落分類、順序與配圖皆由AI／智慧規則自動判斷；如有需要，只要微調標題或文字即可。</p>
+        <p class="mini-note ai-auto-note">如果想調整，只要修改標題或文字即可。</p>
         <div class="quick-section-row">
           <select id="quickSection" aria-label="選擇常用分類">
             <option value="highlight">本月亮點</option>
