@@ -550,8 +550,9 @@ $("exportPng").addEventListener("click",async()=>{
 });
 
 loadDraft();
-if(new URLSearchParams(location.search).get("layout") === "scrapbook"){
-  $("layoutMode").value = "scrapbook";
+const requestedLayout = new URLSearchParams(location.search).get("layout");
+if(["scrapbook","focus"].includes(requestedLayout)){
+  $("layoutMode").value = requestedLayout;
 }
 renderEditors();
 renderPoster();
