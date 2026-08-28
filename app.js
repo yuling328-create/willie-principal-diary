@@ -293,7 +293,11 @@ function renderPoster(){
     const asset = fillerAssets[index % fillerAssets.length];
     card.className = "diary-card image-filler watercolor-art";
     card.setAttribute("aria-label","自動補位插圖");
-    card.innerHTML = `<div class="card-illustration"><img src="${assetUrl(asset)}" alt="自動補位的收藏風插圖"></div>`;
+    card.innerHTML = `
+      <div class="art-panel-label">本月的小小身影</div>
+      <div class="card-illustration"><img src="${assetUrl(asset)}" alt="自動補位的收藏風插圖"></div>
+      <div class="art-panel-note">Every little moment matters.</div>
+    `;
     grid.appendChild(card);
   }
 }
