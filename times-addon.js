@@ -91,9 +91,8 @@
         ${highlights.map((item,index)=>`<article class="tm-highlight tm-h${index+1}"><div class="tm-num">0${index+1}</div><div class="tm-highlight-copy"><h3>${safe(item.title)}</h3><p>${safe(shortText(item.text,72))}</p></div><img src="${safe(sectionImage(item))}" alt="${safe(item.title)}插圖"></article>`).join('')}
       </section>
       <section class="tm-bottom-grid">
-        <article class="tm-note-card"><div class="tm-tape"></div><h3>本月學習亮點 ✦</h3><p>${safe(shortText(learning.text,150))}</p><div class="tm-checks">✓ 看見小小進步　✓ 保留生活感　✓ 不趕進度</div></article>
-        <article class="tm-photo-card"><img src="${safe(sectionImage(story))}" alt="本月小故事插圖"><strong>${safe(story.title)}</strong><span>${safe(shortText(story.text,68))}</span></article>
-        <article class="tm-consultant-card"><span class="tm-new">NEW</span><h3>顧問也能快速<br>生成海報日記</h3><p>貼上內容 → 選風格 → 自動排版 → 直接下載</p><div class="tm-laptop">▰</div></article>
+        <article class="tm-note-card"><div class="tm-tape"></div><h3>本月學習亮點 ✦</h3><p>${safe(shortText(learning.text,180))}</p><div class="tm-checks">✓ 看見小小進步　✓ 保留生活感　✓ 不趕進度</div></article>
+        <article class="tm-photo-card"><img src="${safe(sectionImage(story))}" alt="本月小故事插圖"><strong>${safe(story.title)}</strong><span>${safe(shortText(story.text,100))}</span></article>
       </section>
       <footer class="tm-footer"><span>記錄今天的小進步，成為明天的大自信。</span><strong>${safe(closing)}</strong></footer>
     `;
