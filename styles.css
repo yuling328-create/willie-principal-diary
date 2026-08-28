@@ -764,6 +764,156 @@ footer{
 .layout-scrapbook .closing-card strong{margin-top:1px;font-size:17px;line-height:1.35}
 .layout-scrapbook footer{display:none}
 
+/* 童趣重點報：參考手繪學習月報，以編號與閱讀動線取代相同卡片。 */
+.layout-focus{
+  --focus-navy:#07559a;
+  --focus-red:#e64d68;
+  --focus-yellow:#f3c946;
+  --focus-green:#35936b;
+  --focus-purple:#7353b5;
+  padding:35px 40px 28px;
+  border:0;
+  border-radius:0;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(243,201,70,.09),transparent 18%),
+    radial-gradient(circle at 93% 15%,rgba(0,92,160,.06),transparent 18%),
+    #fffdf8;
+  color:#104f87;
+}
+.layout-focus:before{
+  inset:16px;
+  border:2px solid rgba(19,87,140,.10);
+  border-radius:24px;
+}
+.layout-focus .paper-doodles.top-left{top:23px;left:auto;right:34px;color:#e96780;font-size:21px}
+.layout-focus .paper-doodles.bottom-right{right:22px;bottom:18px;color:#f0b73c;font-size:18px}
+.layout-focus .kindy-corner.corner-left{left:15px;bottom:18px;font-size:58px}
+.layout-focus .kindy-corner.corner-right{right:28px;bottom:19px;font-size:45px}
+.layout-focus header{
+  position:relative;
+  min-height:336px;
+  padding:0;
+}
+.layout-focus .brand-banner{
+  position:absolute;left:0;top:0;width:auto;max-width:none;margin:0;padding:10px 27px;
+  color:#fff;border:0;border-radius:10px 26px 10px 10px;background:var(--focus-navy);
+  box-shadow:none;text-align:left;letter-spacing:1px
+}
+.layout-focus .brand-banner:before,.layout-focus .brand-banner:after{display:none}
+.layout-focus .brand-main{font-size:28px}
+.layout-focus .brand-play{margin-left:3px;padding:0;border:0;background:none;color:#ffd65c;font-size:27px}
+.layout-focus .banner-mascot,.layout-focus .banner-clock,.layout-focus .banner-balloons{display:none}
+.layout-focus .hero-title-row{
+  display:grid;grid-template-columns:minmax(0,1fr) 382px;gap:22px;align-items:end;padding-top:64px
+}
+.layout-focus .title-copy{
+  min-height:250px;padding:12px 4px 0;border:0;background:none;box-shadow:none
+}
+.layout-focus .issue-pill{
+  position:absolute;right:0;top:5px;padding:10px 30px;color:var(--focus-navy);
+  border:0;border-radius:0;background:linear-gradient(transparent 20%,#ffe184 20% 83%,transparent 83%);
+  font-size:22px;letter-spacing:2px
+}
+.layout-focus .title-copy h1{
+  margin:18px 0 4px;font-size:68px;line-height:1.07;letter-spacing:4px;color:var(--focus-navy);
+  font-weight:950;text-shadow:4px 4px 0 rgba(245,202,66,.32)
+}
+.layout-focus .title-copy h1:before{
+  content:"舒＊園長日誌";display:block;margin-bottom:8px;color:var(--focus-red);
+  font-size:47px;line-height:1;letter-spacing:3px;text-shadow:none
+}
+.layout-focus .lead{
+  display:inline-block;margin-top:8px;padding:4px 3px;color:#db526b;background:none;
+  font-size:20px;line-height:1.4;font-weight:900
+}
+.layout-focus .header-side{display:contents}
+.layout-focus .child-card{
+  position:absolute;left:160px;bottom:3px;z-index:4;display:flex;width:auto;gap:8px;
+  padding:6px 25px;border:0;border-radius:999px;background:#2474b1;color:#fff
+}
+.layout-focus .child-avatar{width:31px;height:31px;background:#fff;font-size:21px}
+.layout-focus .child-card strong{display:inline;font-size:21px}
+.layout-focus .child-card span{display:inline;margin-left:5px;font-size:16px}
+.layout-focus .child-card small,.layout-focus .child-two{display:none!important}
+.layout-focus .hero-visual{
+  height:246px;margin:0 0 12px;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible
+}
+.layout-focus .hero-asset-frame{width:360px;height:235px;max-width:100%;max-height:100%}
+.layout-focus .hero-asset-frame img{
+  padding:8px;border:2px solid #e9e0d4;border-radius:8px;background:#fff;
+  box-shadow:0 5px 10px rgba(61,48,34,.12);transform:rotate(2deg);object-fit:contain
+}
+.layout-focus .meta-bar{
+  position:absolute;right:8px;bottom:-4px;display:flex;gap:8px;margin:0
+}
+.layout-focus .meta-bar>div{
+  padding:4px 8px;border:0;background:#fff9e9;color:#725c45;font-size:11px
+}
+.layout-focus .meta-bar>div:nth-child(3){display:none}
+.layout-focus .diary-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:repeat(4,215px);
+  grid-auto-flow:row;
+  gap:11px 16px;
+  margin-top:18px;
+  flex:none;
+  align-content:start
+}
+.layout-focus .diary-card{
+  min-height:0;padding:14px 14px 11px 55px;border:2px solid #efd8dd;border-radius:20px;
+  background:rgba(255,255,255,.58);box-shadow:none;overflow:hidden
+}
+.layout-focus .diary-card:after{display:none}
+.layout-focus .diary-card:nth-child(1){grid-column:1;grid-row:1;border-color:#efd1d8}
+.layout-focus .diary-card:nth-child(2){grid-column:1;grid-row:2;border-color:#efd9bd}
+.layout-focus .diary-card:nth-child(3){grid-column:1;grid-row:3;border-color:#cfe1ce}
+.layout-focus .diary-card:nth-child(4){grid-column:1;grid-row:4;border-color:#bfd9e8}
+.layout-focus .diary-card:nth-child(5){grid-column:2;grid-row:1/span 2;border-color:#d7cce8}
+.layout-focus .diary-card:nth-child(6){grid-column:2;grid-row:3;border-color:#bcdce7}
+.layout-focus .diary-card:nth-child(7){grid-column:2;grid-row:4;border-color:#efcbd4}
+.layout-focus .diary-grid:not(:has(.diary-card:nth-child(7))) .diary-card:nth-child(6){grid-row:3/span 2}
+.layout-focus .card-head{margin:0 0 7px;gap:8px;align-items:center}
+.layout-focus .card-no{
+  position:absolute;left:12px;top:12px;width:33px;height:33px;border-radius:50%;
+  background:#df4965;color:#fff;font-size:19px;box-shadow:0 2px 0 rgba(134,58,73,.12)
+}
+.layout-focus .diary-card:nth-child(2) .card-no{background:#ee9437}
+.layout-focus .diary-card:nth-child(3) .card-no{background:#41936c}
+.layout-focus .diary-card:nth-child(4) .card-no{background:#287fab}
+.layout-focus .diary-card:nth-child(5) .card-no{background:#7657b4}
+.layout-focus .diary-card:nth-child(6) .card-no{background:#348eb1}
+.layout-focus .diary-card:nth-child(7) .card-no{background:#df4965}
+.layout-focus .diary-card h2{
+  margin:0;font-size:20px;line-height:1.28;color:#d74362;letter-spacing:.5px
+}
+.layout-focus .diary-card:nth-child(2) h2{color:#df8130}
+.layout-focus .diary-card:nth-child(3) h2{color:#2d845e}
+.layout-focus .diary-card:nth-child(4) h2{color:#1476a3}
+.layout-focus .diary-card:nth-child(5) h2{color:#6549a6}
+.layout-focus .diary-card:nth-child(6) h2{color:#2380a5}
+.layout-focus .diary-card:nth-child(7) h2{color:#d74362}
+.layout-focus .diary-points{
+  gap:4px;padding-right:58px;color:#174f7f;font-size:13px;line-height:1.45;font-weight:690
+}
+.layout-focus .diary-points li{padding-left:14px}
+.layout-focus .diary-points li:before{content:"•";top:-.05em;color:currentColor;font-size:17px}
+.layout-focus .diary-card:nth-child(5) .diary-points{padding-right:8px;font-size:14px;line-height:1.5}
+.layout-focus .card-illustration,
+.layout-focus .diary-card.watercolor-art .card-illustration{
+  position:absolute;right:7px;bottom:7px;width:67px;height:58px;margin:0;border:0;background:transparent
+}
+.layout-focus .diary-card:nth-child(5) .card-illustration{width:92px;height:82px;opacity:.92}
+.layout-focus .card-illustration img{border-radius:10px;object-fit:contain}
+.layout-focus .closing-card{
+  grid-template-columns:38px 1fr;gap:10px;margin-top:11px;padding:8px 20px 8px 58px;
+  border:2px solid #efcbd4;border-radius:17px;background:#fff8fa
+}
+.layout-focus .closing-icon{width:34px;height:34px;font-size:21px}
+.layout-focus .closing-card span{font-size:10px}
+.layout-focus .closing-card strong{margin-top:0;color:#d74362;font-size:15px;line-height:1.3}
+.layout-focus footer{display:none}
+
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
   .control-panel{position:relative;top:0;max-height:none}
