@@ -819,13 +819,13 @@ footer{
 .layout-focus .brand-play{margin-left:3px;padding:0;border:0;background:none;color:#ffd65c;font-size:27px}
 .layout-focus .banner-mascot,.layout-focus .banner-clock,.layout-focus .banner-balloons{display:none}
 .layout-focus .hero-title-row{
-  display:grid;grid-template-columns:minmax(0,1fr) 382px;gap:22px;align-items:end;padding-top:64px
+  display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:22px;align-items:end;padding-top:84px
 }
 .layout-focus .title-copy{
   min-height:250px;padding:12px 4px 0;border:0;background:none;box-shadow:none
 }
 .layout-focus .issue-pill{
-  position:absolute;right:0;top:5px;padding:10px 30px;color:var(--focus-navy);
+  position:absolute;right:12px;top:7px;z-index:7;padding:10px 30px;color:var(--focus-navy);
   border:0;border-radius:0;background:linear-gradient(transparent 20%,#ffe184 20% 83%,transparent 83%);
   font-size:22px;letter-spacing:2px
 }
@@ -851,9 +851,9 @@ footer{
 .layout-focus .child-card span{display:inline;margin-left:5px;font-size:16px}
 .layout-focus .child-card small,.layout-focus .child-two{display:none!important}
 .layout-focus .hero-visual{
-  height:246px;margin:0 0 12px;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible
+  height:215px;margin:0 0 12px;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible
 }
-.layout-focus .hero-asset-frame{width:360px;height:235px;max-width:100%;max-height:100%}
+.layout-focus .hero-asset-frame{width:325px;height:205px;max-width:100%;max-height:100%}
 .layout-focus .hero-asset-frame img{
   padding:8px;border:2px solid #e9e0d4;border-radius:8px;background:#fff;
   box-shadow:0 5px 10px rgba(61,48,34,.12);transform:rotate(2deg);object-fit:contain
@@ -943,6 +943,66 @@ footer{
 .layout-focus .closing-card span{font-size:10px}
 .layout-focus .closing-card strong{margin-top:0;color:#d74362;font-size:15px;line-height:1.3}
 .layout-focus footer{display:none}
+
+/* 每款輸出版型使用不同的品牌 Banner，避免只有換色的制式感。 */
+.layout-cute .brand-banner{
+  width:72%;border-radius:999px;background:linear-gradient(180deg,#fff7d8,#ffe7b8);
+  border:3px dashed #d89b6f;box-shadow:0 7px 0 #f2c6aa
+}
+.layout-cute .banner-clock{display:none}
+.layout-cute .banner-mascot{left:-68px;top:-15px;transform:rotate(-12deg)}
+.layout-cute .banner-balloons{right:-62px;top:-18px}
+
+.layout-story .brand-banner{
+  width:58%;margin-left:34px;margin-right:auto;text-align:left;border-radius:8px 34px 34px 8px;
+  background:linear-gradient(90deg,#f2c3b0,#ffe3c8);border:0;border-left:12px solid #cf816d;
+  box-shadow:7px 7px 0 rgba(202,139,110,.16)
+}
+.layout-story .brand-banner:before,.layout-story .brand-banner:after{display:none}
+.layout-story .banner-clock,.layout-story .banner-balloons{display:none}
+.layout-story .banner-mascot{left:auto;right:-72px;top:-12px}
+
+.layout-observation .brand-banner{
+  width:64%;transform:rotate(-1deg);border-radius:5px;background:#dceccf;
+  border:2px dashed #84a27a;box-shadow:0 6px 0 #b9d0ab
+}
+.layout-observation .brand-banner:before,.layout-observation .brand-banner:after{display:none}
+.layout-observation .banner-mascot,.layout-observation .banner-balloons{display:none}
+.layout-observation .banner-clock{left:-52px;top:-5px;transform:rotate(-8deg);font-size:52px}
+
+.layout-siblings .brand-banner{
+  width:76%;border-radius:30px 9px 30px 9px;border:3px solid #d49baa;
+  background:linear-gradient(90deg,#ffd9df 0 49%,#dcebdd 51%);box-shadow:0 7px 0 #e7c8c7
+}
+.layout-siblings .brand-banner:before{content:"♡";left:-48px;top:5px;width:auto;height:auto;border:0;background:none;color:#df879e;font-size:48px}
+.layout-siblings .brand-banner:after{content:"♡";right:-48px;top:5px;width:auto;height:auto;border:0;background:none;color:#7fac8b;font-size:48px}
+.layout-siblings .banner-mascot,.layout-siblings .banner-clock,.layout-siblings .banner-balloons{display:none}
+
+.layout-collage .brand-banner{
+  width:68%;transform:rotate(.8deg);border-radius:4px;background:#cfe2ef;
+  border:0;box-shadow:9px 8px 0 rgba(112,157,187,.18);clip-path:polygon(2% 0,98% 3%,100% 88%,4% 100%)
+}
+.layout-collage .brand-banner:before,.layout-collage .brand-banner:after{display:none}
+.layout-collage .banner-mascot,.layout-collage .banner-clock{display:none}
+.layout-collage .banner-balloons{right:-66px;top:-13px;font-size:54px}
+
+.layout-structured .brand-banner{
+  width:54%;margin-left:0;margin-right:auto;padding-left:34px;text-align:left;
+  border-radius:0 999px 999px 0;background:#f2cf83;border:0;border-bottom:7px solid #d9ae59;box-shadow:none
+}
+.layout-structured .brand-banner:before,.layout-structured .brand-banner:after{display:none}
+.layout-structured .banner-mascot,.layout-structured .banner-clock,.layout-structured .banner-balloons{display:none}
+
+/* AI 自動決定分類、順序與配圖；使用者只保留標題及文字微調。 */
+.ai-section-editor .section-row button,
+.ai-section-editor .quick-section-row,
+.ai-section-editor .editor-meta-line,
+.ai-section-editor .asset-label,
+.ai-section-editor .editor-toolbar{display:none}
+.ai-section-editor .ai-auto-note{margin:-2px 0 10px;color:#4f7f6b}
+.ai-section-editor .editor-line{grid-template-columns:1fr}
+.ai-section-editor .icon-input{display:none}
+.automatic-art-section{display:none}
 
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
