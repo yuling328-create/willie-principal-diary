@@ -1293,6 +1293,78 @@ footer{
 .layout-focus .meta-bar>div:nth-child(3),.layout-observation .meta-bar>div:nth-child(3),
 .layout-siblings .meta-bar>div:nth-child(3),.layout-collage .meta-bar>div:nth-child(3){background:#f6e9be}
 
+/* 四款專屬手繪 Banner：以向量色塊、紙張錯位與緞帶尾取代制式矩形。 */
+.layout-focus .brand-banner,.layout-observation .brand-banner,
+.layout-siblings .brand-banner,.layout-collage .brand-banner{isolation:isolate;overflow:visible}
+
+/* 童趣成長報｜深藍刊頭＋黃色手繪標記 */
+.layout-focus .brand-banner{
+  width:62%;margin:0 auto 23px;padding:15px 31px 17px;border:0;border-radius:9px 27px 8px 18px;
+  background:
+    linear-gradient(176deg,rgba(255,255,255,.12),transparent 48%),
+    #185a9d;box-shadow:8px 9px 0 rgba(239,190,69,.72);transform:rotate(-.35deg);text-align:center
+}
+.layout-focus .brand-banner:before{
+  display:block;left:-34px;top:11px;width:58px;height:54px;border:0;border-radius:5px;
+  background:#2772b3;clip-path:polygon(0 0,100% 12%,80% 100%,0 84%,24% 50%);z-index:-1;transform:none
+}
+.layout-focus .brand-banner:after{
+  display:block;right:-30px;top:8px;width:52px;height:55px;border:0;border-radius:4px;
+  background:#f2c750;clip-path:polygon(0 10%,100% 0,78% 50%,100% 100%,0 88%);z-index:-2;transform:none
+}
+.layout-focus .brand-main{color:#fff;font-family:"JF Open Huninn",sans-serif;font-size:38px;letter-spacing:3px}
+.layout-focus .brand-play{margin-left:13px;padding:2px 8px;border:0;border-radius:0;background:transparent;color:#ffe171;font-size:25px}
+
+/* 童趣觀察報｜奶油水彩卷軸＋鼠尾草紙標 */
+.layout-observation .brand-banner{
+  width:76%;margin:0 auto 26px;padding:18px 42px 21px;border:0;border-radius:45% 48% 18px 21px/18px 21px 15px 18px;
+  background:
+    radial-gradient(circle at 18% 30%,rgba(255,255,255,.85),transparent 27%),
+    linear-gradient(178deg,#fff9e8,#f3dfb8);box-shadow:0 8px 0 rgba(132,161,119,.34);transform:rotate(-.25deg);text-align:center
+}
+.layout-observation .brand-banner:before{
+  display:block;left:-46px;top:13px;width:68px;height:62px;border:0;border-radius:12px 0 0 12px;
+  background:#e9cfa2;clip-path:polygon(0 0,100% 14%,78% 50%,100% 88%,0 100%,18% 50%);z-index:-1;transform:rotate(-4deg)
+}
+.layout-observation .brand-banner:after{
+  display:block;right:-46px;top:12px;width:68px;height:62px;border:0;border-radius:0 12px 12px 0;
+  background:#c9dcbf;clip-path:polygon(0 14%,100% 0,82% 50%,100% 100%,0 88%,22% 50%);z-index:-1;transform:rotate(4deg)
+}
+.layout-observation .brand-main{color:#5b4235;font-family:"JF Open Huninn",sans-serif;font-size:41px;letter-spacing:4px}
+.layout-observation .brand-play{margin-left:15px;padding:4px 14px;border:0;border-radius:7px;background:#dce8d2;color:#5c7355;font-size:25px}
+
+/* 童趣手足報｜蜜桃雙層緞帶，左右兩色象徵兩位孩子 */
+.layout-siblings .brand-banner{
+  width:78%;margin:0 auto 25px;padding:18px 42px;border:0;border-radius:24px 8px 24px 8px;
+  background:linear-gradient(102deg,#efadad 0 50%,#a9cbb7 50% 100%);
+  box-shadow:10px 10px 0 #f1d4a8;transform:rotate(.2deg);text-align:center
+}
+.layout-siblings .brand-banner:before{
+  display:block;left:-35px;top:8px;width:54px;height:58px;border:0;background:#d98d94;
+  clip-path:polygon(0 0,100% 15%,78% 50%,100% 88%,0 100%,22% 50%);z-index:-1;transform:rotate(-3deg)
+}
+.layout-siblings .brand-banner:after{
+  display:block;right:-35px;top:8px;width:54px;height:58px;border:0;background:#83ad94;
+  clip-path:polygon(0 15%,100% 0,78% 50%,100% 100%,0 88%,22% 50%);z-index:-1;transform:rotate(3deg)
+}
+.layout-siblings .brand-main{color:#fffaf1;font-family:"JF Open Huninn",sans-serif;font-size:40px;letter-spacing:4px;text-shadow:0 2px 0 rgba(92,55,49,.15)}
+.layout-siblings .brand-play{margin-left:14px;padding:4px 14px;border:0;border-radius:13px 4px 13px 4px;background:#fff7e9;color:#7a584d;font-size:25px}
+
+/* 童趣探索報｜黃色筆刷紙條＋藍色錯位底紙 */
+.layout-collage .brand-banner{
+  width:72%;margin:0 auto 28px;padding:18px 40px 21px;border:0;border-radius:0;
+  background:linear-gradient(100deg,#f4cb58,#ffe697 55%,#efbd45);
+  clip-path:polygon(2% 8%,25% 0,53% 7%,79% 1%,100% 12%,97% 86%,72% 95%,48% 89%,22% 100%,0 87%);
+  box-shadow:none;transform:rotate(-.55deg);text-align:center
+}
+.layout-collage .brand-banner:before{
+  display:block;left:3%;top:11px;width:96%;height:100%;border:0;background:#78abc2;
+  clip-path:polygon(0 15%,24% 6%,50% 12%,77% 4%,100% 16%,97% 90%,70% 98%,43% 92%,17% 100%,2% 89%);z-index:-1;transform:translate(9px,9px)
+}
+.layout-collage .brand-banner:after{display:none}
+.layout-collage .brand-main{color:#4d392d;font-family:"JF Open Huninn",sans-serif;font-size:41px;letter-spacing:4px}
+.layout-collage .brand-play{margin-left:12px;padding:3px 12px;border:0;border-radius:18px;background:#fff7dc;color:#377b99;font-size:25px}
+
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
   .control-panel{position:relative;top:0;max-height:none}
