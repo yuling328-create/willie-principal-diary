@@ -1005,11 +1005,11 @@ footer{
 .automatic-art-section{display:none}
 
 /* 2026-08 海報視覺重製：不用 Emoji、虛線或同款膠囊換色。 */
-#poster *,#poster *:before,#poster *:after{border-style:solid}
 #poster .paper-doodles,#poster .kindy-corner,
 #poster .banner-mascot,#poster .banner-clock,#poster .banner-balloons{display:none!important}
 #poster .brand-banner:before,#poster .brand-banner:after{content:""}
-#poster .brand-play{border-style:solid}
+#poster .brand-play,#poster .child-two,#poster .issue-pill,#poster .meta-bar,
+#poster .title-copy,#poster .closing-card,#poster footer{border-style:solid}
 
 /* 1. 水彩故事月刊｜中央雜誌刊頭與溫暖紙張 */
 .layout-scrapbook{background:linear-gradient(135deg,#fffaf0 0 60%,#f6ead6 60% 100%)}
@@ -1057,6 +1057,81 @@ footer{
 .layout-structured .brand-banner{width:58%;margin-left:0;padding:18px 36px;border:4px solid #473b31;border-left:0;border-radius:0;background:#fff4cc;box-shadow:8px 8px 0 #473b31;text-align:left}
 .layout-structured .brand-play{border:0;border-radius:0;background:#473b31;color:#fff}
 .layout-structured .title-copy h1{color:#473b31;text-transform:uppercase;letter-spacing:9px}
+
+/* 色塊是主角：卡片以紙片、書頁與大面積粉彩分區，不用滿版框線。 */
+.layout-scrapbook .diary-card{
+  border:0;border-radius:26px 18px 28px 16px;box-shadow:0 7px 0 rgba(115,83,50,.08)
+}
+.layout-scrapbook .diary-card:nth-child(1){background:#fff0c8}
+.layout-scrapbook .diary-card:nth-child(2){background:#e3f1f5}
+.layout-scrapbook .diary-card:nth-child(3){background:#eaf1dc}
+.layout-scrapbook .diary-card:nth-child(4){background:#f9e4e6}
+.layout-scrapbook .diary-card:nth-child(5){background:#eee6f5}
+.layout-scrapbook .diary-card:nth-child(6){background:#e1f2ed}
+.layout-scrapbook .issue-pill,.layout-scrapbook .meta-bar{border:0;background:#fff4d8}
+.layout-scrapbook .closing-card{border:0;background:linear-gradient(100deg,#f8ddb0,#f5e8ce 62%,#dfeee5)}
+
+.layout-focus .diary-card{
+  border:0;border-left:8px solid currentColor;border-radius:4px 22px 22px 4px;
+  box-shadow:0 5px 0 rgba(36,71,102,.07)
+}
+.layout-focus .diary-card:nth-child(1){background:#fff0f2;color:#df4965}
+.layout-focus .diary-card:nth-child(2){background:#fff1de;color:#e48b37}
+.layout-focus .diary-card:nth-child(3){background:#e9f3e7;color:#41936c}
+.layout-focus .diary-card:nth-child(4){background:#e5f1f7;color:#287fab}
+.layout-focus .diary-card:nth-child(5){background:#eee8f6;color:#7657b4}
+.layout-focus .diary-card:nth-child(6){background:#e4f2f6;color:#348eb1}
+.layout-focus .diary-card:nth-child(7){background:#fbe9ee;color:#df4965}
+.layout-focus .closing-card{border:0;background:linear-gradient(90deg,#f7dfe5,#fff7e8)}
+
+.layout-cute .diary-card{
+  border:0;border-radius:24px;background:#fff;box-shadow:0 8px 0 rgba(222,159,111,.13)
+}
+.layout-cute .diary-card:nth-child(3n+1){background:#fde5da}
+.layout-cute .diary-card:nth-child(3n+2){background:#e4f0df}
+.layout-cute .diary-card:nth-child(3n){background:#dfeef5}
+.layout-cute .card-head{padding:7px 11px;border-radius:14px;background:rgba(255,255,255,.72)}
+.layout-cute .closing-card{border:0;background:#f6dda5}
+
+.layout-story .diary-card{
+  border:0;border-radius:0 22px 22px 0;background:#fff7f0;
+  box-shadow:inset 10px 0 0 #e9b7a5,0 6px 0 rgba(113,68,57,.06)
+}
+.layout-story .diary-card:nth-child(even){background:#f4eee7;box-shadow:inset 10px 0 0 #b9c9ad,0 6px 0 rgba(113,68,57,.06)}
+.layout-story .card-head{border-bottom:3px solid rgba(112,65,58,.18)}
+.layout-story .closing-card{border:0;border-radius:0 24px 24px 0;background:#ead3c5}
+
+.layout-observation .diary-card{
+  border:0;border-radius:30px 7px 30px 7px;background:#edf4e7;
+  box-shadow:9px 9px 0 #d6e2ce
+}
+.layout-observation .diary-card:nth-child(even){background:#fff1d9;box-shadow:9px 9px 0 #ead9ba}
+.layout-observation .section-date{border:0;border-radius:0;background:#76906a;color:#fff}
+.layout-observation .closing-card{border:0;background:linear-gradient(90deg,#dce8d2,#f4e5c8)}
+
+.layout-siblings .diary-card{
+  border:0;border-radius:28px;background:#f9dfe2;box-shadow:0 8px 0 rgba(185,116,130,.12)
+}
+.layout-siblings .diary-card:nth-child(even){background:#dfeddf;box-shadow:0 8px 0 rgba(108,145,114,.12)}
+.layout-siblings .diary-card.shared-card{background:linear-gradient(110deg,#f8dfe3 0 48%,#e2efe3 52% 100%)}
+.layout-siblings .section-child{border:0;background:#fff;color:#6b4a45}
+.layout-siblings .closing-card{border:0;background:linear-gradient(90deg,#edbcc5,#c1d9c4)}
+
+.layout-collage .diary-card{
+  border:0;border-radius:8px;background:#f7d68d;box-shadow:9px 10px 0 rgba(79,112,127,.10);transform:rotate(-.45deg)
+}
+.layout-collage .diary-card:nth-child(even){background:#cfe6ef;transform:rotate(.55deg)}
+.layout-collage .diary-card:nth-child(3n){background:#efd6df;transform:rotate(-.2deg)}
+.layout-collage .diary-card[data-type="quote"]{border:0;background:#e5ddf1}
+.layout-collage .card-head{padding:6px 10px;background:rgba(255,255,255,.63)}
+.layout-collage .closing-card{border:0;background:#b8d9ca;transform:rotate(.25deg)}
+
+.layout-structured .diary-card{
+  border:0;border-radius:3px;background:#fff;box-shadow:inset 0 12px 0 #f2cf83,0 5px 0 rgba(71,59,49,.08)
+}
+.layout-structured .diary-card:nth-child(even){background:#edf3f4;box-shadow:inset 0 12px 0 #7fb1bd,0 5px 0 rgba(71,59,49,.08)}
+.layout-structured .diary-card[data-type="question"]{border:0;background:#f4e3e6;box-shadow:inset 0 12px 0 #c87582}
+.layout-structured .closing-card{border:0;border-left:16px solid #473b31;border-radius:0;background:#f4dda7}
 
 @media(max-width:1260px){
   .app-shell{grid-template-columns:1fr}
